@@ -11,8 +11,7 @@ import {
     getYears,
     rates
 } from "../../data/filter";
-import { Slider } from "@mui/material";
-import NewSlider from "./client/NewSlider";
+import RangeSlider from "./client/RangeSlider";
 
 
 export default async function Filter() {
@@ -32,27 +31,12 @@ export default async function Filter() {
                 </div>
             </div>
             <div className="bg-white flex flex-col p-5 text-xs">
-                <Select filterName="kindId" options={kinds.map(kind => ({ name: kind.name, value: kind.id }))} description="BOAT_TYPE" />
-                    <Slider
-                    aria-label="Small steps"
-                    defaultValue={0.00000005}
-                    step={0.00000001}
-                    marks
-                    min={-0.00000005}
-                    max={0.0000001}
-                    />
-                    <NewSlider filterName="personsMin" text="PERSONS_MIN"/>
-                <Range filterName="personsMin" text="PERSONS_MIN" />
-                <Range filterName="personsMax" text="PERSONS_MAX" />
+                <Select filterName="kindId" options={kinds.map((kind) => ({ name: kind.name, value: kind.id }))} description="BOAT TYPE" />
 
-                <Range filterName="berthsMin" text="BERTHS_MIN" />
-                <Range filterName="berthsMax" text="BERTHS_MAX" />
-
-                <Range filterName="cabinsMin" text="CABINS_MIN" />
-                <Range filterName="cabinsMax" text="CABINS_MAX" />
-
-                <Range filterName="toiletsMin" text="TOILETS_MIN" />
-                <Range filterName="toiletsMax" text="TOILETS_MAX" />
+                <RangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text="Persons"/>
+                <RangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text="Berths"/>
+                <RangeSlider min={1} max={6} filterName={['cabinsMin', 'cabinsMax']} text="Cabins"/>
+                <RangeSlider min={1} max={6} filterName={['toiletsMin', 'toiletsMax']} text="Toilets"/>
 
                 <Checkbox filterName="recommendedFirst" text="RECOMMENDED_FIRST" />
                 <Checkbox filterName="lowFirstInstallment" text="LOW_FIRST_RATE" />
