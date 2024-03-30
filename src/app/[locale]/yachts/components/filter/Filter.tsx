@@ -16,14 +16,14 @@ import MinMaxRangeNumber from "./client/NumberRange";
 
 export default async function Filter() {
     const searchesData = await getSearches();
-    const kinds = await getKinds();
-    const countries = await getCountries();
-    const years = getYears();
+    const kinds = (await getKinds()).map((kind) => ({ name: kind.name, value: kind.id }));
+    const countries = (await getCountries()).map(kind => ({ name: kind.name, value: kind.id }));
+    const years = getYears().map((year) => ({ name: year.toString(), value: year }));
 
     return (
         <>
             <div className="bg-[#00a0e3] flex flex-col p-5 text-xs">
-                <Select filterName="countries[0][id]" options={countries.map(kind => ({ name: kind.name, value: kind.id }))} description="COUNTRIES" />
+                <Select filterName="countries[0][id]" options={countries} description="COUNTRIES" />
                 <DateInput filterName="date" text="Date" />
                 <div className="flex flex-col">
                     <span>Days</span>
@@ -31,7 +31,7 @@ export default async function Filter() {
                 </div>
             </div>
             <div className="bg-white flex flex-col p-5 text-xs">
-                <Select filterName="kindId" options={kinds.map((kind) => ({ name: kind.name, value: kind.id }))} description="BOAT TYPE" />
+                <Select filterName="kindId" options={kinds} description="BOAT TYPE" />
 
                 <RangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text="Persons"/>
                 <RangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text="Berths"/>
@@ -52,7 +52,7 @@ export default async function Filter() {
 
                 <Select filterName="ratingMin" options={rates.map((rating) => ({ name: rating.name, value: rating.id }))} description="RATE NOT LESS THAN" />
 
-                <Select filterName="yearMin" options={years.map((year) => ({ name: year.toString(), value: year }))} description="NOT OLDER THAN" />
+                <Select filterName="yearMin" options={years} description="NOT OLDER THAN" />
 
                 <MinMaxRangeNumber label="PRICE (€)" filterName={['personsMin', 'personsMax']} placeholder={['From...', 'To...']}/>
                 

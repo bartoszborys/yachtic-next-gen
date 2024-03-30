@@ -1,27 +1,26 @@
 "use client"
 import { Box, Slider, SliderOwnProps, SliderTypeMap } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../../store/hooks";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 interface StoreCheckboxProps {
     text: string,
-    filterName: Array<keyof SearchState>;
+    filterName: [keyof SearchState, keyof SearchState];
 }
 
-export default function NewSlider({ text, filterName, ...sliderProps }: StoreCheckboxProps & SliderOwnProps) {
+export default function NewSlider({ text, filterName: [minFilterName, maxFilterName], ...sliderProps }: StoreCheckboxProps & SliderOwnProps) {
     const dispatch = useDispatch();
-    const [value, setValue] = useState<number[]>([sliderProps.min || 0, sliderProps.max || 0]);
+    const [value, setValue] = useState<[number, number]>([sliderProps.min || 0, sliderProps.max || 0]);
 
     const handleChange = (event: Event, newValue: number|number[]) => {
         if(!Array.isArray(newValue)) {
             throw new Error("Unhandled state");
         }
 
-        setValue(newValue as number[]);
-        dispatch(updateFlag({ value: newValue[0], filterName: filterName[0]}));
-        dispatch(updateFlag({ value: newValue[1], filterName: filterName[1]}));
+        setValue(newValue as [number, number]);
+        dispatch(updateFlag({ value: newValue[0], filterName: minFilterName}));
+        dispatch(updateFlag({ value: newValue[1], filterName: maxFilterName}));
     };
     
     return (
