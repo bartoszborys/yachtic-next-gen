@@ -1,27 +1,45 @@
 "use client"
+
 import { useDispatch } from "react-redux";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
-import { ChangeEvent } from "react";
+import { SyntheticEvent } from "react";
 import { useAppSelector } from "../../../store/hooks";
+import { Box, Checkbox, FormControlLabel } from "@mui/material";
 
 interface StoreCheckboxProps {
     text: string,
     filterName: keyof SearchState;
 }
 
-export default function Checkbox({text, filterName}: StoreCheckboxProps) {
+export default function StoreCheckbox({text, filterName}: StoreCheckboxProps) {
     const dispatch = useDispatch();
     const value = useAppSelector(selector => selector.search[filterName]);
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: SyntheticEvent<Element, Event>, checked: boolean) => {
         dispatch(
-            updateFlag({value: event.target.checked, filterName})
+            updateFlag({value: checked, filterName})
         );
     };
     
     return (
-        <div className="bg-blue-500 flex my-2 p-2 rounded-md">
-            <input value={value.toString()} onChange={onChange} className="w-4 h-5" type="checkbox"/>
-            <span className="my-1 ml-2">{text}</span>
+        <div className="bg-[#00a0e3] flex my-2 p-2 rounded-md h-[35px]">
+            <FormControlLabel
+                value={value.toString()}
+                onChange={onChange}
+                label={<span className="text-xs text-[#e6f2f9]">{text}</span>}
+                control={
+                    <Checkbox
+                        sx={{
+                            'color': '#e6f2f9',
+                            '&.Mui-checked': {
+                              color: "#00a27d",
+                            },
+                            '&.MuiButtonBase-root svg' : {
+                                backgroundColor: "white",
+                            }
+                        }}
+                    />
+                }
+            />
         </div>
     );
 }

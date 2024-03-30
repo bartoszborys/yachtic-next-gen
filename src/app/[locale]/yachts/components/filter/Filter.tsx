@@ -38,17 +38,17 @@ export default async function Filter() {
                 <RangeSlider min={1} max={6} filterName={['cabinsMin', 'cabinsMax']} text="Cabins"/>
                 <RangeSlider min={1} max={6} filterName={['toiletsMin', 'toiletsMax']} text="Toilets"/>
 
-                <Checkbox filterName="recommendedFirst" text="RECOMMENDED_FIRST" />
-                <Checkbox filterName="lowFirstInstallment" text="LOW_FIRST_RATE" />
+                <Checkbox filterName="recommendedFirst" text="Recommended first" />
+                <Checkbox filterName="lowFirstInstallment" text="Low first rate" />
 
                 <div className="my-2">
                     <span>WYPOSAŻENIE I DODATKI</span>
                     <Searches data={searchesData} />
                 </div>
 
-                <Checkbox filterName="haveLicense" text="BAREBOAT" />
+                <Checkbox filterName="haveLicense" text="Bareboat" />
 
-                <Checkbox filterName="needSkipper" text="I_NEED_A_SKIPPER" />
+                <Checkbox filterName="needSkipper" text="I need a skipper" />
 
                 <Select filterName="ratingMin" options={rates.map((rating) => ({ name: rating.name, value: rating.id }))} description="RATE NOT LESS THAN" />
 
