@@ -3,7 +3,6 @@ import DateInput from "./client/Date";
 import Searches from "./client/Searches";
 import Select from "./client/Select";
 import Text from "./client/Text";
-import Range from "./client/Range";
 import {
     getSearches,
     getCountries,
@@ -12,6 +11,7 @@ import {
     rates
 } from "../../data/filter";
 import RangeSlider from "./client/RangeSlider";
+import MinMaxRangeNumber from "./client/NumberRange";
 
 
 export default async function Filter() {
@@ -54,25 +54,9 @@ export default async function Filter() {
 
                 <Select filterName="yearMin" options={years.map((year) => ({ name: year.toString(), value: year }))} description="NOT OLDER THAN" />
 
-                <div>
-                    <span>PRICE</span>
-                    <div>
-                        <Text filterName="priceMin" />
-                        <Text filterName="priceMax" />
-                    </div>
-                </div>
-                <div>
-                    <span>LENGTH</span>
-                    <Text filterName="lengthMin" />
-                    <Text filterName="lengthMax" />
-                </div>
-                <div className="">
-                    <span>kurwiu</span>
-                    <div>
-                        <input className="w-[50%]" />
-                        <input className="w-[50%]" />
-                    </div>
-                </div>
+                <MinMaxRangeNumber label="PRICE (€)" filterName={['personsMin', 'personsMax']} placeholder={['From...', 'To...']}/>
+                
+                <MinMaxRangeNumber label="LENGTH (M)" filterName={['lengthMin', 'lengthMax']} placeholder={['From...', 'To...']}/>
                 <div>
                     <span>NAME OR MODEL</span>
                     <Text filterName="name" />
