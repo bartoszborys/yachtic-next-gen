@@ -6,7 +6,6 @@ import { getYachts } from "../../data/list";
 import YachtsData from "../../types/YachtData";
 import Yacht from "./components/Yacht";
 import { useAppSelector } from "../../store/hooks";
-import { Slider } from "@mui/material";
 
 export default function List() {
     const [yachts, setYachts] = useState<YachtsData[]>([]);
@@ -42,14 +41,6 @@ export default function List() {
 
     return (
         <>
-                            <Slider
-                        aria-label="Small steps"
-                        defaultValue={0.00000005}
-                        step={0.00000001}
-                        marks
-                        min={-0.00000005}
-                        max={0.0000001}
-                    />
             <div className="d-flex flex-col">
                 {yachts.map(yacht => <Yacht key={yacht.id} data={yacht}/>)}
             </div>

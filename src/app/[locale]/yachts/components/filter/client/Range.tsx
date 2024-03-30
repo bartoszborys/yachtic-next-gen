@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
 import { ChangeEvent } from "react";
 import { useAppSelector } from "../../../store/hooks";
-import { Slider } from '@mui/base';
-import { Box } from "@mui/material";
 
 interface StoreCheckboxProps {
     text: string,
@@ -25,16 +23,6 @@ export default function Range({ text, filterName }: StoreCheckboxProps) {
     return (
         <>
             <span>{text}</span>
-            <div className="overflow-auto">
-                    <Slider
-                        aria-label="Small steps"
-                        defaultValue={0.00000005}
-                        step={0.00000001}
-                        marks
-                        min={-0.00000005}
-                        max={0.0000001}
-                    />
-            </div>
             <input
                 value={value.toString()}
                 onChange={onChange}
