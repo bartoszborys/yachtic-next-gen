@@ -1,18 +1,17 @@
 "use client"
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { addSearchId, removeSearchId } from "../../../store/FilterSlice";
 import { SearchesData } from "../../../data/filter";
 import { useAppDispatch } from "../../../store/hooks";
 
 export default function FilterSearches({ data }: { data: SearchesData[] }): ReactNode {
-    const [list, setList] = useState<ReactNode[]>([]);
     const dispatch = useAppDispatch();
     const serviceIds = useSelector<any, number[]>(state => state.search.searches);
 
-    useEffect(() => {
-        const list = data.map(
+    const list = useMemo(() => {
+        return data.map(
             (item: SearchesData) => {
                 const borderColor = serviceIds.includes(item.id) ? "border-sky-500" : "hover:border-sky-300";
                 const onClick = () => {
@@ -32,9 +31,8 @@ export default function FilterSearches({ data }: { data: SearchesData[] }): Reac
                 />
             }
         );
-        setList(list);
-    }, [serviceIds]);
-
+    }, [data, serviceIds]);
+    
     return (
         <>
             <div className="grid grid-cols-5">

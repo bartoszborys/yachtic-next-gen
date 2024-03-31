@@ -1,5 +1,5 @@
 "use client"
-import { Box, Slider, SliderOwnProps, SliderTypeMap } from "@mui/material";
+import { Box, Slider, SliderOwnProps } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
 import { ReactNode, useState } from "react";
@@ -28,7 +28,7 @@ export default function FilterRangeSlider(
     return (
         <>
             <div className="flex justify-between">
-                <span>{text}</span>
+                <span className="text-gray-500">{text}</span>
                 <span className="text-gray-500">
                     <span>FROM:</span>
                     <b className="ml-1">{value[0]}{value[0] === sliderProps.max ? "+" : ""}</b>
@@ -36,7 +36,7 @@ export default function FilterRangeSlider(
                     <b className="ml-1">{value[1]}{value[1] === sliderProps.max ? "+" : ""}</b>
                 </span>
             </div>
-            <Box>
+            <Box className="mx-[9px]">
                 <Slider
                     {...sliderProps}
                     sx={{

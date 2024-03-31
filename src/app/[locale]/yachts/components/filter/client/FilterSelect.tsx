@@ -25,10 +25,10 @@ export default function FilterSelect({ options, description, filterName }: Filte
 
     return (
         <>
-            <span>{description}</span>
-            <select value={value.toString()} onChange={onChange} className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1">
-                <option value={""}>Select</option>
-                {options.map(option => <option key={option.value} value={option.value}>{option.name}</option>)}
+            <span className="text-gray-500">{description}</span>
+            <select value={value.toString()} onChange={onChange} className="flex-1 border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2">
+                <option  value={""}>Any ...</option>
+                {options.map(option => <option className="text-green" key={option.value} value={option.value}>{option.name}</option>)}
             </select>
         </>
     );

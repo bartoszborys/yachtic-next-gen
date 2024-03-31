@@ -33,8 +33,8 @@ export default async function Filter() {
                     <FilterText filterName="days" />
                 </div>
             </div>
-            <div className="bg-white flex flex-col p-5 text-xs">
-                <FilterSelect filterName="kindId" options={kinds} description="BOAT TYPE" />
+            <div className="bg-white flex flex-col p-5 py-2 text-xs">
+                <FilterSelect filterName="kindId" options={kinds} description="BOAT'S TYPE" />
 
                 <FilterRangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text="Persons"/>
                 <FilterRangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text="Berths"/>
@@ -44,8 +44,8 @@ export default async function Filter() {
                 <FilterCheckbox filterName="recommendedFirst" text="Recommended first" />
                 <FilterCheckbox filterName="lowFirstInstallment" text="Low first rate" />
 
-                <div className="my-2">
-                    <span>WYPOSAŻENIE I DODATKI</span>
+                <div className="my-2 text-gray-500">
+                    <span>EQUIPMENT AND EXTRAS</span>
                     <FilterSearches data={searchesData} />
                 </div>
 
@@ -57,15 +57,15 @@ export default async function Filter() {
 
                 <FilterSelect filterName="yearMin" options={years} description="NOT OLDER THAN" />
 
-                <FilterMinMaxRange label="PRICE (€)" filterName={['personsMin', 'personsMax']} placeholder={['From...', 'To...']}/>
+                <FilterMinMaxRange label="PRICE (€)" filterName={['priceMin', 'priceMax']} placeholder={['From...', 'To...']}/>
                 
                 <FilterMinMaxRange label="LENGTH (M)" filterName={['lengthMin', 'lengthMax']} placeholder={['From...', 'To...']}/>
-                <div>
-                    <span>NAME OR MODEL</span>
-                    <FilterText filterName="name" />
+                <div className="flex flex-col">
+                    <span className="text-gray-500">NAME OR MODEL</span>
+                    <FilterText placeholder="Any ..." filterName="name" />
                 </div>
                 <div>
-                    <span>OPERATOR</span>
+                    <span className="text-gray-500">OPERATOR</span>
                     <FilterAutocomplete options={companies} filterName="companyId"/>
                 </div>
             </div>

@@ -82,7 +82,6 @@ export const filterSlice = createSlice({
     initializeSearchSlice: (state: SearchState, value) => {
       const payload = {...value.payload};
       if(payload.searches) {
-        debugger;
         payload.searches = payload.searches.split(",").filter((item: string) => item).map((item: string) => parseInt(item));
       }
       Object.assign(state, payload);
