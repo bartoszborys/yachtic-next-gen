@@ -2,16 +2,16 @@
 
 import { useDispatch } from "react-redux";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
-import { SyntheticEvent } from "react";
+import { ReactNode, SyntheticEvent } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
 
-interface StoreCheckboxProps {
+interface FilterCheckboxProps {
     text: string,
     filterName: keyof SearchState;
 }
 
-export default function StoreCheckbox({text, filterName}: StoreCheckboxProps) {
+export default function FilterCheckbox({text, filterName}: FilterCheckboxProps): ReactNode {
     const dispatch = useDispatch();
     const value = useAppSelector(selector => selector.search[filterName]);
     const onChange = (event: SyntheticEvent<Element, Event>, checked: boolean) => {

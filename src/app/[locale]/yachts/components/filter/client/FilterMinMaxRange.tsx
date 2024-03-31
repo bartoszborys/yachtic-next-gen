@@ -2,9 +2,9 @@
 
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
-interface StoreTextProps {
+interface FilterMinMaxRangeProps {
     label: string;
     filterName: [keyof SearchState, keyof SearchState];
     placeholder: [string, string];
@@ -12,11 +12,11 @@ interface StoreTextProps {
 
 const className = "border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2";
 
-export default function MinMaxRangeNumber({
+export default function FilterMinMaxRange({
     label,
     filterName: [minFilterName, maxFilterName],
     placeholder: [minPlaceholder, maxPlaceholder],
-}: StoreTextProps) {
+}: FilterMinMaxRangeProps): ReactNode {
     const dispatch = useAppDispatch();
 
     const minValue = useAppSelector(selector => selector.search[minFilterName]);

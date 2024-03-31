@@ -2,7 +2,7 @@
 
 import { useDispatch } from "react-redux";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
-import { SyntheticEvent, useMemo, useState } from "react";
+import { ReactNode, SyntheticEvent, useMemo, useState } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import { Autocomplete } from "@mui/material";
 
@@ -10,7 +10,7 @@ interface Option  {
     name: string;
     value: string | number;
 }
-interface SelectProps {
+interface FilterAutocompleteProps {
     options: {
         name: string;
         value: string | number;
@@ -18,7 +18,7 @@ interface SelectProps {
     filterName: keyof SearchState;
 }
 
-export default function FilterAutocomplete({options, filterName}: SelectProps) {
+export default function FilterAutocomplete({options, filterName}: FilterAutocompleteProps): ReactNode {
     const [inputValue, setInputValue] = useState('');
     const dispatch = useDispatch();
     const value = useAppSelector(selector => selector.search[filterName]);

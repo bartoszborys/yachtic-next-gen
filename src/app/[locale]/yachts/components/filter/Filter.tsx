@@ -1,19 +1,19 @@
-import Checkbox from "./client/Checkbox";
-import DateInput from "./client/Date";
-import Searches from "./client/Searches";
-import Select from "./client/Select";
-import Text from "./client/Text";
+import Checkbox from "./client/FilterCheckbox";
+import DateInput from "./client/FilterDate";
+import Searches from "./client/FilterSearches";
+import FilterSelect from "./client/FilterSelect";
+import FilterText from "./client/FilterText";
+import RangeSlider from "./client/FilterRangeSlider";
+import MinMaxRangeNumber from "./client/FilterMinMaxRange";
+import FilterAutocomplete from "./client/FilterAutocomplete";
 import {
     getSearches,
     getCountries,
     getKinds,
     getYears,
+    getCompanies,
     rates
 } from "../../data/filter";
-import RangeSlider from "./client/RangeSlider";
-import MinMaxRangeNumber from "./client/NumberRange";
-import FilterAutocomplete from "./client/FilterAutocomplete";
-import { getCompanies } from "../../data/list";
 
 
 export default async function Filter() {
@@ -26,15 +26,15 @@ export default async function Filter() {
     return (
         <>
             <div className="bg-[#00a0e3] flex flex-col p-5 text-xs">
-                <Select filterName="countries[0][id]" options={countries} description="COUNTRIES" />
+                <FilterSelect filterName="countries[0][id]" options={countries} description="COUNTRIES" />
                 <DateInput filterName="date" text="Date" />
                 <div className="flex flex-col">
                     <span>Days</span>
-                    <Text filterName="days" />
+                    <FilterText filterName="days" />
                 </div>
             </div>
             <div className="bg-white flex flex-col p-5 text-xs">
-                <Select filterName="kindId" options={kinds} description="BOAT TYPE" />
+                <FilterSelect filterName="kindId" options={kinds} description="BOAT TYPE" />
 
                 <RangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text="Persons"/>
                 <RangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text="Berths"/>
@@ -53,20 +53,20 @@ export default async function Filter() {
 
                 <Checkbox filterName="needSkipper" text="I need a skipper" />
 
-                <Select filterName="ratingMin" options={rates.map((rating) => ({ name: rating.name, value: rating.id }))} description="RATE NOT LESS THAN" />
+                <FilterSelect filterName="ratingMin" options={rates.map((rating) => ({ name: rating.name, value: rating.id }))} description="RATE NOT LESS THAN" />
 
-                <Select filterName="yearMin" options={years} description="NOT OLDER THAN" />
+                <FilterSelect filterName="yearMin" options={years} description="NOT OLDER THAN" />
 
                 <MinMaxRangeNumber label="PRICE (€)" filterName={['personsMin', 'personsMax']} placeholder={['From...', 'To...']}/>
                 
                 <MinMaxRangeNumber label="LENGTH (M)" filterName={['lengthMin', 'lengthMax']} placeholder={['From...', 'To...']}/>
                 <div>
                     <span>NAME OR MODEL</span>
-                    <Text filterName="name" />
+                    <FilterText filterName="name" />
                 </div>
                 <div>
                     <span>OPERATOR</span>
-                    <FilterAutocomplete options={companies} description="Heh" filterName="companyId"/>
+                    <FilterAutocomplete options={companies} filterName="companyId"/>
                 </div>
             </div>
         </>

@@ -2,27 +2,27 @@
 
 import { useDispatch } from "react-redux";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import { useAppSelector } from "../../../store/hooks";
 
-interface SelectProps {
+interface FilterSelectProps {
     options: Array<{
         name: string,
-        value: string|number
+        value: string | number
     }>,
     description: string;
     filterName: keyof SearchState;
 }
 
-export default function Select({options, description, filterName}: SelectProps) {
+export default function FilterSelect({ options, description, filterName }: FilterSelectProps): ReactNode {
     const dispatch = useDispatch();
     const value = useAppSelector(selector => selector.search[filterName]);
     const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
         dispatch(
-            updateFlag({value: event.target.value, filterName})
+            updateFlag({ value: event.target.value, filterName })
         );
     };
-    
+
     return (
         <>
             <span>{description}</span>

@@ -6,17 +6,17 @@ import { addSearchId, removeSearchId } from "../../../store/FilterSlice";
 import { SearchesData } from "../../../data/filter";
 import { useAppDispatch } from "../../../store/hooks";
 
-export default function Searches({data}: {data: SearchesData[]}): ReactNode {
+export default function FilterSearches({ data }: { data: SearchesData[] }): ReactNode {
     const [list, setList] = useState<ReactNode[]>([]);
     const dispatch = useAppDispatch();
     const serviceIds = useSelector<any, number[]>(state => state.search.searches);
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         const list = data.map(
             (item: SearchesData) => {
                 const borderColor = serviceIds.includes(item.id) ? "border-sky-500" : "hover:border-sky-300";
                 const onClick = () => {
-                    if(serviceIds.includes(item.id)) {
+                    if (serviceIds.includes(item.id)) {
                         dispatch(removeSearchId(item.id));
                     }
                     else {

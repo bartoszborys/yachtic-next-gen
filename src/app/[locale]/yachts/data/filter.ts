@@ -14,6 +14,12 @@ export interface SearchesData {
     image: {src: string}
 }
 
+
+interface Company {
+    id: number;
+    name: string;
+}
+
 export async function getCountries(): Promise<CountryData[]> {
     return (
         await 
@@ -47,6 +53,12 @@ export function getYears(): number[] {
     const endYear = 2004;
     
     return Array.from({ length: currentYear - endYear }, (_, index) => currentYear - index);
+}
+
+
+export async function getCompanies(): Promise<Company[]> {
+    const url = "http://localhost:8080/yachts/companies";
+    return (await (await fetch(url)).json()).models;
 }
 
 export const rates = [

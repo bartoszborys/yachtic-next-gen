@@ -2,25 +2,27 @@
 
 import { useDispatch } from "react-redux";
 import { SearchState, updateFlag } from "../../../store/FilterSlice";
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import { useAppSelector } from "../../../store/hooks";
 
-interface StoreTextProps {
+interface FilterDateProps {
+    text: string,
     filterName: keyof SearchState;
 }
 
-export default function Text({filterName}: StoreTextProps) {
+export default function FilterDate({ text, filterName }: FilterDateProps): ReactNode {
     const dispatch = useDispatch();
     const value = useAppSelector(selector => selector.search[filterName]);
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(
-            updateFlag({value: event.target.value, filterName})
+            updateFlag({ value: event.target.value, filterName })
         );
     };
-    
+
     return (
         <>
-            <input value={value.toString()} onChange={onChange} className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1" type="text"/>
+            <span>{text}</span>
+            <input value={value.toString()} onChange={onChange} className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1" type="date" />
         </>
     );
 }
