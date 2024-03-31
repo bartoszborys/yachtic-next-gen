@@ -5,6 +5,8 @@ import { SearchState, updateFlag } from "../../../store/FilterSlice";
 import { ReactNode, SyntheticEvent } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 interface FilterCheckboxProps {
     text: string,
@@ -28,15 +30,14 @@ export default function FilterCheckbox({text, filterName}: FilterCheckboxProps):
                 label={<span className="text-xs text-[#e6f2f9]">{text}</span>}
                 control={
                     <Checkbox
-                        sx={{
-                            'color': '#e6f2f9',
-                            '&.Mui-checked': {
-                              color: "#00a27d",
-                            },
-                            '&.MuiButtonBase-root svg' : {
-                                backgroundColor: "white",
-                            }
-                        }}
+                        checkedIcon={(
+                            <div className="flex flex-col justify-center bg-[#00a27d] border border-white text-white w-[22px] h-[22px] text-center rounded">
+                                <FontAwesomeIcon icon={faCheck} />
+                            </div>
+                        )}
+                        icon={(
+                            <div className="flex flex-col justify-center bg-white border border-white text-white w-[22px] h-[22px] text-center rounded" />
+                        )}
                     />
                 }
             />

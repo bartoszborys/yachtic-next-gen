@@ -1,4 +1,16 @@
-interface CountryData {
+export interface CountryData {
+    id: number;
+    name: string;
+    regions: CountryRegion[];
+}
+
+export interface CountryRegion {
+    id: number;
+    name: string;
+    locations: CountryLocation[],
+}
+
+export interface CountryLocation {
     id: number;
     name: string;
 }
@@ -13,7 +25,6 @@ export interface SearchesData {
     name: string;
     image: {src: string}
 }
-
 
 interface Company {
     id: number;

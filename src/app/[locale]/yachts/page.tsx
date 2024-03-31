@@ -6,7 +6,7 @@ import Filter from "./components/filter/Filter";
 import List from "./components/list/List";
 import StoreProvider from "./components/StoreProvider";
 
-export default function Page({params, searchParams} : {params: {locale: string}, searchParams: string[]}) {
+export default function Page({params, searchParams} : {params: {locale: string}, searchParams: {[key: string]: string}}) {
     unstable_setRequestLocale(params.locale);
     const t = useTranslations();
     return (
@@ -17,7 +17,7 @@ export default function Page({params, searchParams} : {params: {locale: string},
                 </div>
                 <div className="flex flex-1 h-100">
                     <div className="hidden flex-col w-[225px] mr-2 my-4 lg:flex">
-                        <Filter/>
+                        <Filter searchParams={searchParams}/>
                     </div>
                     <div className="flex-1 ml-3 my-4 mt-[128px]">
                         <List />

@@ -6,7 +6,7 @@ import { initializeSearchSlice } from '../store/FilterSlice'
 
 interface StoreProviderProps {
   children: React.ReactNode,
-  searchParams: string[],
+  searchParams: {[key: string]: string},
 }
 
 export default function StoreProvider({ children, searchParams }: StoreProviderProps) {

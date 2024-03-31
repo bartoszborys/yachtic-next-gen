@@ -10,6 +10,8 @@ const todayString = `${year}-${month}-${day}`;
 
 export interface SearchState {
   searches: number[];
+  regions: number[];
+  locations: number[];
   recommendedFirst: boolean;
   lowFirstInstallment: boolean;
   haveLicense: boolean;
@@ -38,6 +40,8 @@ export interface SearchState {
 
 const initialState: SearchState = {
   searches: [],
+  regions: [],
+  locations: [],
   recommendedFirst: false,
   lowFirstInstallment: false,
   haveLicense: false,
@@ -70,19 +74,44 @@ export const filterSlice = createSlice({
   reducers: {
     addSearchId: (state, value) => {
       state.searches = [...state.searches, value.payload];
-      console.log(state.searches);
     },
     removeSearchId: (state, value) => {
       state.searches = state.searches.filter(item => item !== value.payload);
     },
-    updateFlag: (state, value) => {
+    addLocations: (state, value: {type: string, payload: number[]}) => {
+      value.payload.forEach(location => {
+        if(!state.locations.includes(location)) {
+          state.locations.push(location);
+        }
+      });
+    },
+    removeLocations: (state, value: {type: string, payload: number[]}) => {
+      state.locations = state.locations.filter(item => !value.payload.includes(item));
+    },
+    addRegions: (state, value: {type: string, payload: number[]}) => {
+      value.payload.forEach(region => {
+        if(!state.regions.includes(region)) {
+          state.regions.push(region);
+        }
+      });
+    },
+    removeRegions: (state, value: {type: string, payload: number[]}) => {
+      state.regions = state.regions.filter(item => !value.payload.includes(item));
+    },
+    updateFlag: (state, value: {payload: {filterName: keyof SearchState, value: unknown}, type: string}) => {
       //@ts-ignore
-      state[value.payload.filterName as keyof SearchState] = value.payload.value;
+      state[value.payload.filterName] = value.payload.value;
     },
     initializeSearchSlice: (state: SearchState, value) => {
       const payload = {...value.payload};
       if(payload.searches) {
         payload.searches = payload.searches.split(",").filter((item: string) => item).map((item: string) => parseInt(item));
+      }
+      if(payload.regions) {
+        payload.regions = payload.regions.split(",").filter((item: string) => item).map((item: string) => parseInt(item));
+      }
+      if(payload.locations) {
+        payload.locations = payload.locations.split(",").filter((item: string) => item).map((item: string) => parseInt(item));
       }
       Object.assign(state, payload);
     }
@@ -91,6 +120,10 @@ export const filterSlice = createSlice({
 
 export const {
   addSearchId,
+  addLocations,
+  addRegions,
+  removeLocations,
+  removeRegions,
   removeSearchId,
   updateFlag,
   initializeSearchSlice,

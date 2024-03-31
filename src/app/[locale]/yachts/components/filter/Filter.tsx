@@ -14,19 +14,23 @@ import {
     getCompanies,
     rates
 } from "../../data/filter";
+import FilterRegions from "./client/FilterRegions";
 
 
-export default async function Filter() {
+export default async function Filter({searchParams}: {searchParams: {[key: string]: string}}) {
     const searchesData = await getSearches();
     const kinds = (await getKinds()).map((kind) => ({ name: kind.name, value: kind.id }));
-    const countries = (await getCountries()).map(kind => ({ name: kind.name, value: kind.id }));
+    const countriesWhileData = await getCountries();
+    const countries = countriesWhileData.map(kind => ({ name: kind.name, value: kind.id }));
     const years = getYears().map((year) => ({ name: year.toString(), value: year }));
     const companies = (await getCompanies()).map(company => ({ name: company.name, value: company.id }));
+    const selectedData = countriesWhileData.find(item => item.id.toString() === searchParams["countries[0][id]"]) || null;
 
     return (
         <>
             <div className="bg-[#00a0e3] flex flex-col p-5 text-xs">
                 <FilterSelect filterName="countries[0][id]" options={countries} description="COUNTRIES" />
+                <FilterRegions countries={countriesWhileData} defaultData={selectedData}/>
                 <FilterDate filterName="date" text="Date" />
                 <div className="flex flex-col">
                     <span>Days</span>
@@ -36,10 +40,10 @@ export default async function Filter() {
             <div className="bg-white flex flex-col p-5 py-2 text-xs">
                 <FilterSelect filterName="kindId" options={kinds} description="BOAT'S TYPE" />
 
-                <FilterRangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text="Persons"/>
-                <FilterRangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text="Berths"/>
-                <FilterRangeSlider min={1} max={6} filterName={['cabinsMin', 'cabinsMax']} text="Cabins"/>
-                <FilterRangeSlider min={1} max={6} filterName={['toiletsMin', 'toiletsMax']} text="Toilets"/>
+                <FilterRangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text="Persons" />
+                <FilterRangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text="Berths" />
+                <FilterRangeSlider min={1} max={6} filterName={['cabinsMin', 'cabinsMax']} text="Cabins" />
+                <FilterRangeSlider min={1} max={6} filterName={['toiletsMin', 'toiletsMax']} text="Toilets" />
 
                 <FilterCheckbox filterName="recommendedFirst" text="Recommended first" />
                 <FilterCheckbox filterName="lowFirstInstallment" text="Low first rate" />
@@ -57,16 +61,16 @@ export default async function Filter() {
 
                 <FilterSelect filterName="yearMin" options={years} description="NOT OLDER THAN" />
 
-                <FilterMinMaxRange label="PRICE (€)" filterName={['priceMin', 'priceMax']} placeholder={['From...', 'To...']}/>
-                
-                <FilterMinMaxRange label="LENGTH (M)" filterName={['lengthMin', 'lengthMax']} placeholder={['From...', 'To...']}/>
+                <FilterMinMaxRange label="PRICE (€)" filterName={['priceMin', 'priceMax']} placeholder={['From...', 'To...']} />
+
+                <FilterMinMaxRange label="LENGTH (M)" filterName={['lengthMin', 'lengthMax']} placeholder={['From...', 'To...']} />
                 <div className="flex flex-col">
                     <span className="text-gray-500">NAME OR MODEL</span>
                     <FilterText placeholder="Any ..." filterName="name" />
                 </div>
                 <div>
                     <span className="text-gray-500">OPERATOR</span>
-                    <FilterAutocomplete options={companies} filterName="companyId"/>
+                    <FilterAutocomplete options={companies} filterName="companyId" />
                 </div>
             </div>
         </>
