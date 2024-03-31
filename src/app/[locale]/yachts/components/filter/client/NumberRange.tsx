@@ -27,7 +27,7 @@ export default function MinMaxRangeNumber({
     };
 
     const onMaxChange = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateFlag({ value: event.target.value, filterName: minFilterName }));
+        dispatch(updateFlag({ value: event.target.value, filterName: maxFilterName }));
     };
 
     return (

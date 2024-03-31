@@ -12,6 +12,8 @@ import {
 } from "../../data/filter";
 import RangeSlider from "./client/RangeSlider";
 import MinMaxRangeNumber from "./client/NumberRange";
+import FilterAutocomplete from "./client/FilterAutocomplete";
+import { getCompanies } from "../../data/list";
 
 
 export default async function Filter() {
@@ -19,6 +21,7 @@ export default async function Filter() {
     const kinds = (await getKinds()).map((kind) => ({ name: kind.name, value: kind.id }));
     const countries = (await getCountries()).map(kind => ({ name: kind.name, value: kind.id }));
     const years = getYears().map((year) => ({ name: year.toString(), value: year }));
+    const companies = (await getCompanies()).map(company => ({ name: company.name, value: company.id }));
 
     return (
         <>
@@ -63,7 +66,7 @@ export default async function Filter() {
                 </div>
                 <div>
                     <span>OPERATOR</span>
-                    <Text filterName="companyId" />
+                    <FilterAutocomplete options={companies} description="Heh" filterName="companyId"/>
                 </div>
             </div>
         </>
