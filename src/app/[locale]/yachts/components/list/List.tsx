@@ -27,7 +27,7 @@ export default function List() {
             }
         }); 
         
-        // router.push(`/yachts?${params.toString()}`, {scroll: false});
+        router.push(`/yachts?${params.toString()}`, {scroll: false});
 
         (async () => {
             try {
