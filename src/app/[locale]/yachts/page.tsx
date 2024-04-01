@@ -12,14 +12,16 @@ export default function Page({params, searchParams} : {params: {locale: string},
     return (
         <>
             <StoreProvider searchParams={searchParams}>
-                <div className="mt-4 text-cyan-400">
+                <div className="mt-4 text-cyan-400 text-sm">
                     <Link href={`/${params.locale}`} locale={params.locale}>Yachtic</Link>
+                    <span className="mx-2">{"➤"}</span>
+                    <Link href={`/${params.locale}/yachts`} locale={params.locale}>Yachts</Link>
                 </div>
                 <div className="flex flex-1 h-100">
                     <div className="hidden flex-col w-[225px] mr-2 my-4 lg:flex">
                         <Filter searchParams={searchParams}/>
                     </div>
-                    <div className="flex-1 ml-3 my-4 mt-[128px]">
+                    <div className="flex-1 ml-3 my-4">
                         <List />
                     </div>
                 </div>

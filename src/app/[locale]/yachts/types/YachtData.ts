@@ -1,43 +1,64 @@
-import CompanyData from "./CompanyData";
-import ExtendedInfoData from "./ExtendedInfoData";
-import FinalCountryData from "./FinalCountryData";
-import FinalLocationData from "./FinalLocationData";
-import FinalRegionData from "./FinalRegionData";
-import PriceData from "./PriceData";
-import SearchData from "./SearchData";
-import UnavailableData from "./UnavailableData";
+export type DiscountName = "DISCOUNT" | "LAST MINUTE" | "FIRST MINUTE" | null;
 
-export default interface YachtsData {
-    readonly id: number;
-    readonly url: string;
-    readonly modelName: string;
-    readonly name: string;
-    readonly year: number | null;
-    readonly width: number;
-    readonly draft: number;
-    readonly length: number;
-    readonly cabins: number;
-    readonly berths: number;
-    readonly bathrooms: number | null;
-    readonly waterTankCapacity: number | null;
-    readonly fuelTanksCapacity: number | null;
-    readonly isRecommended: boolean;
-    readonly isOpportunity: boolean;
-    readonly rating: number;
-    readonly shouldShowRating: boolean;
-    readonly firstInstallmentPercentOfTotal: number;
-    readonly shouldShowFirstInstallmentPercentOfTotal: boolean;
-    readonly company: CompanyData;
-    readonly mainImage: {src: string};
-    readonly price: PriceData | UnavailableData;
-    readonly prevPrice: PriceData | UnavailableData;
-    readonly nextPrice: PriceData | UnavailableData;
-    readonly nextNextPrice: PriceData | UnavailableData;
-    readonly opinionsCount: number;
-    readonly finalLocation: FinalLocationData;
-    readonly finalRegion: FinalRegionData;
-    readonly finalCountry: FinalCountryData;
-    readonly extendedInfos: ExtendedInfoData[];
-    readonly searches: SearchData[];
-    readonly kindName: string;
+export interface YachtHeaderDetails {
+    id: number,
+    locationUrl: string;
+    yachtName: string;
+    modelName: string;
+    countryName: string;
+    locationName: string;
+    opinionsCount: number;
+    rating: number;
+    showRating: boolean;
+}
+
+export interface YachtDetails {
+    berths: number;
+    cabins: number;
+    length: number;
+    baths: number;
+    built: number;
+    operator: string;
+    operatorUrl: string;    
+    searches: Array<{id: number, src: string}>
+}
+
+export interface MainPrice {
+    isBooked: boolean;
+    date: Date;
+    days: number;
+    amount: string;
+    withFee: string;
+    discountName: DiscountName;
+    discount: number | null;
+    befoureDiscountAmount: string | null;
+    currency: string;
+}
+
+export interface SubPrice {
+    isBooked: boolean;
+    date: Date;
+    amount: string;
+    befoureDiscountAmount: string | null;
+}
+
+export interface PriceData {
+    main: MainPrice;
+    leftBottom: SubPrice;
+    rightBottom: SubPrice;
+}
+
+export interface ImageData {
+    isRecommended: boolean;
+    isOpportunity: boolean;
+    shouldShowFirstInstallmentPercentOfTotal: boolean;
+    firstInstallmentPercentOfTotal: number;
+    mainImageUrl: string;
+}
+
+export interface YachtData {
+    image: ImageData;
+    header: YachtHeaderDetails;
+    details: YachtDetails;
+    price: PriceData;
 }

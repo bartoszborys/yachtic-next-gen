@@ -29,11 +29,11 @@ export default async function Filter({searchParams}: {searchParams: {[key: strin
     return (
         <>
             <div className="bg-[#00a0e3] flex flex-col p-5 text-xs">
-                <FilterSelect filterName="countries[0][id]" options={countries} description="COUNTRIES" />
+                <div className="text-white text-xl">Search boat</div>
+                <FilterSelect filterName="countries[0][id]" options={countries} description="COUNTRY" />
                 <FilterRegions countries={countriesWhileData} defaultData={selectedData}/>
-                <FilterDate filterName="date" text="Date" />
+                <FilterDate filterName="date" text="" />
                 <div className="flex flex-col">
-                    <span>Days</span>
                     <FilterText filterName="days" />
                 </div>
             </div>

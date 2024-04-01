@@ -1,0 +1,43 @@
+import CompanyData from "./CompanyData";
+import ExtendedInfoData from "./ExtendedInfoData";
+import FinalCountryData from "./FinalCountryData";
+import FinalLocationData from "./FinalLocationData";
+import FinalRegionData from "./FinalRegionData";
+import PriceData from "./PriceData";
+import SearchData from "./SearchData";
+import UnavailableData from "./UnavailableData";
+
+export default interface YachtsData {
+    readonly id: number;
+    readonly url: string;
+    readonly modelName: string;
+    readonly name: string;
+    readonly year: number | null;
+    readonly width: number;
+    readonly draft: number;
+    readonly length: number;
+    readonly cabins: number;
+    readonly berths: number;
+    readonly bathrooms: number | null;
+    readonly waterTankCapacity: number | null;
+    readonly fuelTanksCapacity: number | null;
+    readonly isRecommended: boolean;
+    readonly isOpportunity: boolean;
+    readonly rating: number;
+    readonly shouldShowRating: boolean;
+    readonly firstInstallmentPercentOfTotal: number;
+    readonly shouldShowFirstInstallmentPercentOfTotal: boolean;
+    readonly company: CompanyData;
+    readonly mainImage: {src: string};
+    readonly price: PriceData & UnavailableData;
+    readonly prevPrice: PriceData & UnavailableData;
+    readonly nextPrice: PriceData & UnavailableData;
+    readonly nextNextPrice: PriceData & UnavailableData;
+    readonly opinionsCount: number;
+    readonly finalLocation: FinalLocationData;
+    readonly finalRegion: FinalRegionData;
+    readonly finalCountry: FinalCountryData;
+    readonly extendedInfos: ExtendedInfoData[];
+    readonly searches: SearchData[];
+    readonly kindName: string;
+}

@@ -19,7 +19,7 @@ const styles = {
 
 export default function Navbar() {
     return (
-        <nav className="bg-white w-full flex justify-center h-16">
+        <nav className="bg-white w-full flex justify-center h-16 overflow-hidden sm:overflow-visible">
             <div className="w-full container flex">
                 <Image className="w-[185px] height-[48px] flex" alt="" src='/logo.svg' width={25} height={25} />
                 <div className="flex-1"></div>

@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import StoreProvider from "./[locale]/yachts/components/StoreProvider";
 import "./global.scss";
-import { Roboto } from 'next/font/google';
 import Navbar from "@/components/Navbar";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "@/navigation";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-
-const RobotoFont = Roboto({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,11 +21,11 @@ export default function LocaleLayout({
 
   return (
     <html>
-      <body className={`flex flex-col min-h-dvh ${RobotoFont.className}`}>
+      <body className={`flex flex-col min-h-dvh`}>
         <AppRouterCacheProvider>
           <Navbar />
           <main className="flex justify-center flex-1">
-            <div className="container flex-1 flexflex-col">
+            <div className="container flex-1 flex flex-col">
               {children}
             </div>
           </main>
