@@ -1,11 +1,11 @@
-import FilterCheckbox from "./client/FilterCheckbox";
-import FilterDate from "./client/FilterDate";
-import FilterSearches from "./client/FilterSearches";
-import FilterSelect from "./client/FilterSelect";
-import FilterText from "./client/FilterText";
-import FilterRangeSlider from "./client/FilterRangeSlider";
-import FilterMinMaxRange from "./client/FilterMinMaxRange";
-import FilterAutocomplete from "./client/FilterAutocomplete";
+import FilterCheckbox from "./controls/FilterCheckbox";
+import FilterDate from "./controls/FilterDate";
+import FilterSearches from "./controls/FilterSearches";
+import FilterSelect from "./controls/FilterSelect";
+import FilterText from "./controls/FilterText";
+import FilterRangeSlider from "./controls/FilterRangeSlider";
+import FilterMinMaxRange from "./controls/FilterMinMaxRange";
+import FilterAutocomplete from "./controls/FilterAutocomplete";
 import {
     getSearches,
     getCountries,
@@ -14,7 +14,7 @@ import {
     getCompanies,
     rates
 } from "../../data/filter";
-import FilterRegions from "./client/FilterRegions";
+import FilterRegions from "./controls/FilterRegions";
 
 
 export default async function Filter({searchParams}: {searchParams: {[key: string]: string}}) {
