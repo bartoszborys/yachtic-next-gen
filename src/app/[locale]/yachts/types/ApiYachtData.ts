@@ -29,10 +29,10 @@ export default interface YachtsData {
     readonly shouldShowFirstInstallmentPercentOfTotal: boolean;
     readonly company: CompanyData;
     readonly mainImage: {src: string};
-    readonly price: PriceData | UnavailableData;
-    readonly prevPrice: PriceData | UnavailableData;
-    readonly nextPrice: PriceData | UnavailableData;
-    readonly nextNextPrice: PriceData | UnavailableData;
+    readonly price: PriceData & UnavailableData;
+    readonly prevPrice: PriceData & UnavailableData;
+    readonly nextPrice: PriceData & UnavailableData;
+    readonly nextNextPrice: PriceData & UnavailableData;
     readonly opinionsCount: number;
     readonly finalLocation: FinalLocationData;
     readonly finalRegion: FinalRegionData;
