@@ -15,6 +15,8 @@ import {
     rates
 } from "../../data/filter";
 import FilterRegions from "./controls/FilterRegions";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 
 export default async function Filter({searchParams}: {searchParams: {[key: string]: string}}) {
@@ -25,12 +27,14 @@ export default async function Filter({searchParams}: {searchParams: {[key: strin
     const years = getYears().map((year) => ({ name: year.toString(), value: year }));
     const companies = (await getCompanies()).map(company => ({ name: company.name, value: company.id }));
     const selectedData = countriesWhileData.find(item => item.id.toString() === searchParams["countries[0][id]"]) || null;
+    const ratesOptions = rates.map((rating) => ({ name: rating.name, value: rating.id }));
+    const t = await getTranslations();
 
     return (
         <>
             <div className="bg-[#00a0e3] flex flex-col p-5 text-xs">
-                <div className="text-white text-xl">Search boat</div>
-                <FilterSelect filterName="countries[0][id]" options={countries} description="COUNTRY" />
+                <div className="text-white text-xl">{t("SEARCH_BOAT")}</div>
+                <FilterSelect filterName="countries[0][id]" options={countries} description={t("COUNTRY")} placeholder={t('ANY_PLACEHOLDER')} />
                 <FilterRegions countries={countriesWhileData} defaultData={selectedData}/>
                 <FilterDate filterName="date" text="" />
                 <div className="flex flex-col">
@@ -38,39 +42,39 @@ export default async function Filter({searchParams}: {searchParams: {[key: strin
                 </div>
             </div>
             <div className="bg-white flex flex-col p-5 py-2 text-xs">
-                <FilterSelect filterName="kindId" options={kinds} description="BOAT'S TYPE" />
+                <FilterSelect  filterName="kindId" options={kinds} description={t("BOAT_TYPE")} placeholder={t('ANY_PLACEHOLDER')} />
 
-                <FilterRangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text="Persons" />
-                <FilterRangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text="Berths" />
-                <FilterRangeSlider min={1} max={6} filterName={['cabinsMin', 'cabinsMax']} text="Cabins" />
-                <FilterRangeSlider min={1} max={6} filterName={['toiletsMin', 'toiletsMax']} text="Toilets" />
+                <FilterRangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text={t("PERSONS")} />
+                <FilterRangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text={t("BERTHS")} />
+                <FilterRangeSlider min={1} max={6} filterName={['cabinsMin', 'cabinsMax']} text={t("CABINS")} />
+                <FilterRangeSlider min={1} max={6} filterName={['toiletsMin', 'toiletsMax']} text={t("TOLIETS")} />
 
-                <FilterCheckbox filterName="recommendedFirst" text="Recommended first" />
-                <FilterCheckbox filterName="lowFirstInstallment" text="Low first rate" />
+                <FilterCheckbox filterName="recommendedFirst" text={t("RECOMMENDED_FIRST")} />
+                <FilterCheckbox filterName="lowFirstInstallment" text={t("LOW_FIRST_RATE")} />
 
                 <div className="my-2 text-gray-500">
-                    <span>EQUIPMENT AND EXTRAS</span>
+                    <span>{t('EQUIPMENT_AND_EXTRAS')}</span>
                     <FilterSearches data={searchesData} />
                 </div>
 
-                <FilterCheckbox filterName="haveLicense" text="Bareboat" />
+                <FilterCheckbox filterName="haveLicense" text={t("BAREBOAT")} />
 
-                <FilterCheckbox filterName="needSkipper" text="I need a skipper" />
+                <FilterCheckbox filterName="needSkipper" text={t("I_NEED_A_SKIPPER")} />
 
-                <FilterSelect filterName="ratingMin" options={rates.map((rating) => ({ name: rating.name, value: rating.id }))} description="RATE NOT LESS THAN" />
+                <FilterSelect filterName="ratingMin" options={ratesOptions} description={t("RATE_NOT_LESS_THAN")} placeholder={t('ANY_PLACEHOLDER')} />
 
-                <FilterSelect filterName="yearMin" options={years} description="NOT OLDER THAN" />
+                <FilterSelect filterName="yearMin" options={years} description={t("NOT_OLDER_THAN")} placeholder={t('ANY_PLACEHOLDER')}/>
 
-                <FilterMinMaxRange label="PRICE (€)" filterName={['priceMin', 'priceMax']} placeholder={['From...', 'To...']} />
+                <FilterMinMaxRange label={t('PRICE_WITH_CURRENCY', {currency: '€'})} filterName={['priceMin', 'priceMax']} placeholder={[t("FROM_PLACEHOLDER"), t("TO_PLACEHOLDER")]} />
 
-                <FilterMinMaxRange label="LENGTH (M)" filterName={['lengthMin', 'lengthMax']} placeholder={['From...', 'To...']} />
+                <FilterMinMaxRange label={t('LENGTH_WITH_UNIT', {unit: 'M'})} filterName={['lengthMin', 'lengthMax']} placeholder={[t("FROM_PLACEHOLDER"), t("TO_PLACEHOLDER")]} />
                 <div className="flex flex-col">
-                    <span className="text-gray-500">NAME OR MODEL</span>
-                    <FilterText placeholder="Any ..." filterName="name" />
+                    <span className="text-gray-500">{t("NAME_OR_MODEL")}</span>
+                    <FilterText placeholder={t('ANY_PLACEHOLDER')} filterName="name" />
                 </div>
                 <div>
-                    <span className="text-gray-500">OPERATOR</span>
-                    <FilterAutocomplete options={companies} filterName="companyId" />
+                    <span className="text-gray-500">{t("OPERATOR")}</span>
+                    <FilterAutocomplete options={companies} filterName="companyId" placeholder={t("ANY_PLACEHOLDER")}/>
                 </div>
             </div>
         </>

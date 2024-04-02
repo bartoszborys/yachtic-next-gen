@@ -10,6 +10,7 @@ import { fromYachtData } from "../../factories/YachtDetailsFactory";
 import { Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faShareAlt } from "@fortawesome/free-solid-svg-icons";
+import { useLocale } from "next-intl";
 
 let loadTimeout: null | NodeJS.Timeout = null;
 
@@ -17,6 +18,7 @@ export default function List() {
     const [yachts, setYachts] = useState<YachtsData[]>([]);
     const search = useAppSelector(state => state.search);
     const router = useRouter();
+    const locale = useLocale();
 
     useEffect(() => {
         if(loadTimeout) {
@@ -38,7 +40,7 @@ export default function List() {
                 }
             }); 
             
-            router.push(`/yachts?${params.toString()}`, {scroll: false});
+            router.push(`/${locale}/yachts?${params.toString()}`, {scroll: false});
     
             (async () => {
                 try {
@@ -49,7 +51,7 @@ export default function List() {
                     setYachts([]);
                 }
             })()
-        }, 10);
+        }, 2000);
     }, [search]);
 
     return (

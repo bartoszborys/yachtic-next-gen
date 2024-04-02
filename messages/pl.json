@@ -1,3 +1,26 @@
 {
-    "WELCOME_TEXT": "Witam na mojej stronie"
+    "WELCOME_TEXT": "Witaj na mojej stronie!",
+    "MAIN_PAGE_INFO": "Test migracji do Next.js, kliknij poniżej, aby przejść do strony jachtów",
+    "YACHT_LIST_LINK": "Jachty",
+    "COUNTRY": "KRAJ",
+    "SEARCH_BOAT": "Szukaj łodzi",
+    "BOAT_TYPE": "TYP ŁODZI",
+    "PERSONS": "Osoby",
+    "BERTHS": "Kuszetki",
+    "CABINS": "Kabiny",
+    "TOLIETS": "Toalety",
+    "RECOMMENDED_FIRST": "Polecane pierwsze",
+    "LOW_FIRST_RATE": "Niska pierwsza stawka",
+    "EQUIPMENT_AND_EXTRAS": "WYPOSAŻENIE I DODATKI",
+    "BAREBOAT": "Bez sternika",
+    "I_NEED_A_SKIPPER": "Potrzebuję sternika",
+    "RATE_NOT_LESS_THAN": "STAWKA NIE MNIEJSZA NIŻ",
+    "NOT_OLDER_THAN": "NIE STARSZE NIŻ",
+    "FROM_PLACEHOLDER": "Od...",
+    "TO_PLACEHOLDER": "Do...",
+    "NAME_OR_MODEL": "NAZWA LUB MODEL",
+    "OPERATOR": "OPERATOR",
+    "ANY_PLACEHOLDER": "Dowolne ...",
+    "PRICE_WITH_CURRENCY": "CENA ({currency}}",
+    "LENGTH_WITH_UNIT": "DŁUGOŚĆ ({unit})"
 }

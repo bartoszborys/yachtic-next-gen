@@ -12,9 +12,10 @@ interface FilterSelectProps {
     }>,
     description: string;
     filterName: keyof SearchState;
+    placeholder: string;
 }
 
-export default function FilterSelect({ options, description, filterName }: FilterSelectProps): ReactNode {
+export default function FilterSelect({ options, description, filterName, placeholder }: FilterSelectProps): ReactNode {
     const dispatch = useDispatch();
     const value = useAppSelector(selector => selector.search[filterName]);
     const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -27,7 +28,7 @@ export default function FilterSelect({ options, description, filterName }: Filte
         <>
             <span className="text-gray-500">{description}</span>
             <select value={value.toString()} onChange={onChange} className="flex-1 border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2">
-                <option  value={""}>Any ...</option>
+                <option  value={""}>{placeholder}</option>
                 {options.map(option => <option className="text-green" key={option.value} value={option.value}>{option.name}</option>)}
             </select>
         </>

@@ -1,3 +1,26 @@
 {
-    "WELCOME_TEXT": "DEUTSCHLAND UNTER ALLEN"
+    "WELCOME_TEXT": "Hallo auf meiner Seite!",
+    "MAIN_PAGE_INFO": "Testmigration zu Next.js, klicken Sie unten, um zur Seite mit Yachten zu gelangen",
+    "YACHT_LIST_LINK": "Yachten",
+    "COUNTRY": "LAND",
+    "SEARCH_BOAT": "Boot suchen",
+    "BOAT_TYPE": "BOOTSTYP",
+    "PERSONS": "Personen",
+    "BERTHS": "Kojen",
+    "CABINS": "Kabinen",
+    "TOLIETS": "Toiletten",
+    "RECOMMENDED_FIRST": "Empfohlen zuerst",
+    "LOW_FIRST_RATE": "Niedrigster erster Tarif",
+    "EQUIPMENT_AND_EXTRAS": "AUSSTATTUNG UND ZUSÄTZE",
+    "BAREBOAT": "Bareboat",
+    "I_NEED_A_SKIPPER": "Ich brauche einen Skipper",
+    "RATE_NOT_LESS_THAN": "TARIF NICHT WENIGER ALS",
+    "NOT_OLDER_THAN": "NICHT ÄLTER ALS",
+    "FROM_PLACEHOLDER": "Von...",
+    "TO_PLACEHOLDER": "Bis...",
+    "NAME_OR_MODEL": "NAME ODER MODELL",
+    "OPERATOR": "BETREIBER",
+    "ANY_PLACEHOLDER": "Beliebig ...",
+    "PRICE_WITH_CURRENCY": "PREIS ({currency}}",
+    "LENGTH_WITH_UNIT": "LÄNGE ({unit})"
 }

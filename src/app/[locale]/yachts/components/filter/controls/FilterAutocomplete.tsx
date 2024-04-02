@@ -10,7 +10,9 @@ interface Option  {
     name: string;
     value: string | number;
 }
+
 interface FilterAutocompleteProps {
+    placeholder: string;
     options: {
         name: string;
         value: string | number;
@@ -18,7 +20,7 @@ interface FilterAutocompleteProps {
     filterName: keyof SearchState;
 }
 
-export default function FilterAutocomplete({options, filterName}: FilterAutocompleteProps): ReactNode {
+export default function FilterAutocomplete({options, filterName, placeholder}: FilterAutocompleteProps): ReactNode {
     const [inputValue, setInputValue] = useState('');
     const dispatch = useDispatch();
     const value = useAppSelector(selector => selector.search[filterName]);
@@ -55,7 +57,7 @@ export default function FilterAutocomplete({options, filterName}: FilterAutocomp
                     <div className="flex" ref={params.InputProps.ref}>
                       <input 
                         {...params.inputProps}
-                        placeholder="Any..."
+                        placeholder={placeholder}
                         type="text"
                         className="flex-1 border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2" />
                     </div>

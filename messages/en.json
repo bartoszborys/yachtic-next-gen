@@ -1,5 +1,26 @@
 {
     "WELCOME_TEXT": "Hello on my page!",
     "MAIN_PAGE_INFO": "Test migration to Next.js click below to enter yachts page",
-    "YACHT_LIST_LINK": "Yachts"
+    "YACHT_LIST_LINK": "Yachts",
+    "COUNTRY": "COUNTRY",
+    "SEARCH_BOAT": "Search boat",
+    "BOAT_TYPE": "BOAT'S TYPE",
+    "PERSONS": "Persons",
+    "BERTHS": "Berths",
+    "CABINS": "Cabins",
+    "TOLIETS": "Toilets",
+    "RECOMMENDED_FIRST": "Recommended first",
+    "LOW_FIRST_RATE": "Low first rate",
+    "EQUIPMENT_AND_EXTRAS": "EQUIPMENT AND EXTRAS",
+    "BAREBOAT": "Bareboat",
+    "I_NEED_A_SKIPPER": "I need a skipper",
+    "RATE_NOT_LESS_THAN": "RATE NOT LESS THAN",
+    "NOT_OLDER_THAN": "NOT OLDER THAN",
+    "FROM_PLACEHOLDER": "From...",
+    "TO_PLACEHOLDER": "To...",
+    "NAME_OR_MODEL": "NAME OR MODEL",
+    "OPERATOR": "OPERATOR",
+    "ANY_PLACEHOLDER": "Any ...",
+    "PRICE_WITH_CURRENCY": "PRICE ({currency}}",
+    "LENGTH_WITH_UNIT": "LENGTH ({unit})"
 }

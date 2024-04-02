@@ -1,14 +1,12 @@
 import { locales } from "@/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import Filter from "./components/filter/Filter";
 import List from "./components/list/List";
 import StoreProvider from "./components/StoreProvider";
 
 export default function Page({params, searchParams} : {params: {locale: string}, searchParams: {[key: string]: string}}) {
     unstable_setRequestLocale(params.locale);
-    const t = useTranslations();
     return (
         <>
             <StoreProvider searchParams={searchParams}>
