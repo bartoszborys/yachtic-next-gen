@@ -1,6 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import YachtsData from "../../../../types/ApiYachtData";
-import { faHeart, faList, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import { toExternalHref } from "@/navigation";
 import { Header } from "./sections/Header";
 import Details from "./sections/Details";
@@ -25,10 +22,8 @@ const containerClass = [
 ].join(" ");
 
 export default function Yacht({ data }: { data: YachtData }) {
-    const redicrect =  () => window.location.href = toExternalHref(data.header.locationUrl);
-
-    return (
-        <div onClick={redicrect} className={containerClass}>
+     return (
+        <div className={containerClass}>
             <div className="flex flex-col justify-center relative">
                 <div className="absolute text-sm flex flex-col top-2 text-white">
                     {data.image.isRecommended ? <div className="bg-orange-600 px-2 py-1 mb-2">Recommended</div> : <></>}

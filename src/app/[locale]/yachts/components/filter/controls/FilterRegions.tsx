@@ -107,7 +107,6 @@ export default function FilterRegions({ countries, defaultData }: FilterRegionsP
     }, [countryId]);
     
     const treeItems = useMemo(() => {
-        console.log("RERENDER COUNT:" + rerenderCount++);
         return selectedCountry?.regions.map(region => {
             const data = region.locations.map((location) => (
                 <TreeItem
