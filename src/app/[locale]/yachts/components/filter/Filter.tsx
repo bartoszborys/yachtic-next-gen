@@ -14,10 +14,12 @@ import {
     getCompanies,
     rates
 } from "../../data/filter";
-import FilterRegions from "./controls/FilterRegions";
-import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 import { getTranslations } from "next-intl/server";
 
+const FilterRegions =  dynamic(() => import("./controls/FilterRegions"), {
+    loading: () => <p>Loading...</p>,
+});
 
 export default async function Filter({searchParams}: {searchParams: {[key: string]: string}}) {
     const searchesData = await getSearches();
@@ -47,7 +49,7 @@ export default async function Filter({searchParams}: {searchParams: {[key: strin
                 <FilterRangeSlider min={1} max={12} filterName={['personsMin', 'personsMax']} text={t("PERSONS")} />
                 <FilterRangeSlider min={1} max={12} filterName={['berthsMin', 'berthsMax']} text={t("BERTHS")} />
                 <FilterRangeSlider min={1} max={6} filterName={['cabinsMin', 'cabinsMax']} text={t("CABINS")} />
-                <FilterRangeSlider min={1} max={6} filterName={['toiletsMin', 'toiletsMax']} text={t("TOLIETS")} />
+                <FilterRangeSlider min={1} max={6} filterName={['bathroomsMin', 'bathroomsMax']} text={t("TOLIETS")} />
 
                 <FilterCheckbox filterName="recommendedFirst" text={t("RECOMMENDED_FIRST")} />
                 <FilterCheckbox filterName="lowFirstInstallment" text={t("LOW_FIRST_RATE")} />

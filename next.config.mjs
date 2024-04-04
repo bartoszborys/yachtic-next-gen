@@ -8,6 +8,15 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'ocs.yachtic.com',
+            pathname: '**',
+          },
+        ],
+      },
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
     },

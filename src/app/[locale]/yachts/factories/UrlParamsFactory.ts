@@ -1,4 +1,4 @@
-import { SearchState } from "../store/FilterSlice";
+import { parseParams, SearchState } from "../store/FilterSlice";
 
 export function yachtsListfromFilter(search: SearchState): URLSearchParams {
     const params = new URLSearchParams();
@@ -9,7 +9,7 @@ export function yachtsListfromFilter(search: SearchState): URLSearchParams {
                 return;
             }
         }
-
+        
         if(value) {
             params.append(key, value);
         }
@@ -19,9 +19,17 @@ export function yachtsListfromFilter(search: SearchState): URLSearchParams {
 }
 
 export function apiYachtsListFromFilter(search: {[key: string]: string;}): URLSearchParams {
+    const storeValues = parseParams(search);
     const params = new URLSearchParams();
         
-    Object.entries(search).forEach(([key, value]) => {
+    Object.entries(storeValues).forEach(([key, value]) => {
+        if(value instanceof Array) {
+            value.forEach((item, index) => {
+                params.append(`${key}[${index}][id]`, item.toString());
+            });
+            return;
+        }
+
         if(value) {
             params.append(key, value);
         }

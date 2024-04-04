@@ -4,6 +4,7 @@ import Details from "./sections/Details";
 import Price from "./sections/Price";
 import { YachtData } from "@/app/[locale]/yachts/types/YachtData";
 import Footer from "./sections/Footer";
+import { YachtImage } from "./sections/Image";
 
 const containerClass = [
     "cursor-pointer",
@@ -17,21 +18,16 @@ const containerClass = [
     "transition",
     "duration-300",
     "ease-in-out",
-    "sm:flex-row",
-    "flex-col"
+    "md:flex-row",
+    "flex-col",
+    "relative",
 ].join(" ");
 
 export default function Yacht({ data }: { data: YachtData }) {
-     return (
+    return (
         <div className={containerClass}>
-            <div className="flex flex-col justify-center relative">
-                <div className="absolute text-sm flex flex-col top-2 text-white">
-                    {data.image.isRecommended ? <div className="bg-orange-600 px-2 py-1 mb-2">Recommended</div> : <></>}
-                    {data.image.isOpportunity ? <div className="bg-orange-600 px-2 py-1 mb-2">The best choice!</div> : <></>}
-                    {data.image.shouldShowFirstInstallmentPercentOfTotal ? <div className="bg-[#00a0e3] px-2 py-1 mb-2">First rate {data.image.firstInstallmentPercentOfTotal}%</div> : <></>}
-                </div>
-                <img src={data.image.mainImageUrl} />
-            </div>
+            <a className="absolute w-full h-full" href={toExternalHref(data.header.locationUrl)}/>
+            <YachtImage image={data.image}/>
             <div className="flex flex-1 flex-col px-1">
                 <div className="flex-1 flex flex-col text-sky-500 px-2 pb-1">
                     <Header details={data.header} />

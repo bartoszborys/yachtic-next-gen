@@ -28,7 +28,7 @@ export default function LocaleLayout({
         <AppRouterCacheProvider>
           <Navbar />
           <main className="flex justify-center flex-1">
-            <div className="container flex-1 flex flex-col">
+            <div className="md:min-w-[600px] max-w-[1200px] px-[0.5rem] flex-1 flex flex-col">
               {children}
             </div>
           </main>

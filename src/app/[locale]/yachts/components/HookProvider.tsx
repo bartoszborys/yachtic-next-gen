@@ -1,28 +1,30 @@
 "use client"
 
-import { ReactNode, useEffect } from "react";
+import { Fragment, ReactNode, useEffect } from "react";
 import { useAppSelector } from '../store/hooks'
-import { useRouter } from 'next/navigation'
-import { useLocale } from 'next-intl'
 import { yachtsListfromFilter } from '../factories/UrlParamsFactory'
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 
-let loadTimeout: null | NodeJS.Timeout = null;
+let reloadDebounce: NodeJS.Timeout | null = null;
 
 export function HookProvider({children}: any): ReactNode {
     const search = useAppSelector(state => state.search);
     const router = useRouter();
     const locale = useLocale();
-  
+
     useEffect(() => {
-        if (loadTimeout) {
-            clearTimeout(loadTimeout);
+        const params = yachtsListfromFilter(search);
+
+        if(reloadDebounce) {
+            clearTimeout(reloadDebounce);
         }
-  
-        loadTimeout = setTimeout(() => {
-            const params = yachtsListfromFilter(search);
+
+        reloadDebounce = setTimeout(() => {
             router.push(`/${locale}/yachts?${params.toString()}`, { scroll: false });
-        }, 10);
+        }, 2000);
+
     }, [search]);
 
-    return (<div className="bg-red">{children}</div>)
+    return (<Fragment>{children}</Fragment>)
 }

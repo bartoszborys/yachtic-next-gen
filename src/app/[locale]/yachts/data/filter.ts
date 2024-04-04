@@ -1,4 +1,4 @@
-import { API_URL, noCorsFetch } from "@/TmpEnv";
+import { noCorsFetch } from "@/TmpEnv";
 
 export interface CountryData {
     id: number;
@@ -37,7 +37,7 @@ export async function getCountries(): Promise<CountryData[]> {
     return (
         await 
         (
-            await noCorsFetch(`${API_URL}/yachts/countries?currencyId=2&languageName=yachts&languageId=2`)
+            await noCorsFetch(`${process.env.API_URL}/yachts/countries?currencyId=2&languageName=yachts&languageId=2`)
         ).json()
     );
 }
@@ -47,7 +47,7 @@ export async function getKinds(): Promise<KindData[]> {
     return (
         await 
         (
-            await noCorsFetch(`${API_URL}/yachts/kinds`)
+            await noCorsFetch(`${process.env.API_URL}/yachts/kinds`)
         ).json()
     )?.models;
 }
@@ -56,7 +56,7 @@ export async function getSearches(): Promise<SearchesData[]> {
     return (
         await 
         (
-            await noCorsFetch(`${API_URL}/yachts/searches?currencyId=2&languageName=yachts`)
+            await noCorsFetch(`${process.env.API_URL}/yachts/searches?currencyId=2&languageName=yachts`)
         ).json()
     )?.models;
 }
@@ -70,7 +70,7 @@ export function getYears(): number[] {
 
 
 export async function getCompanies(): Promise<Company[]> {
-    const url = `${API_URL}/yachts/companies`;
+    const url = `${process.env.API_URL}/yachts/companies`;
     return (await (await noCorsFetch(url)).json()).models;
 }
 
