@@ -22,7 +22,7 @@ export function HookProvider({children}: any): ReactNode {
 
         reloadDebounce = setTimeout(() => {
             router.push(`/${locale}/yachts?${params.toString()}`, { scroll: false });
-        }, 2000);
+        }, 400);
 
     }, [search]);
 

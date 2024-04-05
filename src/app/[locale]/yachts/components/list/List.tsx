@@ -4,6 +4,7 @@ import { fromYachtData } from "../../factories/YachtDetailsFactory";
 import { apiYachtsListFromFilter } from "../../factories/UrlParamsFactory";
 import { ReactNode } from "react";
 import { Skeleton } from "@mui/material";
+import { parseParams } from "../../store/FilterSlice";
 
 export default async function List({ searchParams }: { searchParams: { [key: string]: string } }) {
     const params = apiYachtsListFromFilter(searchParams);

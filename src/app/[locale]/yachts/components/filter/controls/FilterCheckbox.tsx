@@ -25,11 +25,11 @@ export default function FilterCheckbox({text, filterName}: FilterCheckboxProps):
     return (
         <div className="bg-[#00a0e3] flex my-2 p-2 rounded-md h-[35px]">
             <FormControlLabel
-                value={value.toString()}
                 onChange={onChange}
                 label={<span className="text-xs text-[#e6f2f9]">{text}</span>}
                 control={
                     <Checkbox
+                        checked={value.toString() === 'true'}
                         checkedIcon={(
                             <div className="flex flex-col justify-center bg-[#00a27d] border border-white text-white w-[22px] h-[22px] text-center rounded">
                                 <FontAwesomeIcon icon={faCheck} />

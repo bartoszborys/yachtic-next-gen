@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Provider } from 'react-redux'
 import { makeStore, AppStore } from '../store/store'
 import { initializeSearchSlice } from '../store/FilterSlice'

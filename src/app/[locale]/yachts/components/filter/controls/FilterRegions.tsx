@@ -3,11 +3,10 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem, TreeItem2Label } from "@mui/x-tree-view";
 import { Checkbox, CheckboxProps } from "@mui/material";
-import { CountryData, CountryLocation, CountryRegion } from "../../../data/filter";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { CountryData } from "../../../data/filter";
+import { useAppSelector } from "../../../store/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { addLocations, addRegions, removeLocations, removeRegions } from "../../../store/FilterSlice";
 
 interface FilterRegionsProps {
     countries: CountryData[];
@@ -34,78 +33,17 @@ function ColoredCheckbox({ onChange, ...props }: CheckboxProps): ReactNode {
     );
 }
 
-let rerenderCount = 0;
-
 export default function FilterRegions({ countries, defaultData }: FilterRegionsProps): ReactNode {
     const [selectedCountry, setSelectedCountry] = useState<CountryData | null>(defaultData);
-    const countryId = useAppSelector(selector => selector.search["countries[0][id]"]);
-    const locationsIds = useAppSelector(selector => selector.search.locations);
-    const regionsIds = useAppSelector(selector => selector.search.regions);
-    const dispath = useAppDispatch();
-
-    const addCurrentCountryAllRegionsAndLocations = (selectedCountry: CountryData, regionIdMask: number|null = null) => {
-        if(!selectedCountry) {
-            return;
-        }
-        const restRegions = selectedCountry.regions.filter(item => regionIdMask !== item.id);
-        const regionsIds = [];
-        const locationsIds = [];
-        for(const region of restRegions) {
-            regionsIds.push(region.id);
-            locationsIds.push(...region.locations.map(location => location.id));
-        }
-        dispath(addRegions(regionsIds));
-        dispath(addLocations(locationsIds));
-    }
-
-    const regionOnChange = (region: CountryRegion, checked: boolean) => {
-        const locationsIds = region.locations.map(location => location.id);
-        if (checked) {
-            dispath(addRegions([region.id]))
-            dispath(addLocations(locationsIds));
-        }
-        else {
-            if(selectedCountry?.regions.length === 1) {
-                return;
-            }
-            
-            dispath(removeRegions([region.id]))
-            dispath(removeLocations(locationsIds));
-            if(selectedCountry) {
-                addCurrentCountryAllRegionsAndLocations(selectedCountry, region.id);
-            }
-        }
-    }
-    
-    const locationOnChange = (location: CountryLocation, region: CountryRegion, checked: boolean) => {
-
-        if (checked) {
-            dispath(addLocations([location.id]))
-        }
-        else {
-            dispath(removeLocations([location.id]));
-            const hasAtleastOne = locationsIds.filter(item => item !== location.id).some(item => region.locations.map(item => item.id).includes(item));
-            if(!hasAtleastOne && locationsIds.length === 1) {
-                dispath(addLocations(region.locations.filter(item => location.id !== item.id).map(item => item.id)));
-                dispath(addRegions([region.id]));
-            }
-        }
-    }
+    const countryId = useAppSelector(selector => selector.search.countryId);
 
     useEffect(() => {
-        const item = countries.find(item => item.id.toString() === countryId);
-
-        if (!item) {
-            return;
+        const country = countries.find(country => country.id.toString() === countryId);
+        if(country) {
+            setSelectedCountry(country);
         }
-
-        setSelectedCountry(item);
-        dispath(removeLocations(locationsIds));
-        dispath(removeRegions(regionsIds));
-        addCurrentCountryAllRegionsAndLocations(item);
-        //@TODO issue with store after change country -> mayby asynchronous store call // must read about
     }, [countryId]);
-    
+
     const treeItems = useMemo(() => {
         return selectedCountry?.regions.map(region => {
             const data = region.locations.map((location) => (
@@ -115,9 +53,9 @@ export default function FilterRegions({ countries, defaultData }: FilterRegionsP
                     label={(
                         <TreeItem2Label>
                             <ColoredCheckbox
-                                checked={locationsIds.includes(location.id)}
+                                checked={true}
                                 onClick={(...props) => props[0].stopPropagation()}
-                                onChange={(...props) => locationOnChange(location, region, props[1])} />
+                                onChange={(...props) => {}} />
                             <span className="text-sm ml-1">{location.name}</span>
                         </TreeItem2Label>
                     )} />
@@ -134,9 +72,9 @@ export default function FilterRegions({ countries, defaultData }: FilterRegionsP
                     label={(
                         <TreeItem2Label>
                             <ColoredCheckbox
-                                checked={regionsIds.includes(region.id)}
+                                checked={true}
                                 onClick={(...props) => props[0].stopPropagation()}
-                                onChange={(...props) => regionOnChange(region, props[1])}
+                                onChange={(...props) => {}}
                             />
                             <span className="text-sm ml-1">{region.name}</span>
                         </TreeItem2Label>
@@ -146,7 +84,7 @@ export default function FilterRegions({ countries, defaultData }: FilterRegionsP
                 </TreeItem>
             )
         });
-    }, [selectedCountry, regionsIds, locationsIds])
+    }, [selectedCountry])
 
     return (
         <>

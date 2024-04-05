@@ -15,6 +15,11 @@ const nextConfig = {
             hostname: 'ocs.yachtic.com',
             pathname: '**',
           },
+          {
+            protocol: 'https',
+            hostname: 'media.yachtic.com',
+            pathname: '**',
+          },
         ],
       },
     sassOptions: {

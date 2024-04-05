@@ -6,6 +6,8 @@ import FilterText from "./controls/FilterText";
 import FilterRangeSlider from "./controls/FilterRangeSlider";
 import FilterMinMaxRange from "./controls/FilterMinMaxRange";
 import FilterAutocomplete from "./controls/FilterAutocomplete";
+import FilterRegions from "./controls/FilterRegions";
+import { getTranslations } from "next-intl/server";
 import {
     getSearches,
     getCountries,
@@ -14,12 +16,6 @@ import {
     getCompanies,
     rates
 } from "../../data/filter";
-import dynamic from "next/dynamic";
-import { getTranslations } from "next-intl/server";
-
-const FilterRegions =  dynamic(() => import("./controls/FilterRegions"), {
-    loading: () => <p>Loading...</p>,
-});
 
 export default async function Filter({searchParams}: {searchParams: {[key: string]: string}}) {
     const searchesData = await getSearches();
@@ -36,7 +32,7 @@ export default async function Filter({searchParams}: {searchParams: {[key: strin
         <>
             <div className="bg-[#00a0e3] flex flex-col p-5 text-xs">
                 <div className="text-white text-xl">{t("SEARCH_BOAT")}</div>
-                <FilterSelect filterName="countries[0][id]" options={countries} description={t("COUNTRY")} placeholder={t('ANY_PLACEHOLDER')} />
+                <FilterSelect filterName="countryId" options={countries} description={t("COUNTRY")} placeholder={t('ANY_PLACEHOLDER')} />
                 <FilterRegions countries={countriesWhileData} defaultData={selectedData}/>
                 <FilterDate filterName="date" text="" />
                 <div className="flex flex-col">

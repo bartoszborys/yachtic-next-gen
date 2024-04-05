@@ -10,14 +10,12 @@ const todayString = `${year}-${month}-${day}`;
 
 export interface SearchState {
   searches: number[];
-  regions: number[];
-  locations: number[];
   recommendedFirst: boolean;
   lowFirstInstallment: boolean;
   haveLicense: boolean;
   needSkipper: boolean;
   date: string;
-  "countries[0][id]": string;
+  countryId: string;
   personsMin: string;
   personsMax: string;
   berthsMin: string;
@@ -36,55 +34,49 @@ export interface SearchState {
   lengthMax: string;
   name: string;
   companyId: string;
-  loader: boolean;
+  page: string;
 }
 
-const initialState: SearchState & { [key: string]: Array<number> | string | boolean } = {
-  searches: [],
-  regions: [],
-  locations: [],
-  recommendedFirst: false,
-  lowFirstInstallment: false,
-  haveLicense: false,
-  needSkipper: false,
-  date: todayString,
-  'countries[0][id]': '',
-  personsMin: '',
-  personsMax: '',
-  berthsMin: '',
-  berthsMax: '',
-  cabinsMin: '',
-  cabinsMax: '',
-  bathroomsMin: '',
-  bathroomsMax: '',
-  kindId: '',
-  days: '7',
-  ratingMin: '',
-  yearMin: '',
-  priceMin: '',
-  priceMax: '',
-  lengthMin: '',
-  lengthMax: '',
-  name: '',
-  companyId: '',
-  loader: false,
-};
+export function getInitialState(): SearchState & { [key: string]: Array<number> | string | boolean | object } {
+  return {
+    searches: [],
+    recommendedFirst: false,
+    lowFirstInstallment: false,
+    haveLicense: false,
+    needSkipper: false,
+    date: todayString,
+    countryId: '',
+    personsMin: '',
+    personsMax: '',
+    berthsMin: '',
+    berthsMax: '',
+    cabinsMin: '',
+    cabinsMax: '',
+    bathroomsMin: '',
+    bathroomsMax: '',
+    kindId: '',
+    days: '7',
+    ratingMin: '',
+    yearMin: '',
+    priceMin: '',
+    priceMax: '',
+    lengthMin: '',
+    lengthMax: '',
+    name: '',
+    companyId: '',
+    page: '2',
+  };
+} 
+
+const initialState: SearchState & { [key: string]: Array<number> | string | boolean | object } = getInitialState();
 
 export function parseParams(params: { [key: string]: string }): SearchState {
   const payload = { ...params };
   // @ts-ignore
-  const state: SearchState = Object.assign({}, payload);
+  const state: SearchState = Object.assign(getInitialState(), payload);
 
   if (payload.searches) {
     state.searches = payload.searches.split(",").filter((item: string) => item).map((item: string) => parseInt(item));
-  }
-
-  if (payload.regions) {
-    state.regions = payload.regions.split(",").filter((item: string) => item).map((item: string) => parseInt(item));
-  }
-
-  if (payload.locations) {
-    state.locations = payload.locations.split(",").filter((item: string) => item).map((item: string) => parseInt(item));
   }
 
   return state;
@@ -100,43 +92,21 @@ export const filterSlice = createSlice({
     removeSearchId: (state, value) => {
       state.searches = state.searches.filter(item => item !== value.payload);
     },
-    addLocations: (state, value: { type: string, payload: number[] }) => {
-      value.payload.forEach(location => {
-        if (!state.locations.includes(location)) {
-          state.locations.push(location);
-        }
-      });
-    },
-    removeLocations: (state, value: { type: string, payload: number[] }) => {
-      state.locations = state.locations.filter(item => !value.payload.includes(item));
-    },
-    addRegions: (state, value: { type: string, payload: number[] }) => {
-      value.payload.forEach(region => {
-        if (!state.regions.includes(region)) {
-          state.regions.push(region);
-        }
-      });
-    },
-    removeRegions: (state, value: { type: string, payload: number[] }) => {
-      state.regions = state.regions.filter(item => !value.payload.includes(item));
-    },
     updateFlag: (state, value: { payload: { filterName: keyof SearchState, value: unknown }, type: string }) => {
       //@ts-ignore
       state[value.payload.filterName] = value.payload.value;
     },
     initializeSearchSlice: (state: SearchState, value) => {
-      const payload = parseParams(value.payload);
-      Object.assign(state, payload);
+      Object.assign(
+        state,
+        parseParams(value.payload)
+      );
     }
   }
 })
 
 export const {
   addSearchId,
-  addLocations,
-  addRegions,
-  removeLocations,
-  removeRegions,
   removeSearchId,
   updateFlag,
   initializeSearchSlice,

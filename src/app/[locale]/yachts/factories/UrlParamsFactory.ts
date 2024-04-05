@@ -1,16 +1,22 @@
-import { parseParams, SearchState } from "../store/FilterSlice";
+import { getInitialState, parseParams, SearchState } from "../store/FilterSlice";
 
 export function yachtsListfromFilter(search: SearchState): URLSearchParams {
     const params = new URLSearchParams();
+    const initalState = getInitialState();
         
     Object.entries(search).forEach(([key, value]) => {
         if(value instanceof Array) {
-            if(value.length === 0) {
-                return;
-            }
+            value.forEach((item, index) => {
+                params.append(`${key}[${index}][id]`, item.toString());
+            });
+            return;
         }
         
-        if(value) {
+        if(value instanceof Object) {
+            return;
+        }
+
+        if(getInitialState()[key] !== value) {
             params.append(key, value);
         }
     });
@@ -29,10 +35,12 @@ export function apiYachtsListFromFilter(search: {[key: string]: string;}): URLSe
             });
             return;
         }
-
-        if(value) {
-            params.append(key, value);
+        
+        if(value instanceof Object) {
+            return;
         }
+
+        params.append(key, value);
     });
 
     return params;
