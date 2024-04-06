@@ -1,4 +1,4 @@
-import { ImageData } from "@/app/[locale]/yachts/types/YachtData";
+import { ImageData } from "@/modules/YachtsList/types/YachtData";
 import Image from "next/image";
 import { ReactNode } from "react";
 

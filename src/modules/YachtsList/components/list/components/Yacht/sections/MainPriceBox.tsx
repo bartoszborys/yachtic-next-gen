@@ -1,4 +1,4 @@
-import { MainPrice } from "@/app/[locale]/yachts/types/YachtData";
+import { MainPrice } from "@/modules/YachtsList/types/YachtData";
 import { ReactNode } from "react";
 import BookedPlaceholder from "./BookedPlaceholder";
 

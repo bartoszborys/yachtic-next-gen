@@ -1,4 +1,4 @@
-import { YachtDetails } from "@/app/[locale]/yachts/types/YachtData";
+import { YachtDetails } from "@/modules/YachtsList/types/YachtData";
 import { ReactNode } from "react";
 
 export default function Details({ details }: { details: YachtDetails }): ReactNode {

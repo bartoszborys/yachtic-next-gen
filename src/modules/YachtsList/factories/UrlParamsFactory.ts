@@ -3,7 +3,7 @@ import { getInitialState, parseParams, SearchState } from "../store/FilterSlice"
 export function yachtsListfromFilter(search: SearchState): URLSearchParams {
     const params = new URLSearchParams();
     const initalState = getInitialState();
-        
+
     Object.entries(search).forEach(([key, value]) => {
         if(value instanceof Array) {
             value.forEach((item, index) => {
@@ -16,7 +16,7 @@ export function yachtsListfromFilter(search: SearchState): URLSearchParams {
             return;
         }
 
-        if(getInitialState()[key] !== value) {
+        if(initalState[key] !== value) {
             params.append(key, value);
         }
     });

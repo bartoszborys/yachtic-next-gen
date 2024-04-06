@@ -1,4 +1,4 @@
-import { YachtHeaderDetails } from "@/app/[locale]/yachts/types/YachtData";
+import { YachtHeaderDetails } from "@/modules/YachtsList/types/YachtData";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode } from "react";

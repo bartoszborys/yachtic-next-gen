@@ -1,4 +1,4 @@
-import { PriceData } from "@/app/[locale]/yachts/types/YachtData";
+import { PriceData } from "@/modules/YachtsList/types/YachtData";
 import { ReactNode } from "react";
 import SubPriceBox from "./LesserPriceBox";
 import MainPriceBox from "./MainPriceBox";

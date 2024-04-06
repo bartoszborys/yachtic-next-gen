@@ -1,5 +1,5 @@
 
-import filterSlice from '@/app/[locale]/yachts/store/FilterSlice'
+import filterSlice from '@/modules/YachtsList/store/FilterSlice'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const makeStore = () => {

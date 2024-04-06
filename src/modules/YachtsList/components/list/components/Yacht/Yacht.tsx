@@ -2,7 +2,7 @@ import { toExternalHref } from "@/navigation";
 import { Header } from "./sections/Header";
 import Details from "./sections/Details";
 import Price from "./sections/Price";
-import { YachtData } from "@/app/[locale]/yachts/types/YachtData";
+import { YachtData } from "@/modules/YachtsList/types/YachtData";
 import Footer from "./sections/Footer";
 import { YachtImage } from "./sections/Image";
 

@@ -21,6 +21,7 @@ export function HookProvider({children}: any): ReactNode {
         }
 
         reloadDebounce = setTimeout(() => {
+            // https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams
             router.push(`/${locale}/yachts?${params.toString()}`, { scroll: false });
         }, 400);
 
