@@ -1,35 +1,32 @@
 "use client"
 
-import { useDispatch } from "react-redux";
-import { SearchState, updateFlag } from "../../../store/FilterSlice";
 import { ChangeEvent, ReactNode } from "react";
-import { useAppSelector } from "../../../store/hooks";
+import { parseAsString, useQueryState } from "nuqs";
+import { options } from "@/modules/YachtsList/constants/urlQuery";
 
 interface FilterSelectProps {
-    options: Array<{
-        name: string,
-        value: string | number
-    }>,
+    selectOptions: Array<{name: string, value: string}>,
     description: string;
-    filterName: keyof SearchState;
+    filterName: string;
     placeholder: string;
 }
 
-export default function FilterSelect({ options, description, filterName, placeholder }: FilterSelectProps): ReactNode {
-    const dispatch = useDispatch();
-    const value = useAppSelector(selector => selector.search[filterName]);
-    const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(
-            updateFlag({ value: event.target.value, filterName })
-        );
-    };
+export default function FilterSelect({ selectOptions, description, filterName, placeholder }: FilterSelectProps): ReactNode {
+    const [value, setValue] = useQueryState(
+        filterName,
+        parseAsString
+            .withDefault('')
+            .withOptions(options)
+    );
+    
+    const onChange = (event: ChangeEvent<HTMLSelectElement>) => setValue(event.target.value || null);
 
     return (
         <>
             <span className="text-gray-500">{description}</span>
-            <select value={value.toString()} onChange={onChange} className="flex-1 border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2">
-                <option  value={""}>{placeholder}</option>
-                {options.map(option => <option className="text-green" key={option.value} value={option.value}>{option.name}</option>)}
+            <select value={value} onChange={onChange} className="flex-1 border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2">
+                <option value={""}>{placeholder}</option>
+                {selectOptions.map(option => <option className="text-green" key={option.value} value={option.value}>{option.name}</option>)}
             </select>
         </>
     );

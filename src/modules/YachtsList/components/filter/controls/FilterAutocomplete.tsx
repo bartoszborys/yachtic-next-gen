@@ -1,31 +1,33 @@
 "use client"
 
-import { useDispatch } from "react-redux";
-import { SearchState, updateFlag } from "../../../store/FilterSlice";
+import { SearchState } from "../../../types/SearchState";
 import { ReactNode, SyntheticEvent, useMemo, useState } from "react";
-import { useAppSelector } from "../../../store/hooks";
 import { Autocomplete } from "@mui/material";
+import { parseAsString, useQueryState } from "nuqs";
+import { options } from "@/modules/YachtsList/constants/urlQuery";
 
 interface Option  {
     name: string;
-    value: string | number;
+    value: string;
 }
 
 interface FilterAutocompleteProps {
     placeholder: string;
-    options: {
-        name: string;
-        value: string | number;
-    }[],
+    autocompleteOptions: Option[],
     filterName: keyof SearchState;
 }
 
-export default function FilterAutocomplete({options, filterName, placeholder}: FilterAutocompleteProps): ReactNode {
+export default function FilterAutocomplete({autocompleteOptions, filterName, placeholder}: FilterAutocompleteProps): ReactNode {
     const [inputValue, setInputValue] = useState('');
-    const dispatch = useDispatch();
-    const value = useAppSelector(selector => selector.search[filterName]);
+    const [value, setValue] = useQueryState(
+        filterName,
+        parseAsString
+            .withOptions(options)
+            .withDefault('')
+    );
+
     const filteredOptions = useMemo(
-        () => options.filter((option) => option.name.toLowerCase().includes(inputValue.toLowerCase())),
+        () => autocompleteOptions.filter((option) => option.name.toLowerCase().includes(inputValue.toLowerCase())),
         [inputValue]
     )
 
@@ -34,9 +36,7 @@ export default function FilterAutocomplete({options, filterName, placeholder}: F
             return;
         }
 
-        dispatch(
-            updateFlag({value: value.value, filterName})
-        );
+        setValue(value.value)
     };
 
     return (

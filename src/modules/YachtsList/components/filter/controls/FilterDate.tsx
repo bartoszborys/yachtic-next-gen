@@ -1,28 +1,26 @@
 "use client"
 
-import { useDispatch } from "react-redux";
-import { SearchState, updateFlag } from "../../../store/FilterSlice";
 import { ChangeEvent, ReactNode } from "react";
-import { useAppSelector } from "../../../store/hooks";
+import { parseAsString, useQueryState } from "nuqs";
+import { options } from "@/modules/YachtsList/constants/urlQuery";
 
 interface FilterDateProps {
-    text: string,
-    filterName: keyof SearchState;
+    filterName: string;
+    defaultValue: string;
 }
 
-export default function FilterDate({ text, filterName }: FilterDateProps): ReactNode {
-    const dispatch = useDispatch();
-    const value = useAppSelector(selector => selector.search[filterName]);
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch(
-            updateFlag({ value: event.target.value, filterName })
-        );
-    };
+export default function FilterDate({ filterName, defaultValue }: FilterDateProps): ReactNode {
+    const [value, setValue] = useQueryState(
+        filterName,
+        parseAsString
+            .withDefault(defaultValue)
+            .withOptions(options)
+    );
 
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value || defaultValue);
     return (
         <>
-            <span>{text}</span>
-            <input value={value.toString()} onChange={onChange} className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1" type="date" />
+            <input value={value} onChange={onChange} className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1" type="date" />
         </>
     );
 }

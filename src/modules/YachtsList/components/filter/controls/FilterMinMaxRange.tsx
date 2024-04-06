@@ -1,12 +1,11 @@
 "use client"
-
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { SearchState, updateFlag } from "../../../store/FilterSlice";
 import { ChangeEvent, ReactNode } from "react";
+import { parseAsInteger, useQueryState } from "nuqs";
+import { options } from "@/modules/YachtsList/constants/urlQuery";
 
 interface FilterMinMaxRangeProps {
     label: string;
-    filterName: [keyof SearchState, keyof SearchState];
+    filterName: [string, string];
     placeholder: [string, string];
 }
 
@@ -17,28 +16,49 @@ export default function FilterMinMaxRange({
     filterName: [minFilterName, maxFilterName],
     placeholder: [minPlaceholder, maxPlaceholder],
 }: FilterMinMaxRangeProps): ReactNode {
-    const dispatch = useAppDispatch();
+    const [min, setMin] = useQueryState(
+        minFilterName,
+        parseAsInteger
+            .withOptions(options)
+    );
 
-    const minValue = useAppSelector(selector => selector.search[minFilterName]);
-    const maxValue = useAppSelector(selector => selector.search[maxFilterName]);
+    const [max, setMax] = useQueryState(
+        maxFilterName,
+        parseAsInteger
+            .withOptions(options)
+    );
 
-    const onMinChange = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateFlag({ value: event.target.value, filterName: minFilterName }));
+    function onMinChange(event: ChangeEvent<HTMLInputElement>) {
+        const value = parseInt(event.target.value);
+        setMin(value ? value : null);
     };
 
     const onMaxChange = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateFlag({ value: event.target.value, filterName: maxFilterName }));
+        const value = parseInt(event.target.value);
+        setMax(value ? value : null);
     };
 
     return (
         <>
             <div className="text-gray-500">{label}</div>
             <div className="flex">
-                <input placeholder={minPlaceholder} value={minValue.toString()} onChange={onMinChange} className={className} />
+                <input
+                    className={className}
+                    placeholder={minPlaceholder}
+                    type="text"
+                    pattern="[0-9]*"
+                    value={min ?? ''}
+                    onChange={onMinChange} />
                 <div className="w-12 flex flex-col justify-center text-center">
                     <span>-</span>
                 </div>
-                <input placeholder={maxPlaceholder} value={maxValue.toString()} onChange={onMaxChange} className={className} type="text" />
+                <input
+                    className={className}
+                    placeholder={maxPlaceholder}
+                    type="text"
+                    pattern="[0-9]*"
+                    value={max ?? ''}
+                    onChange={onMaxChange}/>
             </div>
         </>
     )

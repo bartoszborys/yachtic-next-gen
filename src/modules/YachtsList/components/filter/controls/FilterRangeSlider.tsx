@@ -1,27 +1,41 @@
 "use client"
 import { Box, Slider, SliderOwnProps } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { SearchState, updateFlag } from "../../../store/FilterSlice";
 import { ReactNode, useState } from "react";
-import { useAppSelector } from "@/modules/YachtsList/store/hooks";
+import { parseAsInteger, useQueryState } from "nuqs";
+import { options } from "@/modules/YachtsList/constants/urlQuery";
 
 interface FilterRangeSliderProps {
-    text: string,
-    filterName: [keyof SearchState, keyof SearchState];
+    text: string;
+    filterName: [string, string];
 }
 
 export default function FilterRangeSlider(
-    { text, filterName: [minFilterName, maxFilterName], ...sliderProps }: FilterRangeSliderProps & SliderOwnProps
+    {text, filterName: [minFilterName, maxFilterName], min = 0, max = 0, ...sliderProps}: FilterRangeSliderProps & SliderOwnProps
 ): ReactNode {
-    const dispatch = useDispatch();
-    const [min, max] = useAppSelector(selector => [parseInt(selector.search[minFilterName]), parseInt(selector.search[maxFilterName])]);
+    const [minValue, setMin] = useQueryState(
+        minFilterName,
+        parseAsInteger
+            .withDefault(min)
+            .withOptions(options)
+    );
+
+    const [maxValue, setMax] = useQueryState(
+        maxFilterName,
+        parseAsInteger
+            .withDefault(max)
+            .withOptions(options)
+    );
+
+    const [value, setValue] = useState([minValue, maxValue]);
+
     const handleChange = (event: Event, newValue: number | number[]) => {
         if (!Array.isArray(newValue)) {
             throw new Error("Unhandled state");
         }
 
-        dispatch(updateFlag({ value: newValue[0], filterName: minFilterName }));
-        dispatch(updateFlag({ value: newValue[1], filterName: maxFilterName }));
+        setMin(newValue[0] !== min ? newValue[0] : null);
+        setMax(newValue[1] !== max ? newValue[1] : null);
+        setValue([newValue[0], newValue[1]]);      
     };
 
     return (
@@ -30,14 +44,16 @@ export default function FilterRangeSlider(
                 <span className="text-gray-500">{text}</span>
                 <span className="text-gray-500">
                     <span>FROM:</span>
-                    <b className="ml-1">{min}{min === sliderProps.max ? "+" : ""}</b>
+                    <b className="ml-1">{value[0]}</b>
                     <span className="ml-1">TO:</span>
-                    <b className="ml-1">{max}{max === sliderProps.max ? "+" : ""}</b>
+                    <b className="ml-1">{value[1]}{value[1] === max ? "+" : ""}</b>
                 </span>
             </div>
             <Box className="mx-[9px]">
                 <Slider
                     {...sliderProps}
+                    min={min}
+                    max={max}
                     sx={{
                         'color': '#ace0f6',
                         'height': '8px',
@@ -47,7 +63,7 @@ export default function FilterRangeSlider(
                             color: '#00a0e3',
                         },
                     }}
-                    value={storePair}
+                    value={value}
                     onChange={handleChange}
                 />
             </Box>

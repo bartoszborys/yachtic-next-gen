@@ -4,9 +4,10 @@ import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem, TreeItem2Label } from "@mui/x-tree-view";
 import { Checkbox, CheckboxProps } from "@mui/material";
 import { CountryData } from "../../../data/filter";
-import { useAppSelector } from "../../../store/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { parseAsInteger, useQueryState } from "nuqs";
+import { options } from "@/modules/YachtsList/constants/urlQuery";
 
 interface FilterRegionsProps {
     countries: CountryData[];
@@ -35,10 +36,14 @@ function ColoredCheckbox({ onChange, ...props }: CheckboxProps): ReactNode {
 
 export default function FilterRegions({ countries, defaultData }: FilterRegionsProps): ReactNode {
     const [selectedCountry, setSelectedCountry] = useState<CountryData | null>(defaultData);
-    const countryId = useAppSelector(selector => selector.search.countryId);
+    const [countryId, setCountryId] = useQueryState("countryId", parseAsInteger.withOptions(options));
 
     useEffect(() => {
-        const country = countries.find(country => country.id.toString() === countryId);
+        if(!countryId) {
+            return;
+        }
+
+        const country = countries.find(country => country.id === countryId);
         if(country) {
             setSelectedCountry(country);
         }
@@ -95,8 +100,7 @@ export default function FilterRegions({ countries, defaultData }: FilterRegionsP
                         <div className="text-white font-bold">REGION</div>
                         <SimpleTreeView
                             className="text-white font-bold"
-                            aria-label="file system navigator"
-                        >
+                            aria-label="file system navigator">
                             {treeItems}
                         </SimpleTreeView>
                     </>
