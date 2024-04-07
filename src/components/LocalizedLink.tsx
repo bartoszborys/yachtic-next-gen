@@ -1,4 +1,7 @@
+'use client';
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ReactNode } from "react";
 
 export interface LocalizedLinkParams {
@@ -8,7 +11,8 @@ export interface LocalizedLinkParams {
 }
 
 export default function LocalizedLink({href, locale, children}: LocalizedLinkParams) {
+    const search = useSearchParams();
     return (
-        <Link href={`${locale}${href}`} locale={locale}>{children}</Link>
+        <Link href={`${locale}${href}?${search}`} locale={locale}>{children}</Link>
     );
 }

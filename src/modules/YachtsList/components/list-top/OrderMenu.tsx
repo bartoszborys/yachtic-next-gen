@@ -15,7 +15,7 @@ export default function SortOrderMenu({ filterName }: { filterName: string }): R
     filterName,
     parseAsString
       .withDefault(Order.priceAsc)
-      .withOptions({ ...options, clearOnDefault: false })
+      .withOptions(options)
   );
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popper' : undefined;

@@ -1,3 +1,5 @@
+import { Order } from "../enums/order";
+
 export interface SearchState {
   searches: number[];
   recommendedFirst: boolean;
@@ -24,5 +26,6 @@ export interface SearchState {
   lengthMax: string;
   name: string;
   companyId: string;
-  page: string;
+  page: number;
+  sort: Order;
 }

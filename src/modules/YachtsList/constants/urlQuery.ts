@@ -1,5 +1,6 @@
 import { Options } from "nuqs";
 import { SearchState } from "../types/SearchState";
+import { Order } from "../enums/order";
 
 export const options: Options = {
     shallow: false,
@@ -42,5 +43,6 @@ export const filterDefaults: SearchState = {
     lengthMax: '',
     name: '',
     companyId: '',
-    page: '2',
+    page: 1,
+    sort: Order.priceAsc,
 } as const;

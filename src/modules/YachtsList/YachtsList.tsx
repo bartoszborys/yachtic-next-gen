@@ -7,7 +7,8 @@ import { TopFilters } from "./components/TopFilters";
 import { TopActions } from "./components/TopActions";
 import SidebarFilter from "./components/SidebarFilters";
 import List, { ListSkeletion } from "./components/List";
-
+import { Pagination } from "./components/Pagination";
+import { SidebarInfo } from "./components/SidebarInfo";
 
 export function YachtsList({ params, searchParams }: { params: { locale: string }, searchParams: { [key: string]: string } }): ReactNode {
     unstable_setRequestLocale(params.locale);
@@ -23,6 +24,7 @@ export function YachtsList({ params, searchParams }: { params: { locale: string 
             <div className="flex flex-1 h-100">
                 <div className="hidden flex-col w-[225px] mr-4 my-4 lg:flex">
                     <SidebarFilter searchParams={searchParams} />
+                    <SidebarInfo />
                 </div>
                 <div className="flex-1 my-4">
                     <div className="w-100 min-h-[86px] text-xs p-4 bg-white font-bold text-gray-500">
@@ -36,6 +38,7 @@ export function YachtsList({ params, searchParams }: { params: { locale: string 
                             <List searchParams={searchParams} />
                         </Suspense>
                     </div>
+                    <Pagination />
                 </div>
             </div>
         </>
