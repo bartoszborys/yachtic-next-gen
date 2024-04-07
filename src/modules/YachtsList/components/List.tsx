@@ -1,10 +1,9 @@
-import { getYachts } from "../../data/list";
-import Yacht from "./components/Yacht/Yacht";
-import { fromYachtData } from "../../factories/YachtDetailsFactory";
-import { apiYachtsListFromFilter } from "../../factories/UrlParamsFactory";
+import { getYachts } from "../data/list";
+import Yacht from "./list-tile/Yacht";
+import { fromYachtData } from "../factories/YachtDetailsFactory";
+import { apiYachtsListFromFilter } from "../factories/UrlParamsFactory";
 import { ReactNode } from "react";
 import { Skeleton } from "@mui/material";
-import { parseParams } from "../../types/SearchState";
 
 export default async function List({ searchParams }: { searchParams: { [key: string]: string } }) {
     const params = apiYachtsListFromFilter(searchParams);

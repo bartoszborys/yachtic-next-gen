@@ -3,6 +3,7 @@ import { SearchState } from "../types/SearchState";
 
 export const options: Options = {
     shallow: false,
+    clearOnDefault: true,
     throttleMs: 500,
     scroll: false,
 } as const;

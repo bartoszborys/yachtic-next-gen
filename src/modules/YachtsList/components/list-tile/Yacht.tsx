@@ -9,6 +9,7 @@ import { YachtImage } from "./sections/Image";
 const containerClass = [
     "cursor-pointer",
     "flex",
+    "first:my-2",
     "my-4",
     "bg-white",
     "border",

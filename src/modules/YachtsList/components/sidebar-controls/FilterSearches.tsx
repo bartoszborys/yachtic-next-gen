@@ -1,7 +1,7 @@
 "use client"
 
 import { ReactNode, useCallback, useMemo } from "react";
-import { SearchesData } from "../../../data/filter";
+import { SearchesData } from "../../data/filter";
 import { options } from "@/modules/YachtsList/constants/urlQuery";
 import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs";
 
@@ -24,11 +24,11 @@ export default function FilterSearches({ data }: FilterSearchesProps): ReactNode
                 const onClick = () => {
                     if (!serviceIds.includes(item.id)) {
                         const newServiceIds = [...serviceIds, item.id];
-                        setServiceIds(newServiceIds.length ? newServiceIds : null);
+                        setServiceIds(newServiceIds);
                     }
                     else {
                         const newServiceIds = serviceIds.filter(id => id !== item.id);
-                        setServiceIds(newServiceIds.length ? newServiceIds : null);
+                        setServiceIds(newServiceIds);
                     }
                 };
                 return <img

@@ -17,7 +17,7 @@ export default function FilterDate({ filterName, defaultValue }: FilterDateProps
             .withOptions(options)
     );
 
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value || defaultValue);
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
     return (
         <>
             <input value={value} onChange={onChange} className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1" type="date" />

@@ -1,6 +1,6 @@
 "use client"
 
-import { SearchState } from "../../../types/SearchState";
+import { SearchState } from "../../types/SearchState";
 import { ReactNode, SyntheticEvent, useMemo, useState } from "react";
 import { Autocomplete } from "@mui/material";
 import { parseAsString, useQueryState } from "nuqs";
@@ -42,7 +42,7 @@ export default function FilterAutocomplete({autocompleteOptions, filterName, pla
     return (
         <>
             <Autocomplete
-                options={filteredOptions}
+                options={autocompleteOptions}
                 getOptionLabel={(option) => option.name}
                 getOptionKey={(option) => option.value}
                 onChange={onChange}

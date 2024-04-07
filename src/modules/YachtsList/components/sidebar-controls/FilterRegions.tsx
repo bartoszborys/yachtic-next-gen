@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem, TreeItem2Label } from "@mui/x-tree-view";
 import { Checkbox, CheckboxProps } from "@mui/material";
-import { CountryData } from "../../../data/filter";
+import { CountryData } from "../../data/filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { parseAsInteger, useQueryState } from "nuqs";

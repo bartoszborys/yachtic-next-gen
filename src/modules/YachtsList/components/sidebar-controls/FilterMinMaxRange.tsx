@@ -1,6 +1,6 @@
 "use client"
 import { ChangeEvent, ReactNode } from "react";
-import { parseAsInteger, useQueryState } from "nuqs";
+import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import { options } from "@/modules/YachtsList/constants/urlQuery";
 
 interface FilterMinMaxRangeProps {
@@ -9,8 +9,6 @@ interface FilterMinMaxRangeProps {
     placeholder: [string, string];
 }
 
-const className = "border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2";
-
 export default function FilterMinMaxRange({
     label,
     filterName: [minFilterName, maxFilterName],
@@ -18,24 +16,24 @@ export default function FilterMinMaxRange({
 }: FilterMinMaxRangeProps): ReactNode {
     const [min, setMin] = useQueryState(
         minFilterName,
-        parseAsInteger
+        parseAsString
+            .withDefault('')
             .withOptions(options)
     );
 
     const [max, setMax] = useQueryState(
         maxFilterName,
-        parseAsInteger
+        parseAsString
+            .withDefault('')
             .withOptions(options)
     );
 
     function onMinChange(event: ChangeEvent<HTMLInputElement>) {
-        const value = parseInt(event.target.value);
-        setMin(value ? value : null);
+        setMin(event.target.value);
     };
 
     const onMaxChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(event.target.value);
-        setMax(value ? value : null);
+        setMax(event.target.value);
     };
 
     return (
@@ -43,21 +41,21 @@ export default function FilterMinMaxRange({
             <div className="text-gray-500">{label}</div>
             <div className="flex">
                 <input
-                    className={className}
+                    className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2"
                     placeholder={minPlaceholder}
                     type="text"
                     pattern="[0-9]*"
-                    value={min ?? ''}
+                    value={min}
                     onChange={onMinChange} />
                 <div className="w-12 flex flex-col justify-center text-center">
                     <span>-</span>
                 </div>
                 <input
-                    className={className}
+                    className="border-solid border-2 bg-[#e6f2f9] p-1 rounded my-1 py-2"
                     placeholder={maxPlaceholder}
                     type="text"
                     pattern="[0-9]*"
-                    value={max ?? ''}
+                    value={max}
                     onChange={onMaxChange}/>
             </div>
         </>

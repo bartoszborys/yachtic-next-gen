@@ -20,7 +20,7 @@ export default function FilterCheckbox({text, filterName}: FilterCheckboxProps):
             .withOptions(options)
     );
     const onChange = (event: SyntheticEvent<Element, Event>, checked: boolean) => {
-        setValue(checked || null);
+        setValue(checked);
     };
     
     return (

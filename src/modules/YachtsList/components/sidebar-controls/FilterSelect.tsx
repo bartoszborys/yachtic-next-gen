@@ -19,7 +19,7 @@ export default function FilterSelect({ selectOptions, description, filterName, p
             .withOptions(options)
     );
     
-    const onChange = (event: ChangeEvent<HTMLSelectElement>) => setValue(event.target.value || null);
+    const onChange = (event: ChangeEvent<HTMLSelectElement>) => setValue(event.target.value);
 
     return (
         <>

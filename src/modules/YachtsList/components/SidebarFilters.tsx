@@ -1,12 +1,12 @@
-import FilterCheckbox from "./controls/FilterCheckbox";
-import FilterDate from "./controls/FilterDate";
-import FilterSearches from "./controls/FilterSearches";
-import FilterSelect from "./controls/FilterSelect";
-import FilterText from "./controls/FilterText";
-import FilterRangeSlider from "./controls/FilterRangeSlider";
-import FilterMinMaxRange from "./controls/FilterMinMaxRange";
-import FilterAutocomplete from "./controls/FilterAutocomplete";
-import FilterRegions from "./controls/FilterRegions";
+import FilterCheckbox from "./sidebar-controls/FilterCheckbox";
+import FilterDate from "./sidebar-controls/FilterDate";
+import FilterSearches from "./sidebar-controls/FilterSearches";
+import FilterSelect from "./sidebar-controls/FilterSelect";
+import FilterText from "./sidebar-controls/FilterText";
+import FilterRangeSlider from "./sidebar-controls/FilterRangeSlider";
+import FilterMinMaxRange from "./sidebar-controls/FilterMinMaxRange";
+import FilterAutocomplete from "./sidebar-controls/FilterAutocomplete";
+import FilterRegions from "./sidebar-controls/FilterRegions";
 import { getTranslations } from "next-intl/server";
 import {
     getSearches,
@@ -15,10 +15,10 @@ import {
     getYears,
     getCompanies,
     rates
-} from "../../data/filter";
-import { filterDefaults } from "../../constants/urlQuery";
+} from "../data/filter";
+import { filterDefaults } from "../constants/urlQuery";
 
-export default async function Filter({searchParams}: {searchParams: {[key: string]: string}}) {
+export default async function SidebarFilter({searchParams}: {searchParams: {[key: string]: string}}) {
     const searchesData = await getSearches();
     const kinds = (await getKinds()).map((kind) => ({ name: kind.name, value: kind.id.toString() }));
     const countriesWhileData = await getCountries();
