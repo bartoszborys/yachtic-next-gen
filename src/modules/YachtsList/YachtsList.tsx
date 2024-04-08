@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { TopFilters } from "./components/TopFilters";
-import { TopActions } from "./components/TopActions";
 import SidebarFilter from "./components/SidebarFilters";
 import List, { ListSkeletion } from "./components/List";
 import { Pagination } from "./components/Pagination";

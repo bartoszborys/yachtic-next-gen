@@ -1,4 +1,4 @@
-import { faHeart, faList, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faHeart, faList, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -15,13 +15,18 @@ const styles = {
     navbarLink: `text-sky-500 font-bold flex`,
     navbarItem: `text-xs px-3 flex flex-col justify-center border-r border-gray-200`,
     navbarIcon: `w-2.5 mr-1`,
+    navbarMobileIcon: `text-sky-500 cursor-pointer text-3xl font-bold m-auto mx-1`,
 };
 
 export default function Navbar() {
     return (
-        <nav className="bg-white w-full flex justify-center h-16 overflow-hidden sm:overflow-visible">
-            <div className="w-full container flex">
-                <Image className="w-[185px] height-[48px] flex" alt="" src='/logo.svg' width={25} height={25} />
+        <nav className="bg-white w-full flex justify-between sm:justify-center h-16 px-3">
+            <Image className="w-[185px] height-[48px] flex" alt="" src='/logo.svg' width={25} height={25} />
+            <div className="flex sm:hidden">
+                <FontAwesomeIcon icon={faSearch} className={styles.navbarMobileIcon} />
+                <FontAwesomeIcon icon={faBars} className={styles.navbarMobileIcon} />
+            </div>
+            <div className="w-full container sm:flex hidden">
                 <div className="flex-1"></div>
                 <div className={styles.navbarItem}>
                     <LanguageChange />
@@ -48,14 +53,10 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className={styles.navbarItem}>
-                    <div className={styles.navbarLink}>
-                        <div>ZALOGUJ SIĘ</div>
-                    </div>
+                    <div className={styles.navbarLink}>ZALOGUJ SIĘ</div>
                 </div>
                 <div className="text-xs px-4 flex flex-col justify-center">
-                    <div>
-                        <Image className="w-4" alt="" src='/contact-icon.png' width={25} height={25} />
-                    </div>
+                    <Image className="w-4" alt="" src='/contact-icon.png' width={25} height={25} />
                 </div>
             </div>
         </nav>
