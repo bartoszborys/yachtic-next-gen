@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode, useCallback, useState } from "react";
 import ActionMenu from "./ActionMenu";
 
-export default function SortOrderMenu(): ReactNode {
+export default function ShareMenu(): ReactNode {
   const texts = [
     "SHARE ON FACEBOOK",
     "SEND",

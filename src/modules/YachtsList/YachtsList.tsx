@@ -9,6 +9,8 @@ import SidebarFilter from "./components/SidebarFilters";
 import List, { ListSkeletion } from "./components/List";
 import { Pagination } from "./components/Pagination";
 import { SidebarInfo } from "./components/SidebarInfo";
+import ShareMenu from "./components/list-top/ShareMenu";
+import SortOrderMenu from "./components/list-top/OrderMenu";
 
 export function YachtsList({ params, searchParams }: { params: { locale: string }, searchParams: { [key: string]: string } }): ReactNode {
     unstable_setRequestLocale(params.locale);
@@ -31,7 +33,8 @@ export function YachtsList({ params, searchParams }: { params: { locale: string 
                         <TopFilters searchParams={searchParams} />
                     </div>
                     <div className="w-100 my-2 flex justify-end text-xs font-bold">
-                        <TopActions />
+                        <ShareMenu />
+                        <SortOrderMenu filterName="sort"/>
                     </div>
                     <div className="d-flex flex-col">
                         <Suspense key={JSON.stringify(searchParams)} fallback={<ListSkeletion />}>

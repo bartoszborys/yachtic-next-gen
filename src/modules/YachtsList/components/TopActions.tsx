@@ -5,8 +5,6 @@ import ShareMenu from "./list-top/ShareMenu";
 export function TopActions(): ReactNode {
     return (
         <>
-            <ShareMenu />
-            <SortOrderMenu filterName="sort"/>
         </>
     )
 }

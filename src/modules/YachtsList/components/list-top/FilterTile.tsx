@@ -19,21 +19,19 @@ export function FilterTile({name}: FilterTileProps): ReactNode {
     );
 
     const onClick = useCallback(() => {setQueryParam(null)}, []);
+    const tile = useMemo(() => 
+        <div className="mr-2 mb-2 ml-0 text-xs cursor-pointer flex" onClick={onClick}>
+            <span className="bg-[#e6f2f9] py-1 px-2">{name} : {queryParam}</span>
+            <span className="bg-[#ace0f6] hover:bg-[#00a0e3] py-1 px-2 transition-colors duration-300">
+                <FontAwesomeIcon icon={faTimes} />
+            </span>
+    </div>
+    , [queryParam]);
 
     return (
         <>
             {
-                (queryParam === null)
-                ? <></>
-                : 
-                useMemo(() => 
-                    <div className="mr-2 mb-2 ml-0 text-xs cursor-pointer flex" onClick={onClick}>
-                        <span className="bg-[#e6f2f9] py-1 px-2">{name} : {queryParam}</span>
-                        <span className="bg-[#ace0f6] hover:bg-[#00a0e3] py-1 px-2 transition-colors duration-300">
-                            <FontAwesomeIcon icon={faTimes} />
-                        </span>
-                </div>
-                , [queryParam])
+                (queryParam === null) ? <></> : tile
             } 
         </>
     );

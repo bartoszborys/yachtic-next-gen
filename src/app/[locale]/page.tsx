@@ -1,9 +1,10 @@
-import LocalizedLink from "@/components/LocalizedLink";
 import { locales } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
+import dynamic from "next/dynamic";
+const LocalizedLink = dynamic(() => import("@/components/LocalizedLink"));
 
-export default function Page({ params: { locale } }: {params: {locale: string}}) {
+export default function Page({ params: { locale } }: {params: {locale: any}}) {
   unstable_setRequestLocale(locale);
   const t = useTranslations();
 
