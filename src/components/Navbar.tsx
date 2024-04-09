@@ -20,43 +20,45 @@ const styles = {
 
 export default function Navbar() {
     return (
-        <nav className="bg-white w-full flex justify-between sm:justify-center h-16 px-3">
-            <Image className="w-[185px] height-[48px] flex" alt="" src='/logo.svg' width={25} height={25} />
-            <div className="flex sm:hidden">
-                <FontAwesomeIcon icon={faSearch} className={styles.navbarMobileIcon} />
-                <FontAwesomeIcon icon={faBars} className={styles.navbarMobileIcon} />
-            </div>
-            <div className="w-full container sm:flex hidden">
-                <div className="flex-1"></div>
-                <div className={styles.navbarItem}>
-                    <LanguageChange />
+        <nav className="bg-white flex justify-center w-full h-16 fixed z-50 px-3">
+            <div className="content-container flex justify-between sm:justify-center w-full">
+                <Image className="w-[185px] height-[48px] flex" alt="" src='/logo.svg' width={25} height={25} />
+                <div className="flex sm:hidden">
+                    <FontAwesomeIcon icon={faSearch} className={styles.navbarMobileIcon} />
+                    <FontAwesomeIcon icon={faBars} className={styles.navbarMobileIcon} />
                 </div>
-                <div className={styles.navbarItem}>
-                    <div className={styles.navbarCurrency}>EUR (€)</div>
-                </div>
-                <div className={styles.navbarItem}>
-                    <div className={styles.navbarLink}>
-                        <FontAwesomeIcon icon={faHeart} className={styles.navbarIcon} />
-                        <div>ULUBIONE (6)</div>
+                <div className="w-full container sm:flex hidden">
+                    <div className="flex-1"></div>
+                    <div className={styles.navbarItem}>
+                        <LanguageChange />
                     </div>
-                </div>
-                <div className={styles.navbarItem}>
-                    <div className={styles.navbarLink}>
-                        <FontAwesomeIcon icon={faList} className={styles.navbarIcon} />
-                        <div>OSTATNIO OGLĄDANE (6)</div>
+                    <div className={styles.navbarItem}>
+                        <div className={styles.navbarCurrency}>EUR (€)</div>
                     </div>
-                </div>
-                <div className={styles.navbarItem}>
-                    <div className={styles.navbarLink}>
-                        <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
-                        <div>ZAREJESTRUJ SIĘ</div>
+                    <div className={styles.navbarItem}>
+                        <div className={styles.navbarLink}>
+                            <FontAwesomeIcon icon={faHeart} className={styles.navbarIcon} />
+                            <div>ULUBIONE (6)</div>
+                        </div>
                     </div>
-                </div>
-                <div className={styles.navbarItem}>
-                    <div className={styles.navbarLink}>ZALOGUJ SIĘ</div>
-                </div>
-                <div className="text-xs px-4 flex flex-col justify-center">
-                    <Image className="w-4" alt="" src='/contact-icon.png' width={25} height={25} />
+                    <div className={styles.navbarItem}>
+                        <div className={styles.navbarLink}>
+                            <FontAwesomeIcon icon={faList} className={styles.navbarIcon} />
+                            <div>OSTATNIO OGLĄDANE (6)</div>
+                        </div>
+                    </div>
+                    <div className={styles.navbarItem}>
+                        <div className={styles.navbarLink}>
+                            <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
+                            <div>ZAREJESTRUJ SIĘ</div>
+                        </div>
+                    </div>
+                    <div className={styles.navbarItem}>
+                        <div className={styles.navbarLink}>ZALOGUJ SIĘ</div>
+                    </div>
+                    <div className="text-xs px-4 flex flex-col justify-center">
+                        <Image className="w-4" alt="" src='/contact-icon.png' width={25} height={25} />
+                    </div>
                 </div>
             </div>
         </nav>

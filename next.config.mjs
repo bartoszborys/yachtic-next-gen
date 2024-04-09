@@ -20,6 +20,11 @@ const nextConfig = {
             hostname: 'media.yachtic.com',
             pathname: '**',
           },
+          {
+            protocol: 'https',
+            hostname: 'blog.yachtic.com',
+            pathname: "**",
+          }
         ],
       },
     sassOptions: {

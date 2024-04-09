@@ -4,11 +4,7 @@ import { YachtsList } from "@/modules/YachtsList/YachtsList";
 
 export default function Page({ params, searchParams }: { params: { locale: string }, searchParams: { [key: string]: string } }) {
     unstable_setRequestLocale(params.locale);
-    return (
-        <>
-            <YachtsList params={params} searchParams={searchParams} />
-        </>
-    );
+    return (<YachtsList params={params} searchParams={searchParams} />);
 }
 
 export async function generateStaticParams() {

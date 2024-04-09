@@ -22,5 +22,9 @@
     "OPERATOR": "OPERATOR",
     "ANY_PLACEHOLDER": "Any ...",
     "PRICE_WITH_CURRENCY": "PRICE ({currency}}",
-    "LENGTH_WITH_UNIT": "LENGTH ({unit})"
+    "LENGTH_WITH_UNIT": "LENGTH ({unit})",
+    "JUST_SEARCH_AND_BOOK_A_BOAT": "JUST SEARCH AND BOOK A BOAT",
+    "ADVANCED_SEARCH": "ADVANCED SEARCH",
+    "EU_DIVIER_TEXT": "Online yacht charter and boat search engine - YACHTIC.com",
+    "CUSTOMER_RATE_HEADER": "Customers rate us {from} out of {to} on Google"
 }

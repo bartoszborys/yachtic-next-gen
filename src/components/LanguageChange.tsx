@@ -48,10 +48,16 @@ export default function LanguageChange() {
             throw new Error("Language not found");
         }
 
+        const currentLanguage = {
+            languageId: nextLanguage.id,
+            languageName: nextLanguage.name,
+        };
+
         setUrlParams({
             languageId: nextLanguage.id,
             languageName: nextLanguage.name,
         });
+        localStorage.setItem("language", JSON.stringify(currentLanguage));
     }
 
     const languageChanged = (event: ChangeEvent<HTMLSelectElement>) => {
