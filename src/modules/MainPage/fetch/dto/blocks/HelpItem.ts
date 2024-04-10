@@ -1,4 +1,4 @@
-interface HelpsItem {
+export interface HelpsItem {
     type: string;
     order: number;
     header: {

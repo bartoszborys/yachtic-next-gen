@@ -1,4 +1,4 @@
-interface EasyCharterItem {
+export interface EasyCharterItem {
     type: string;
     order: number;
     text: {
