@@ -1,5 +1,5 @@
-import { ApiFetch } from "@/fetch/ApiFetch";
+import { ApiQuery } from "@/fetch/ApiFetch";
 
 export async function getFirstLastMinute(): Promise<{models: Yacht[]}> {
-    return await ApiFetch<{models: Yacht[]}>("yachts/first-last-minute?currencyId=2");
+    return await ApiQuery<{models: Yacht[]}>("yachts/first-last-minute");
 }

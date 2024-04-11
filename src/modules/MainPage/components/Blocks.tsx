@@ -2,9 +2,9 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement } from "react";
 import { getBlocks } from "../fetch/queries/getBlocks";
 import { BlockTitle } from "./blocks/BlockTile";
-import { ThirdRow } from "./blocks-rows/ThirdRow";
-import { FirstRow } from "./blocks-rows/FirstRow";
-import { SecondRow } from "./blocks-rows/SecondRow";
+import { ThirdRow } from "./blocks/ThirdRow";
+import { FirstRow } from "./blocks/FirstRow";
+import { SecondRow } from "./blocks/SecondRow";
 
 export async function Blocks(): Promise<ReactElement> {
     const blocks = await getBlocks();

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BlockTitle } from "../blocks/BlockTile";
+import { BlockTitle } from "./BlockTile";
 import { faAngleDoubleRight, faNewspaper, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { WhyUsItem } from "../../fetch/dto/blocks/WhyUsItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

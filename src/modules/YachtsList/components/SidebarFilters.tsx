@@ -11,12 +11,12 @@ import { getTranslations } from "next-intl/server";
 import {
     getSearches,
     getCountries,
-    getKinds,
     getYears,
     getCompanies,
     rates
 } from "../data/filter";
 import { filterDefaults } from "../constants/urlQuery";
+import getKinds from "@/fetch/queries/getKinds";
 
 export default async function SidebarFilter({searchParams}: {searchParams: {[key: string]: string}}) {
     const searchesData = await getSearches();

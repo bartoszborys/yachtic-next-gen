@@ -1,3 +1,5 @@
+import { ApiQuery } from "@/fetch/ApiFetch";
+
 export interface CountryData {
     id: number;
     name: string;
@@ -11,11 +13,6 @@ export interface CountryRegion {
 }
 
 export interface CountryLocation {
-    id: number;
-    name: string;
-}
-
-interface KindData {
     id: number;
     name: string;
 }
@@ -38,16 +35,6 @@ export async function getCountries(): Promise<CountryData[]> {
             await fetch(`${process.env.API_URL}/yachts/countries?currencyId=2&languageName=yachts&languageId=2`)
         ).json()
     );
-}
-
-
-export async function getKinds(): Promise<KindData[]> {
-    return (
-        await 
-        (
-            await fetch(`${process.env.API_URL}/yachts/kinds`)
-        ).json()
-    )?.models;
 }
 
 export async function getSearches(): Promise<SearchesData[]> {

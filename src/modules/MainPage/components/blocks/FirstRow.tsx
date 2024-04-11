@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
-import { BlockTitle } from "../blocks/BlockTile";
+import { BlockTitle } from "./BlockTile";
 import { faClock, faMapMarker } from "@fortawesome/free-solid-svg-icons";
-import { YachtBlock } from "../blocks/YachtBlock";
+import { YachtBlock } from "./YachtBlock";
 import { HomepageTemplate } from "../../fetch/dto/blocks/HomepageTemplate";
 import { MapItem } from "../../fetch/dto/blocks/MapItem";
 import { getFirstLastMinute } from "../../fetch/queries/getFirstLastMinute";
@@ -24,15 +24,11 @@ export async function FirstRow({map, homepage}: {map: MapItem, homepage: Homepag
             </article>
             <article className="flex flex-col cursor-default">
                 <BlockTitle icon={faClock} name={homepage.firstMinuteTitle.content} />
-                <div className="flex flex-col gap-3">
-                    {firstMinuteBlock}
-                </div>
+                <div className="flex flex-col gap-3">{firstMinuteBlock}</div>
             </article>
             <article className="flex flex-col cursor-default">
                 <BlockTitle icon={faClock} name={homepage.lastMinuteTitle.content} />
-                <div className="flex flex-col gap-3">
-                    {lastMinuteBlock}
-                </div>
+                <div className="flex flex-col gap-3">{lastMinuteBlock}</div>
             </article>
         </>
     );

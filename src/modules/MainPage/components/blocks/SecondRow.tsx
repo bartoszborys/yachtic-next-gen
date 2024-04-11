@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { BlockTitle } from "../blocks/BlockTile";
+import { BlockTitle } from "./BlockTile";
 import { faAnchor, faHeart, faPencil } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { HomepageTemplate } from "../../fetch/dto/blocks/HomepageTemplate";

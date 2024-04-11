@@ -22,5 +22,9 @@
     "OPERATOR": "OPERATOR",
     "ANY_PLACEHOLDER": "Dowolne ...",
     "PRICE_WITH_CURRENCY": "CENA ({currency}}",
-    "LENGTH_WITH_UNIT": "DŁUGOŚĆ ({unit})"
+    "LENGTH_WITH_UNIT": "DŁUGOŚĆ ({unit})",
+    "JUST_SEARCH_AND_BOOK_A_BOAT": "TYLKO SZUKAJ I REZERWUJ JACHT",
+    "ADVANCED_SEARCH": "WYSZUKIWANIE ZAAWANSOWANE",
+    "EU_DIVIER_TEXT": "Onlineowy silnik wyszukiwania jachtów i czarteru - YACHTIC.com",
+    "CUSTOMER_RATE_HEADER": "Klienci oceniają nas na {from} z {to} w Google"
 }

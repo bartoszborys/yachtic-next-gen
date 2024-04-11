@@ -3,10 +3,8 @@ import { SearchState } from "../types/SearchState";
 import { Order } from "../enums/order";
 
 export const options: Options = {
-    shallow: false,
+    shallow: true,
     clearOnDefault: true,
-    throttleMs: 500,
-    scroll: false,
 } as const;
 
 export const filterDefaults: SearchState = {

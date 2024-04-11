@@ -8,13 +8,15 @@ export interface LocalizedLinkParams {
     href: "/yachts";
     locale: "en" | "pl" | "de";
     children: ReactNode;
+    search?: URLSearchParams;
+    className?: string;
 }
 
-export default function LocalizedLink({href, locale, children}: LocalizedLinkParams) {
-    const search = useSearchParams();
+export default function LocalizedLink({href, locale, children, search, className = ""}: LocalizedLinkParams) {
+    const searchParams = search ? `?${search}`: ``;
     const pathnames = getPathnames();
     const permalink = pathnames[href][locale];
     return (
-        <Link href={`${locale}${permalink}?${search}`} locale={locale}>{children}</Link>
+        <Link className={className} href={`${locale}${permalink}${searchParams}`} locale={locale}>{children}</Link>
     );
 }
