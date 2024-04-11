@@ -25,8 +25,8 @@ export function SearchControls({locale}: {locale: string}): ReactNode {
             <div className="flex-[5] w-full flex gap-8">
                 <input className="flex-1 rounded p-4 text-gray-400" type="date" />
                 <select className="flex-1 rounded p-4 text-gray-400">
-                    <option defaultValue={''}>Select Boat's</option>
-                    {kinds.map(kind => (<option value={kind.id}>{kind.name}</option>))}    
+                    <option defaultValue={''}>Select Boats</option>
+                    {kinds.map(kind => (<option key={kind.id} value={kind.id}>{kind.name}</option>))}    
                 </select>
             </div>
             <LocalizedLink className="flex-[2] flex" href="/yachts" locale={locale as any} search={selected?.getParams()}>                
