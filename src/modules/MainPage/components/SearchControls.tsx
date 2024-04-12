@@ -7,7 +7,7 @@ import Search from "./search/Search";
 import { KindData } from "@/fetch/dto/kindData";
 import getKinds from "@/fetch/queries/getKinds";
 import LocalizedLink from "@/components/LocalizedLink";
-import { SearchItem } from "../searchItem/SearchItem";
+import { SearchItem } from "../domain/SearchItem/SearchItem";
 
 export function SearchControls({locale}: {locale: string}): ReactNode {
     const [selected, setSelected] = useState<SearchItem | null>(null);

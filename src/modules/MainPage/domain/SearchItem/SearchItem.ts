@@ -1,4 +1,4 @@
-import Search from "../fetch/dto/SearchLocation";
+import Search from "../../fetch/dto/SearchLocation";
 
 export abstract class SearchItem {
     abstract getParams(): URLSearchParams;

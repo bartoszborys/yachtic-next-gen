@@ -2,7 +2,7 @@
 
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons/faShareAlt";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactNode, useCallback, useState } from "react";
+import { ReactNode } from "react";
 import ActionMenu from "./ActionMenu";
 
 export default function ShareMenu(): ReactNode {

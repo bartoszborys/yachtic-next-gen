@@ -2,20 +2,11 @@ import { faBars, faHeart, faList, faSearch, faUser } from "@fortawesome/free-sol
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { useLocale } from "next-intl";
+import { cookies } from "next/headers";
 
-const LanguageChange = dynamic(
-    () => import('./LanguageChange'),
-    {
-        loading: () => <p>Loading...</p>,
-    }
-);
-
-const CurrencyChange = dynamic(
-    () => import('./CurrencyChange'),
-    {
-        loading: () => <p>Loading...</p>,
-    }
-);
+const LanguageChange = dynamic(() => import('./LanguageChange'));
+const CurrencyChange = dynamic(() => import('./CurrencyChange'));
 
 const styles = {
     navbarCurrency: `text-gray-500 font-bold`,
@@ -25,7 +16,7 @@ const styles = {
     navbarMobileIcon: `text-sky-500 cursor-pointer text-3xl font-bold m-auto mx-1`,
 };
 
-export default function Navbar() {
+export default function Navbar() {    
     return (
         <nav className="bg-white flex justify-center w-full h-16 fixed z-50 px-3">
             <div className="content-container flex justify-between sm:justify-center w-full">
@@ -40,7 +31,7 @@ export default function Navbar() {
                         <LanguageChange />
                     </div>
                     <div className={styles.navbarItem}>
-                        <CurrencyChange />
+                        <CurrencyChange  />
                     </div>
                     <div className={styles.navbarItem}>
                         <div className={styles.navbarLink}>

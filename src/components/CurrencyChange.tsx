@@ -3,8 +3,9 @@
 import { Currency } from "@/fetch/dto/currency";
 import { NextCommand } from "@/fetch/NextCommand";
 import { getCurrencies } from "@/fetch/queries/getCurrencies";
+import ActionMenu from "@/modules/YachtsList/components/list-top/ActionMenu";
 import { parseAsString, useQueryState } from "nuqs";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LanguageChange() {
     const [currencyId, setCurrencyId] = useQueryState(
@@ -19,19 +20,22 @@ export default function LanguageChange() {
         getCurrencies().then(result => setCurrencies(result));
     }, []);
 
-    const options = currencies.map(currency => <option value={currency.id} key={currency.id}>{currency.code}</option>);
-
-    const languageChanged = async (event: ChangeEvent<HTMLSelectElement>) => {
-        const currencyId = event.target.value;
+    
+    const languageChanged = async (currencyId: number) => {
         await NextCommand("currency", {currencyId});
-        setCurrencyId(currencyId);
+        setCurrencyId(currencyId.toString());
     }
+    
+    const options = currencies.map(currency => <div onClick={() => languageChanged(currency.id)} key={currency.id}>{currency.code}</div>);
 
     return (
         <>
-            <select value={currencyId} onChange={languageChanged}>
+            <ActionMenu
+                zIndex={52}
+                button={<div>{currencies.find(item => item.id.toString() === currencyId)?.code || "UNKNOWN"}</div>}
+                trigger={"click"}>
                 {options}
-            </select>
+            </ActionMenu>
         </>
     );
 }

@@ -3,15 +3,16 @@ import { Language } from "@/fetch/dto/language";
 import { NextCommand } from "@/fetch/NextCommand";
 import { getLanguages } from "@/fetch/queries/getLanguages";
 import { locales } from "@/navigation";
-import { useLocale } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
+import ActionMenu from "@/modules/YachtsList/components/list-top/ActionMenu";
+import { useLocale } from "next-intl";
 
 export default function LanguageChange() {
+    const locale = useLocale();
     const router = useRouter();
     const pathname = usePathname();
     const params = useSearchParams();
-    const locale = useLocale();
 
     const pathParts = pathname.split("/");
     const languagePart = pathParts[1];
@@ -26,11 +27,7 @@ export default function LanguageChange() {
         getLanguages().then(result => setLanguages(result));
     }, []);
 
-    const options = locales.map(locale => <option value={locale} key={locale}>{locale}</option>);
-
-    const languageChanged = async (event: ChangeEvent<HTMLSelectElement>) => {
-        const nextLocale = event.target.value;
-
+    const languageChanged = async (nextLocale: string) => {
         if(languages.length === 0) {
             return;
         }
@@ -58,11 +55,16 @@ export default function LanguageChange() {
         };
     }
 
+    const options = locales.map(locale => <div onClick={() => languageChanged(locale)} key={locale}>{locale}</div>);
+
     return (
         <>
-            <select value={selectedLanguage} onChange={languageChanged}>
+            <ActionMenu
+                zIndex={52}
+                button={<div>{selectedLanguage}</div>}
+                trigger={"click"}>
                 {options}
-            </select>
+            </ActionMenu>
         </>
     );
 }
