@@ -13,9 +13,9 @@ export function Pagination(): ReactNode {
         'page',
         parseAsInteger
             .withDefault(filterDefaults.page)
-            .withOptions({ ...options, scroll: true })
+            .withOptions(Object.assign({scroll: true}, options))
     );
-    const [maxPage, setMaxPage] = useState<number>(1);
+    const [maxPage, setMaxPage] = useState<number | null>(null);
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -35,7 +35,13 @@ export function Pagination(): ReactNode {
     }, [searchParams]);
 
     useEffect(() => {
-        setPage(1);
+        if(!maxPage) {
+            return;
+        }
+
+        if(maxPage < page) {
+            setPage(1);
+        }
     }, [maxPage])
 
     useEffect(() => {
@@ -48,6 +54,10 @@ export function Pagination(): ReactNode {
     }, [])
 
     const increment = useCallback(() => {
+        if(!maxPage) {
+            return;
+        }
+
         if (page >= maxPage) {
             return;
         }

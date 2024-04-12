@@ -1,6 +1,6 @@
-import { ApiQuery } from "../ApiFetch";
 import { Language } from "../dto/language";
+import { ProxyYachticFetch } from "../ProxyFetch";
 
 export async function getLanguages(): Promise<Language[]> {
-    return ApiQuery("abeon-languages")
+    return ProxyYachticFetch("abeon-languages");
 }

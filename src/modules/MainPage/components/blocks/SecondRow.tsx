@@ -6,6 +6,7 @@ import { HomepageTemplate } from "../../fetch/dto/blocks/HomepageTemplate";
 import { PopularItem } from "../../fetch/dto/blocks/PopularItem";
 import { SelectYachtItem } from "../../fetch/dto/blocks/SeletYachtItem";
 import { getBlog } from "../../fetch/queries/getBlog";
+import { Blog } from "./Blog";
 
 interface SecondRowProps {
     homepage: HomepageTemplate;
@@ -14,9 +15,7 @@ interface SecondRowProps {
 }
 
 export async function SecondRow({homepage, popularItems, selectedBoatItems}: SecondRowProps): Promise<ReactElement> {
-    const result = await getBlog();
 
-    const blogHTML = { __html: result.excerpt.rendered };
     const popular = popularItems.map(item => {
         return (
             <a
@@ -50,11 +49,7 @@ export async function SecondRow({homepage, popularItems, selectedBoatItems}: Sec
             <article className="flex flex-col cursor-default">
                 <BlockTitle icon={faPencil} name={"BLOG"} />
                 <article className="flex flex-1 flex-col relative">
-                    <a href={result.link} className="absolute w-full h-full" />
-                    <Image src={result.yoast_head_json.og_image[0].url} className="w-full min-h-[220px]" width={400} height={220} alt="blog-img" />
-                    <div className="bg-white p-4 text-lg font-bold text-sky-500">{result.title.rendered}</div>
-                    <div className="bg-white p-4 flex-1 text-xs text-gray-400" dangerouslySetInnerHTML={blogHTML} />
-                    <button className="bg-sky-500 p-2 font-bold text-white text-center cursor-pointer">READ MORE...</button>
+                    <Blog />
                 </article>
             </article>
             <article className="flex flex-col cursor-default">

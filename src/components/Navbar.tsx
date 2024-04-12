@@ -10,6 +10,13 @@ const LanguageChange = dynamic(
     }
 );
 
+const CurrencyChange = dynamic(
+    () => import('./CurrencyChange'),
+    {
+        loading: () => <p>Loading...</p>,
+    }
+);
+
 const styles = {
     navbarCurrency: `text-gray-500 font-bold`,
     navbarLink: `text-sky-500 font-bold flex`,
@@ -33,7 +40,7 @@ export default function Navbar() {
                         <LanguageChange />
                     </div>
                     <div className={styles.navbarItem}>
-                        <div className={styles.navbarCurrency}>EUR (€)</div>
+                        <CurrencyChange />
                     </div>
                     <div className={styles.navbarItem}>
                         <div className={styles.navbarLink}>

@@ -1,10 +1,10 @@
 "use client"
 import { Language } from "@/fetch/dto/language";
+import { NextCommand } from "@/fetch/NextFetch";
 import { getLanguages } from "@/fetch/queries/getLanguages";
 import { locales } from "@/navigation";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import { ChangeEvent, useEffect, useState } from "react";
 
 export default function LanguageChange() {
@@ -12,10 +12,6 @@ export default function LanguageChange() {
     const pathname = usePathname();
     const params = useSearchParams();
     const locale = useLocale();
-    const [urlParams, setUrlParams] = useQueryStates({
-        languageId: parseAsInteger.withDefault(2),
-        languageName: parseAsString.withDefault("en")
-    });
 
     const pathParts = pathname.split("/");
     const languagePart = pathParts[1];
@@ -24,12 +20,7 @@ export default function LanguageChange() {
 
     useEffect(() => {
         setSelectedLanguage(locale);
-        setUrlParamsCallback();
     }, [languagePart]);
-
-    useEffect(() => {
-        setUrlParamsCallback();
-    }, [languages]);
 
     useEffect(() => {
         getLanguages().then(result => setLanguages(result));
@@ -37,12 +28,14 @@ export default function LanguageChange() {
 
     const options = locales.map(locale => <option value={locale} key={locale}>{locale}</option>);
 
-    const setUrlParamsCallback = () => {
+    const languageChanged = async (event: ChangeEvent<HTMLSelectElement>) => {
+        const nextLocale = event.target.value;
+
         if(languages.length === 0) {
             return;
         }
 
-        const nextLanguage = languages.find(item => item.name === locale);
+        const nextLanguage = languages.find(item => item.name === nextLocale);
 
         if(!nextLanguage) {
             throw new Error("Language not found");
@@ -53,15 +46,7 @@ export default function LanguageChange() {
             languageName: nextLanguage.name,
         };
 
-        setUrlParams({
-            languageId: nextLanguage.id,
-            languageName: nextLanguage.name,
-        });
-        localStorage.setItem("language", JSON.stringify(currentLanguage));
-    }
-
-    const languageChanged = (event: ChangeEvent<HTMLSelectElement>) => {
-        const nextLocale = event.target.value;
+        await NextCommand("language", currentLanguage);
 
         const pathParts = pathname.split("/");
         if (locales.includes(languagePart)) {

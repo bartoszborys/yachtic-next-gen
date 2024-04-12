@@ -1,7 +1,6 @@
 'use client';
 import getPathnames from "@/getPathnames";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { ReactNode } from "react";
 
 export interface LocalizedLinkParams {
