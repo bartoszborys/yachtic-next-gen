@@ -1,5 +1,5 @@
 import { ReactNode, useCallback } from "react";
-import { SearchItem } from "../../domain/SearchItem/SearchItem";
+import { SearchItem } from "../../searchItem/SearchItem";
 
 interface SearchItemRowProps {
     item: SearchItem;
