@@ -4,10 +4,10 @@ import { ReactNode, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Search from "./search/Search";
-import { SearchItem } from "../domain/SearchItem/SearchItem";
 import { KindData } from "@/fetch/dto/kindData";
 import getKinds from "@/fetch/queries/getKinds";
 import LocalizedLink from "@/components/LocalizedLink";
+import { SearchItem } from "../searchItem/SearchItem";
 
 export function SearchControls({locale}: {locale: string}): ReactNode {
     const [selected, setSelected] = useState<SearchItem | null>(null);

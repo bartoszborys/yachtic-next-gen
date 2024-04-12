@@ -1,8 +1,8 @@
 import SearchLocationFactory from "../factories/SearchLocationFactory";
 import Search from "../fetch/dto/SearchLocation";
-import { SearchItem } from "../domain/SearchItem/SearchItem";
+import { SearchItem } from "../searchItem/SearchItem";
 
-export class SearchLocationAdapter {
+export class SearchItemAdapter {
     constructor(
         private searchItem: Search[]
     ) {}

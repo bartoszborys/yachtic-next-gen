@@ -4,9 +4,10 @@ import { ReactNode, SyntheticEvent, useCallback, useEffect, useMemo, useRef, use
 import { getMostPopularSearches } from "../../fetch/queries/getMostPopularSearches";
 import Popper from "@mui/material/Popper";
 import { getMultiSearch } from "../../fetch/queries/getMultiSearch";
-import { SearchLocationAdapter } from "../../adapters/SearchItemAdapter";
+import { SearchItemAdapter } from "../../adapters/SearchItemAdapter";
 import { SearchItemRow } from "./SearchItemRow";
-import { SearchItem } from "../../domain/SearchItem/SearchItem";
+import { SearchItem } from "../../searchItem/SearchItem";
+import { addRecentSearch, getRecentSearches } from "../../store/RecentSearches";
 
 interface SearchProps {
   className: string;
@@ -17,15 +18,17 @@ export default function Search({className, selectSearchItem}: SearchProps): Reac
     const input = useRef<HTMLInputElement>(null);
     const container = useRef<HTMLDivElement>(null);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [currentSearches, setCurrentSearches] = useState(new SearchLocationAdapter([]));
-    const [mostPopularSearches, setMostPopularSearches] = useState(new SearchLocationAdapter([]));
+    const [currentSearches, setCurrentSearches] = useState(new SearchItemAdapter([]));
+    const [mostPopularSearches, setMostPopularSearches] = useState(new SearchItemAdapter([]));
+    const [recentSearches, setRecentSearches] = useState(new SearchItemAdapter([]));
     const open = Boolean(anchorEl);
     const id = open ? 'location-picker-pooper' : undefined;
 
     useEffect(() => {
+        setRecentSearches(getRecentSearches());
         (async () => {
             setMostPopularSearches(
-                new SearchLocationAdapter(
+                new SearchItemAdapter(
                     await getMostPopularSearches()
                 )
             );
@@ -40,7 +43,7 @@ export default function Search({className, selectSearchItem}: SearchProps): Reac
     }, []);
   
     const handleBlur = useCallback(() => {
-      setTimeout(() => setAnchorEl(null), 100);
+      setTimeout(() => setAnchorEl(null), 200);
     }, []);
 
     const handleInput = useCallback(async (event: SyntheticEvent<HTMLInputElement>) => {
@@ -49,12 +52,11 @@ export default function Search({className, selectSearchItem}: SearchProps): Reac
         }
 
         const params = new URLSearchParams();
-        params.append("currencyId", "2");
         params.append("text", input.current.value);
         params.append("quantity", "8");
 
         setCurrentSearches(
-            new SearchLocationAdapter(
+            new SearchItemAdapter(
                 await getMultiSearch(params)
             )
         );
@@ -66,6 +68,8 @@ export default function Search({className, selectSearchItem}: SearchProps): Reac
       }
       input.current.value = item.data.name;
       selectSearchItem(item);
+      addRecentSearch(item);
+      setRecentSearches(getRecentSearches());
     }, []);
 
     const popular = useMemo(
@@ -74,6 +78,13 @@ export default function Search({className, selectSearchItem}: SearchProps): Reac
         ),
         [mostPopularSearches]
     );
+
+    const recent = useMemo(
+      () => recentSearches.asItem.map(
+        (search, index) => <SearchItemRow item={search} select={optionSelected} key={index} />
+      ),
+      [recentSearches]
+  );
 
     const currentSearch = useMemo(
         () => currentSearches.asItem.map(
@@ -100,6 +111,8 @@ export default function Search({className, selectSearchItem}: SearchProps): Reac
           placement="bottom-start">
             <div className="bg-white shadow-inner flex flex-col text-sm w-[623px] max-w-[100vw]">
               {currentSearch}
+              <div className="underline text-gray-400 px-2">Recent searches</div>
+              {recent}
               <div className="underline text-gray-400 px-2">Most popular searches</div>
               {popular}
             </div>
