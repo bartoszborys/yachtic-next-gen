@@ -1,4 +1,4 @@
-import { ApiQuery } from "@/fetch/ApiFetch";
+import { ApiQuery } from "@/fetch/ApiQuery";
 
 export interface CountryData {
     id: number;

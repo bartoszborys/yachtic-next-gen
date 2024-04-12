@@ -1,4 +1,4 @@
-import { ApiQuery } from "../../../../fetch/ApiFetch";
+import { ApiQuery } from "../../../../fetch/ApiQuery";
 import { BlockResponse } from "../dto/BlockResponse";
 import { KnownBlocks } from "../types/KnownBlocks";
 

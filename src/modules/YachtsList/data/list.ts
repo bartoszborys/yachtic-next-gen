@@ -1,4 +1,4 @@
-import { ApiQuery } from "@/fetch/ApiFetch";
+import { ApiQuery } from "@/fetch/ApiQuery";
 import YachtsData from "../types/ApiYachtData";
 import { YachtsPagination } from "../types/YachtsPagination";
 import { ProxyYachticFetch } from "@/fetch/ProxyFetch";

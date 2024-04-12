@@ -1,4 +1,4 @@
-import { ApiQuery } from "@/fetch/ApiFetch";
+import { ApiQuery } from "@/fetch/ApiQuery";
 import Search from "../dto/SearchLocation";
 
 export async function getMostPopularSearches(): Promise<Search[]> {

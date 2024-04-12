@@ -1,4 +1,4 @@
-import { ApiQuery } from "@/fetch/ApiFetch";
+import { ApiQuery } from "@/fetch/ApiQuery";
 import { NextRequest } from "next/server";
 
 export async function GET(

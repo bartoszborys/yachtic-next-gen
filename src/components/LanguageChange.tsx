@@ -1,6 +1,6 @@
 "use client"
 import { Language } from "@/fetch/dto/language";
-import { NextCommand } from "@/fetch/NextFetch";
+import { NextCommand } from "@/fetch/NextCommand";
 import { getLanguages } from "@/fetch/queries/getLanguages";
 import { locales } from "@/navigation";
 import { useLocale } from "next-intl";

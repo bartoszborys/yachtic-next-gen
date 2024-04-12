@@ -1,4 +1,4 @@
-import { ApiQuery } from "../ApiFetch";
+import { ApiQuery } from "../ApiQuery";
 import { KindData } from "../dto/kindData";
 
 export default async function getKinds(): Promise<KindData[]> {

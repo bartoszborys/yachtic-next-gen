@@ -13,7 +13,8 @@ export function MainPage({ locale }: { locale: string }): ReactElement {
 
     return (
         <>
-            <section className="main-page-search-with-background">
+            <section className="main-page-search-with-background relative">
+                <Image loading="eager" className="absolute w-full h-full z-[-1]" src={'/background.webp'} width={1920} height={1080} alt="" />
                 <div className="my-auto sm:my-[200px] justify-center p-4 flex">
                     <div className="content-container starting flex flex-col">
                         <h2 className="mt-1 text-3xl font-bold">{t("JUST_SEARCH_AND_BOOK_A_BOAT")}...</h2>

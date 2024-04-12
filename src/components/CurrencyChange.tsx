@@ -1,7 +1,7 @@
 "use client"
 
 import { Currency } from "@/fetch/dto/currency";
-import { NextCommand } from "@/fetch/NextFetch";
+import { NextCommand } from "@/fetch/NextCommand";
 import { getCurrencies } from "@/fetch/queries/getCurrencies";
 import { parseAsString, useQueryState } from "nuqs";
 import { ChangeEvent, useEffect, useState } from "react";

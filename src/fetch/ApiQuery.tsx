@@ -5,9 +5,9 @@ import { cookies } from "next/headers";
 export async function ApiQuery<T>(resource: string, params: URLSearchParams = new URLSearchParams()): Promise<T> {
     const url = `${process.env.API_URL}/${resource}`;
     
-    params.append("currencyId", cookies().get("currencyId")!.value);
-    params.append("languageName", cookies().get("languageName")!.value);
-    params.append("languageId", cookies().get("languageId")!.value);
+    params.append("currencyId", cookies().get("currencyId")?.value || "2");
+    params.append("languageName", cookies().get("languageName")?.value || "en");
+    params.append("languageId", cookies().get("languageId")?.value || "2");
 
     const paramsPart = params.toString();
     let urlWithParams = "";
