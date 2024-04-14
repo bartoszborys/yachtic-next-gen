@@ -1,25 +1,23 @@
 "use client"
 
-import { Currency } from "@/fetch/dto/currency";
 import { NextCommand } from "@/fetch/NextCommand";
-import { getCurrencies } from "@/fetch/queries/getCurrencies";
 import ActionMenu from "@/modules/YachtsList/components/list-top/ActionMenu";
 import { parseAsString, useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
+import { Currency } from "../fetch/dto/currency";
+import { getCurrencies } from "../fetch/queries/getCurrencies";
 
-export default function LanguageChange() {
+interface LanguageChangeProps {
+    currencies: Currency[]
+}
+
+export default function LanguageChange({currencies}: LanguageChangeProps) {
     const [currencyId, setCurrencyId] = useQueryState(
         "currencyId", 
         parseAsString
             .withDefault("2")
             .withOptions({shallow: false, clearOnDefault: true})
     );
-    const [currencies, setCurrencies] = useState<Currency[]>([]);
-
-    useEffect(() => {
-        getCurrencies().then(result => setCurrencies(result));
-    }, []);
-
     
     const languageChanged = async (currencyId: number) => {
         await NextCommand("currency", {currencyId});

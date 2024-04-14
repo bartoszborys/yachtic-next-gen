@@ -7,11 +7,11 @@ interface ActionMenuProps {
   children: ReactNode;
   button: ReactNode;
   className?: string;
-  zIndex: number;
+  zIndex?: number;
   trigger?: "click" | "mouseover";
 }
 
-export default function ActionMenu({ children, zIndex, button, className = "", trigger = "mouseover" }: ActionMenuProps): ReactNode {
+export default function ActionMenu({ children, zIndex = 0, button, className = "", trigger = "mouseover" }: ActionMenuProps): ReactNode {
   const container = useRef<HTMLDivElement>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 

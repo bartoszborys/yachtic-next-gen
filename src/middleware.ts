@@ -10,7 +10,7 @@ export default async function middleware(request: NextRequest) {
   return (createMiddleware({
     defaultLocale: 'en',
     localePrefix: "as-needed",
-    localeDetection: false,
+    localeDetection: true,
     pathnames,
     locales,
   }))(request);

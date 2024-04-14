@@ -1,31 +1,25 @@
 "use client"
-import { Language } from "@/fetch/dto/language";
+
 import { NextCommand } from "@/fetch/NextCommand";
-import { getLanguages } from "@/fetch/queries/getLanguages";
 import { locales } from "@/navigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ActionMenu from "@/modules/YachtsList/components/list-top/ActionMenu";
 import { useLocale } from "next-intl";
+import { Language } from "../fetch/dto/language";
 
-export default function LanguageChange() {
-    const locale = useLocale();
+interface LanguageChangeProps {
+    selectedLanguage: string;
+    languages: Language[];
+}
+
+export default function LanguageChange({languages, selectedLanguage}: LanguageChangeProps) {
     const router = useRouter();
     const pathname = usePathname();
     const params = useSearchParams();
 
     const pathParts = pathname.split("/");
     const languagePart = pathParts[1];
-    const [selectedLanguage, setSelectedLanguage] = useState(languagePart);
-    const [languages, setLanguages] = useState<Language[]>([]);
-
-    useEffect(() => {
-        setSelectedLanguage(locale);
-    }, [languagePart]);
-
-    useEffect(() => {
-        getLanguages().then(result => setLanguages(result));
-    }, []);
 
     const languageChanged = async (nextLocale: string) => {
         if(languages.length === 0) {

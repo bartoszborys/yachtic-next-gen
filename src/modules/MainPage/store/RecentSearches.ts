@@ -1,8 +1,8 @@
 'use client'
 
 import { SearchItemAdapter } from "../adapters/SearchItemAdapter";
+import { SearchItem } from "../domain/SearchItem/SearchItem";
 import Search from "../fetch/dto/SearchLocation";
-import { SearchItem } from "../searchItem/SearchItem";
 
 export function getRecentSearches(): SearchItemAdapter {
     const items: Search[] = JSON.parse(localStorage.getItem("recent-searches") || "[]");

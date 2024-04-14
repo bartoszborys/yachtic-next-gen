@@ -2,7 +2,12 @@
 
 import { cookies } from "next/headers";
 
-export async function ApiQuery<T>(resource: string, params: URLSearchParams = new URLSearchParams()): Promise<T> {
+export interface ApiQueryData {
+    params?: URLSearchParams;
+    init?: RequestInit;
+}
+
+export async function ApiQuery<T>(resource: string, {params = new URLSearchParams, init = {}}: ApiQueryData = {}): Promise<T> {
     const url = `${process.env.API_URL}/${resource}`;
     
     params.append("currencyId", cookies().get("currencyId")?.value || "2");
@@ -20,6 +25,16 @@ export async function ApiQuery<T>(resource: string, params: URLSearchParams = ne
             urlWithParams = `${url}?${paramsPart}`
         }
     }
+
     
-    return (await fetch(urlWithParams)).json();
+    const before = performance.now();
+
+    const reuslt = (await fetch(urlWithParams, init)).json();
+    
+    const after = performance.now();
+    const elapsedTime = after - before;
+    
+    console.log(`Elapsed time: ${elapsedTime} milliseconds for: "${urlWithParams}"`);
+
+    return reuslt;
 }

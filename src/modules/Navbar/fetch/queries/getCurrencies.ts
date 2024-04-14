@@ -1,6 +1,14 @@
+import { RevalidateTime } from "@/fetch/enums/RevalidateTime";
 import { Currency } from "../dto/currency";
-import { ProxyYachticFetch } from "../../../../fetch/ProxyFetch";
+import { ApiQuery } from "@/fetch/ApiQuery";
 
 export async function getCurrencies(): Promise<Currency[]> {
-    return (await ProxyYachticFetch<{models: Currency[]}>("yachts/currencies")).models;
+    return (await ApiQuery<{ models: Currency[] }>(
+        "yachts/currencies",
+        {
+            init: { 
+                next: { revalidate: RevalidateTime.DAY }
+            }
+        }
+    )).models;
 }
