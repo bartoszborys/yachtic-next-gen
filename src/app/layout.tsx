@@ -27,7 +27,9 @@ export default function LocaleLayout({
     <html>
       <body className={`flex flex-col min-h-dvh`}>
         <AppRouterCacheProvider>
-          <Navbar />
+          <header>
+            <Navbar />
+          </header>
           <main className="flex w-full flex-col flex-1 mt-[4rem]">{children}</main>
         </AppRouterCacheProvider>
       </body>

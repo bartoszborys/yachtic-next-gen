@@ -17,7 +17,6 @@ export function YachtsList({ params, searchParams }: { params: { locale: string 
 
     return (
         <section>
-
             <div className="content-container w-100 mx-auto">
                 <div className="mt-4 text-cyan-400 text-sm">
                     <Link href={`/${params.locale}`} locale={params.locale}>Yachtic</Link>

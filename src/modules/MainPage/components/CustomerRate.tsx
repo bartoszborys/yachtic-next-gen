@@ -7,7 +7,7 @@ export function CustomerRate(): ReactElement {
     const t = useTranslations();
 
     return (
-        <div className="content-container w-full mt-4">
+        <>
             <div className="flex w-full">
                 <FontAwesomeIcon icon={faStar} />
                 <FontAwesomeIcon icon={faStar} />
@@ -25,6 +25,6 @@ export function CustomerRate(): ReactElement {
                     <article className="w-80 h-44 bg-white text-center flex flex-col justify-center mr-2">RATE</article>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
