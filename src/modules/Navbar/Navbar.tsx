@@ -5,8 +5,8 @@ import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
 import { cookies } from "next/headers";
 
-const LanguageChange = dynamic(() => import('./LanguageChange'));
-const CurrencyChange = dynamic(() => import('./CurrencyChange'));
+const LanguageChange = dynamic(() => import('./components/LanguageChange'));
+const CurrencyChange = dynamic(() => import('./components/CurrencyChange'));
 
 const styles = {
     navbarCurrency: `text-gray-500 font-bold`,

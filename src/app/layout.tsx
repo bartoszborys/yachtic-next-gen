@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./global.scss";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/modules/Navbar/Navbar";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "@/navigation";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
