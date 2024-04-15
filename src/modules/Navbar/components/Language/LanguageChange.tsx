@@ -43,9 +43,9 @@ export default function LanguageChange({ languages, selectedLanguage }: Language
     );
 
     const button = (
-        <div className="p-1 hover:bg-[#e6f2f9]">
+        <div className="p-1 hover:bg-[#e6f2f9] cursor-pointer">
             <Image
-                className="border border-gray-400 cursor-pointer"
+                className="border border-gray-400"
                 src={`/flags/${selectedLanguage.name}.svg`}
                 width={25}
                 height={20}

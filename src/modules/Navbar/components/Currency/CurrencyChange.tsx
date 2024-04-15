@@ -37,8 +37,8 @@ export default function LanguageChange({currencies, selected}: LanguageChangePro
             ? <CircularProgress color="inherit" className="mx-5 text-gray-500" variant="indeterminate" size={20} thickness={4} />
             : <ActionMenu
                 zIndex={52}
-                className="p-2 hover:bg-[#e6f2f9]"
-                button={<b className="text-xs text-gray-500 cursor-pointer">{selected.code} ({selected.symbol})</b>}
+                className="p-2 hover:bg-[#e6f2f9] cursor-pointer"
+                button={<b className="text-xs text-gray-500">{selected.code} ({selected.symbol})</b>}
                 trigger={"click"}
                 placement="bottom-start">
                 {options}
