@@ -1,6 +1,6 @@
 'use client'
 
-import { Popper } from "@mui/material";
+import { Popper, PopperPlacementType, PopperProps } from "@mui/material";
 import { ReactNode, useCallback, useRef, useState } from "react";
 
 interface ActionMenuProps {
@@ -9,9 +9,12 @@ interface ActionMenuProps {
   className?: string;
   zIndex?: number;
   trigger?: "click" | "mouseover";
+  placement?: PopperPlacementType;
 }
 
-export default function ActionMenu({ children, zIndex = 0, button, className = "", trigger = "mouseover" }: ActionMenuProps): ReactNode {
+export default function ActionMenu(
+  { children, zIndex = 0, button, className = "", trigger = "mouseover", placement = "bottom-end" }: ActionMenuProps
+): ReactNode {
   const container = useRef<HTMLDivElement>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -51,7 +54,7 @@ export default function ActionMenu({ children, zIndex = 0, button, className = "
         style={{zIndex}}
         open={open}
         anchorEl={anchorEl}
-        placement="bottom-end"
+        placement={placement}
         onClick={handleClose}
         onMouseLeave={handleClose}
         onMouseEnter={handleClick}>

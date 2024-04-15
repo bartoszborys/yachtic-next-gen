@@ -1,4 +1,3 @@
-import LocalizedLink from "@/components/LocalizedLink";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
 import { SearchControls } from "./components/SearchControls";

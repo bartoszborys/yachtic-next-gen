@@ -8,7 +8,7 @@ import { getCurrencies } from "./fetch/queries/getCurrencies";
 import { cookies } from "next/headers";
 import { CookiesKeys } from "@/enums/CookiesKeys";
 
-const LanguageChange = dynamic(() => import('./components/LanguageChange'));
+const LanguageChange = dynamic(() => import('./components/Language/LanguageChange'));
 const CurrencyChange = dynamic(() => import('./components/CurrencyChange'));
 
 const styles = {
@@ -31,6 +31,7 @@ export default async function Navbar({locale}: NavbarProps): Promise<ReactElemen
 
     const currencyId = cookies().get(CookiesKeys.CURRENCY_ID)?.value || (() => {throw new Error("CurrencyId cookie is not set!")})();
     const currency = currencies.find(item => item.id.toString() === currencyId) || (() => {throw new Error("Currency not found")})();
+    const selectedLanguage = languages.find(item => item.name === locale) || (() => {throw new Error("SelectedLanguage is not set!")})();
 
     return (
         <nav className="bg-white flex justify-center w-full h-16 fixed z-50 px-3">
@@ -43,7 +44,7 @@ export default async function Navbar({locale}: NavbarProps): Promise<ReactElemen
                 <div className="w-full container sm:flex hidden">
                     <div className="flex-1"></div>
                     <div className={styles.navbarItem}>
-                        <LanguageChange selectedLanguage={locale} languages={languages} />
+                        <LanguageChange selectedLanguage={selectedLanguage} languages={languages} />
                     </div>
                     <div className={styles.navbarItem}>
                         <CurrencyChange selected={currency} currencies={currencies} />
