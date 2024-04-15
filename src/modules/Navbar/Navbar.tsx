@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
 import { CookiesKeys } from "@/enums/CookiesKeys";
 
 const LanguageChange = dynamic(() => import('./components/Language/LanguageChange'));
-const CurrencyChange = dynamic(() => import('./components/CurrencyChange'));
+const CurrencyChange = dynamic(() => import('./components/Currency/CurrencyChange'));
 
 const styles = {
     navbarCurrency: `text-gray-500 font-bold`,
