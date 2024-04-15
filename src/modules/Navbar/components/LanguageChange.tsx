@@ -3,9 +3,7 @@
 import { NextCommand } from "@/fetch/NextCommand";
 import { locales } from "@/navigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import ActionMenu from "@/modules/YachtsList/components/list-top/ActionMenu";
-import { useLocale } from "next-intl";
 import { Language } from "../fetch/dto/language";
 
 interface LanguageChangeProps {
