@@ -26,5 +26,19 @@
     "JUST_SEARCH_AND_BOOK_A_BOAT": "JUST SEARCH AND BOOK A BOAT",
     "ADVANCED_SEARCH": "ADVANCED SEARCH",
     "EU_DIVIER_TEXT": "Online yacht charter and boat search engine - YACHTIC.com",
-    "CUSTOMER_RATE_HEADER": "Customers rate us {from} out of {to} on Google"
+    "CUSTOMER_RATE_HEADER": "Customers rate us {from} out of {to} on Google",
+
+    "CONTINUE_FACEBOOK": "CONTINUE WITH FACEBOOK",
+    "CONTINUE_GOOGLE": "CONTINUE WITH GOOGLE",
+    "CONTINUE_APPLE": "CONTINUE WITH APPLE",
+    "OR": "or",
+    "LOGIN_HEADER_TEXT": "Log in with your Yachtic account",
+    "LOGIN_PLACEHOLDER": "E-mail address",
+    "PASSWORD_PLACEHOLDER": "Password",
+    "FORGOTTEN_PASSWORD": "Forgotten password",
+    "LOG_IN": "LOG IN",
+    "DONT_HAVE_ACCOUNT": "Don't have account yet?",
+    "SIGN_UP": "Sign up",
+    "SIGNING_INFO": "Signing in means acceptance of",
+    "GENERAL_CONDITIONS": "general conditions"
 }

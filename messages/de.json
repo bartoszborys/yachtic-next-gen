@@ -26,5 +26,19 @@
     "JUST_SEARCH_AND_BOOK_A_BOAT": "NUR SUCHEN UND BUCHEN SIE EIN BOOT",
     "ADVANCED_SEARCH": "ERWEITERTE SUCHE",
     "EU_DIVIER_TEXT": "Online-Yachtcharter- und Bootssuchmaschine - YACHTIC.com",
-    "CUSTOMER_RATE_HEADER": "Kunden bewerten uns mit {from} von {to} auf Google"
+    "CUSTOMER_RATE_HEADER": "Kunden bewerten uns mit {from} von {to} auf Google",
+
+    "CONTINUE_FACEBOOK": "MIT FACEBOOK FORTFAHREN",
+    "CONTINUE_GOOGLE": "MIT GOOGLE FORTFAHREN",
+    "CONTINUE_APPLE": "MIT APPLE FORTFAHREN",
+    "OR": "oder",
+    "LOGIN_HEADER_TEXT": "Melden Sie sich mit Ihrem Yachtic-Konto an",
+    "LOGIN_PLACEHOLDER": "E-Mail-Adresse",
+    "PASSWORD_PLACEHOLDER": "Passwort",
+    "FORGOTTEN_PASSWORD": "Passwort vergessen",
+    "LOG_IN": "ANMELDEN",
+    "DONT_HAVE_ACCOUNT": "Sie haben noch kein Konto?",
+    "SIGN_UP": "Registrieren",
+    "SIGNING_INFO": "Anmelden bedeutet Akzeptanz von",
+    "GENERAL_CONDITIONS": "Allgemeinen Geschäftsbedingungen"
 }

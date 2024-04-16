@@ -26,5 +26,19 @@
     "JUST_SEARCH_AND_BOOK_A_BOAT": "TYLKO SZUKAJ I REZERWUJ JACHT",
     "ADVANCED_SEARCH": "WYSZUKIWANIE ZAAWANSOWANE",
     "EU_DIVIER_TEXT": "Onlineowy silnik wyszukiwania jachtów i czarteru - YACHTIC.com",
-    "CUSTOMER_RATE_HEADER": "Klienci oceniają nas na {from} z {to} w Google"
+    "CUSTOMER_RATE_HEADER": "Klienci oceniają nas na {from} z {to} w Google",
+
+    "CONTINUE_FACEBOOK": "KONTYNUUJ Z FACEBOOKIEM",
+    "CONTINUE_GOOGLE": "KONTYNUUJ Z GOOGLEM",
+    "CONTINUE_APPLE": "KONTYNUUJ Z APPLE",
+    "OR": "lub",
+    "LOGIN_HEADER_TEXT": "Zaloguj się na swoje konto Yachtic",
+    "LOGIN_PLACEHOLDER": "Adres e-mail",
+    "PASSWORD_PLACEHOLDER": "Hasło",
+    "FORGOTTEN_PASSWORD": "Zapomniałeś hasła",
+    "LOG_IN": "ZALOGUJ SIĘ",
+    "DONT_HAVE_ACCOUNT": "Nie masz jeszcze konta?",
+    "SIGN_UP": "Zarejestruj się",
+    "SIGNING_INFO": "Zalogowanie oznacza akceptację",
+    "GENERAL_CONDITIONS": "ogólnych warunków"
 }
