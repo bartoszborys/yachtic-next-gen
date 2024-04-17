@@ -1,28 +1,44 @@
 'use client'
 
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { ReactElement, useState } from "react";
-import { OAuthButton } from "./components/OAuthButton";
-import { LoginTranslations } from "./LoginTranslations";
+import { ReactElement, useEffect, useState, useTransition } from "react";
+import { OAuthButton } from "./OAuthButton";
+import { LoginTranslations } from "../../translations/LoginTranslations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { executeLogin } from "../../fetch/commands/executeLogin";
+import getLoggedUser from "../../fetch/queries/getLoggedUser";
+import { useRouter } from "next/navigation";
+import { PathParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
 interface LoginProps {
     t: LoginTranslations;
 }
 
 export function Login({t}: LoginProps): ReactElement {
+    const router = useRouter();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [isPending, startTransition] = useTransition();
+
+    const handleLogin = async () => {
+        startTransition(async () => {
+            await executeLogin({email: "szweda@cyberstudio.pl", password: "sledzik1"});
+            router.refresh();
+            handleClose();
+        });
+    }
 
     return (
         <>
-            <div onClick={handleOpen} className="text-xs px-3 flex flex-col justify-center border-r border-gray-200">
-                <div className="text-sky-500 font-bold flex hover:underline cursor-pointer select-none">{t.LOG_IN}</div>
-            </div>
+            {
+                isPending
+                ? <CircularProgress color="inherit" className="mx-5 text-gray-500" variant="indeterminate" size={20} thickness={4} />
+                : <div onClick={handleOpen} className="text-sky-500 font-bold flex hover:underline cursor-pointer select-none">{t.LOG_IN}</div>
+            }
             <Modal
                 disableScrollLock={true}
                 open={open}
@@ -54,13 +70,13 @@ export function Login({t}: LoginProps): ReactElement {
                             <hr className="flex-1 my-auto" />
                         </div>
                         <h4 className="font-semibold">{t.LOGIN_HEADER_TEXT}</h4>
-                        <div className="flex flex-col gap-1">
+                        <form className="flex flex-col gap-1">
                             <input type="email" className="bg-[#e6f2f9] p-2 rounded text-xs" placeholder={t.LOGIN_PLACEHOLDER}/>
                             <input type="password" className="bg-[#e6f2f9] p-2 rounded text-xs" placeholder={t.PASSWORD_PLACEHOLDER}/>
-                        </div>
+                        </form>
                         <div className="flex justify-between">
                             <a className="text-xs font-semibold cursor-pointer text-[#0ba4e4] hover:underline">{t.FORGOTTEN_PASSWORD}</a>
-                            <button className="bg-[#0ba4e4] font-semibold text-sm text-white px-4 py-2">{t.LOG_IN}</button>
+                            <button onClick={handleLogin} className="bg-[#0ba4e4] font-semibold text-sm text-white px-4 py-2">{t.LOG_IN}</button>
                         </div>
                         <span className="text-xs">{t.DONT_HAVE_ACCOUNT} <a className="font-semibold cursor-pointer text-[#0ba4e4] hover:underline">{t.SIGN_UP}</a></span>
                         <span className="text-[11px] text-gray-500">{t.SIGNING_INFO} <a className="font-semibold cursor-pointer text-[#0ba4e4] hover:underline">{t.GENERAL_CONDITIONS}</a></span>

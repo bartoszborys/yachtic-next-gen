@@ -8,17 +8,18 @@ import { getCurrencies } from "./fetch/queries/getCurrencies";
 import { cookies } from "next/headers";
 import { CookiesKeys } from "@/enums/CookiesKeys";
 import { Login } from "./components/Login/Login";
-import { LoginTranslations } from "./components/Login/LoginTranslations";
-import { t } from "i18next";
+import { LoginTranslations } from "./translations/LoginTranslations";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import getLoggedUser from "./fetch/queries/getLoggedUser";
+import Logout from "./components/Logout";
 
 const LanguageChange = dynamic(() => import('./components/Language/LanguageChange'));
 const CurrencyChange = dynamic(() => import('./components/Currency/CurrencyChange'));
 
 const styles = {
     navbarCurrency: `text-gray-500 font-bold`,
-    navbarLink: `text-sky-500 font-bold flex hover:underline cursor-pointer select-none`,
+    navbarLink: `text-sky-500 font-bold flex hover:underline cursor-pointer select-none uppercase`,
     navbarItem: `text-xs px-3 flex flex-col justify-center border-r border-gray-200`,
     navbarIcon: `w-2.5 mr-1`,
     navbarMobileIcon: `text-sky-500 cursor-pointer text-3xl font-bold m-auto mx-1`,
@@ -28,17 +29,18 @@ interface NavbarProps {
     locale: string;
 }
 
-export default async function Navbar({locale}: NavbarProps): Promise<ReactElement> {
-    const [languages, currencies] = await Promise.all([
+export default async function Navbar({ locale }: NavbarProps): Promise<ReactElement> {
+    const [languages, currencies, user] = await Promise.all([
         getLanguages(),
-        getCurrencies()
+        getCurrencies(),
+        getLoggedUser(),
     ]);
 
     const t = await getTranslations();
 
     const currencyId = cookies().get(CookiesKeys.CURRENCY_ID)?.value || "2";
-    const currency = currencies.find(item => item.id.toString() === currencyId) || (() => {throw new Error("Currency not found")})();
-    const selectedLanguage = languages.find(item => item.name === locale) || (() => {throw new Error("SelectedLanguage is not set!")})();
+    const currency = currencies.find(item => item.id.toString() === currencyId) || (() => { throw new Error("Currency not found") })();
+    const selectedLanguage = languages.find(item => item.name === locale) || (() => { throw new Error("SelectedLanguage is not set!") })();
 
     const loginTranslations = {
         CONTINUE_FACEBOOK: t("CONTINUE_FACEBOOK"),
@@ -86,13 +88,30 @@ export default async function Navbar({locale}: NavbarProps): Promise<ReactElemen
                             <div>{t("RECENTLY_SEEN")} (6)</div>
                         </button>
                     </div>
-                    <div className={styles.navbarItem}>
-                        <a href="https://yachtic.com/registration" className={styles.navbarLink}>
-                            <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
-                            <>{loginTranslations.SIGN_UP}</>
-                        </a>
-                    </div>
-                    <Login t={loginTranslations} />
+
+                    {
+                        (user === null)
+                        ? <>
+                            <div className={styles.navbarItem}>
+                                <a href="https://yachtic.com/registration" className={styles.navbarLink}>
+                                    <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
+                                    <>{loginTranslations.SIGN_UP}</>
+                                </a>
+                            </div>
+                            <div className={styles.navbarItem}>
+                                <Login t={loginTranslations} />
+                            </div>
+                        </>
+                        : <>
+                            <div className="text-xs px-3 flex flex-col justify-center border-r border-gray-200">
+                                <a className={styles.navbarLink}>{user.email}</a>
+                            </div>
+                            <div className="text-xs px-3 flex flex-col justify-center border-r border-gray-200">
+                                <Logout />
+                            </div>
+                        </>
+                    }
+
                     <a href="https://yachtic.com/contact" className="text-xs px-4 flex flex-col justify-center">
                         <Image className="w-4" alt="" src='/contact-icon.png' width={25} height={25} />
                     </a>

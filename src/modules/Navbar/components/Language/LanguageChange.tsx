@@ -1,7 +1,7 @@
 "use client"
 
 import { NextCommand } from "@/fetch/NextCommand";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ActionMenu from "@/modules/YachtsList/components/list-top/ActionMenu";
 import { Language } from "../../fetch/dto/language";
 import { locales } from "@/navigation";
@@ -16,10 +16,11 @@ interface LanguageChangeProps {
 
 export default function LanguageChange({ languages, selectedLanguage }: LanguageChangeProps): ReactElement {
     const router = useRouter();
-    const pathname = usePathname();
     const params = useSearchParams();
 
     const languageChanged = async (nextLanguage: Language) => {
+        const pathname = location.pathname;
+
         await NextCommand("language", {
             languageId: nextLanguage.id,
             languageName: nextLanguage.name,
