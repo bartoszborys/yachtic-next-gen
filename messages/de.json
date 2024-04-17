@@ -40,5 +40,8 @@
     "DONT_HAVE_ACCOUNT": "Sie haben noch kein Konto?",
     "SIGN_UP": "Registrieren",
     "SIGNING_INFO": "Anmelden bedeutet Akzeptanz von",
-    "GENERAL_CONDITIONS": "Allgemeinen Geschäftsbedingungen"
+    "GENERAL_CONDITIONS": "Allgemeinen Geschäftsbedingungen",
+    
+    "MY_FAVOURITES": "TODO",
+    "RECENTLY_SEEN": "TODO"
 }

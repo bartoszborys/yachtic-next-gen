@@ -40,5 +40,8 @@
     "DONT_HAVE_ACCOUNT": "Don't have account yet?",
     "SIGN_UP": "Sign up",
     "SIGNING_INFO": "Signing in means acceptance of",
-    "GENERAL_CONDITIONS": "general conditions"
+    "GENERAL_CONDITIONS": "general conditions",
+
+    "MY_FAVOURITES": "TODO",
+    "RECENTLY_SEEN": "TODO"
 }

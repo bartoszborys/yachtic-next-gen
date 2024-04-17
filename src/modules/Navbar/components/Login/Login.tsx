@@ -55,8 +55,8 @@ export function Login({t}: LoginProps): ReactElement {
                         </div>
                         <h4 className="font-semibold">{t.LOGIN_HEADER_TEXT}</h4>
                         <div className="flex flex-col gap-1">
-                            <input className="bg-[#e6f2f9] p-2 rounded text-xs" placeholder={t.LOGIN_PLACEHOLDER}/>
-                            <input className="bg-[#e6f2f9] p-2 rounded text-xs" placeholder={t.PASSWORD_PLACEHOLDER}/>
+                            <input type="email" className="bg-[#e6f2f9] p-2 rounded text-xs" placeholder={t.LOGIN_PLACEHOLDER}/>
+                            <input type="password" className="bg-[#e6f2f9] p-2 rounded text-xs" placeholder={t.PASSWORD_PLACEHOLDER}/>
                         </div>
                         <div className="flex justify-between">
                             <a className="text-xs font-semibold cursor-pointer text-[#0ba4e4] hover:underline">{t.FORGOTTEN_PASSWORD}</a>

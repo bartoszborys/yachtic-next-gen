@@ -11,6 +11,7 @@ import { Login } from "./components/Login/Login";
 import { LoginTranslations } from "./components/Login/LoginTranslations";
 import { t } from "i18next";
 import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
 const LanguageChange = dynamic(() => import('./components/Language/LanguageChange'));
 const CurrencyChange = dynamic(() => import('./components/Currency/CurrencyChange'));
@@ -58,7 +59,9 @@ export default async function Navbar({locale}: NavbarProps): Promise<ReactElemen
     return (
         <nav className="bg-white flex justify-center w-full h-16 fixed z-50 px-3">
             <div className="content-container flex justify-between lg:justify-center w-full">
-                <Image className="w-[185px] height-[48px] flex" alt="" src='/logo.svg' width={25} height={25} />
+                <Link className="flex" href="/">
+                    <Image className="w-[185px] height-[48px] m-auto" alt="" src='/logo.svg' width={25} height={25} />
+                </Link>
                 <div className="flex lg:hidden">
                     <FontAwesomeIcon icon={faSearch} className={styles.navbarMobileIcon} />
                     <FontAwesomeIcon icon={faBars} className={styles.navbarMobileIcon} />
@@ -72,27 +75,27 @@ export default async function Navbar({locale}: NavbarProps): Promise<ReactElemen
                         <CurrencyChange selected={currency} currencies={currencies} />
                     </div>
                     <div className={styles.navbarItem}>
-                        <div className={styles.navbarLink}>
+                        <button className={styles.navbarLink}>
                             <FontAwesomeIcon icon={faHeart} className={styles.navbarIcon} />
-                            <div>ULUBIONE (6)</div>
-                        </div>
+                            <div>{t("MY_FAVOURITES")} (6)</div>
+                        </button>
                     </div>
                     <div className={styles.navbarItem}>
-                        <div className={styles.navbarLink}>
+                        <button className={styles.navbarLink}>
                             <FontAwesomeIcon icon={faList} className={styles.navbarIcon} />
-                            <div>OSTATNIO OGLĄDANE (6)</div>
-                        </div>
+                            <div>{t("RECENTLY_SEEN")} (6)</div>
+                        </button>
                     </div>
                     <div className={styles.navbarItem}>
-                        <div className={styles.navbarLink}>
+                        <a href="https://yachtic.com/registration" className={styles.navbarLink}>
                             <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
-                            <div>ZAREJESTRUJ SIĘ</div>
-                        </div>
+                            <>{loginTranslations.SIGN_UP}</>
+                        </a>
                     </div>
                     <Login t={loginTranslations} />
-                    <div className="text-xs px-4 flex flex-col justify-center">
+                    <a href="https://yachtic.com/contact" className="text-xs px-4 flex flex-col justify-center">
                         <Image className="w-4" alt="" src='/contact-icon.png' width={25} height={25} />
-                    </div>
+                    </a>
                 </div>
             </div>
         </nav>

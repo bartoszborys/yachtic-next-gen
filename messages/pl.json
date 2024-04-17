@@ -40,5 +40,8 @@
     "DONT_HAVE_ACCOUNT": "Nie masz jeszcze konta?",
     "SIGN_UP": "Zarejestruj się",
     "SIGNING_INFO": "Zalogowanie oznacza akceptację",
-    "GENERAL_CONDITIONS": "ogólnych warunków"
+    "GENERAL_CONDITIONS": "ogólnych warunków",
+    
+    "MY_FAVOURITES": "TODO",
+    "RECENTLY_SEEN": "TODO"
 }
