@@ -18,5 +18,5 @@ export default function Logout(): ReactElement {
 
     return isPending
         ? <CircularProgress color="inherit" className="mx-5 text-gray-500" variant="indeterminate" size={20} thickness={4} />
-        : <div onClick={handleLogout}>LOGOUT</div>
+        : <div className="text-sky-500 font-bold flex hover:underline cursor-pointer select-none" onClick={handleLogout}>LOGOUT</div>
 }

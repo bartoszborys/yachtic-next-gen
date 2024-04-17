@@ -30,7 +30,7 @@ export function LanguageTile({ language, onClick }: LanguageTileProps): ReactEle
             <div className="my-auto mr-2">
                 <Image className="border border-gray-400 bg-cover" src={`/flags/${language.name}.svg`} width={25} height={16} alt={`flag-${language.name}`} />
             </div>
-            <b className="">{languageNames[language.name]}</b>
+            <b>{languageNames[language.name]}</b>
         </div>
     );
 }

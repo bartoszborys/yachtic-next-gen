@@ -7,6 +7,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { LanguageKey } from "@/types/LanguageKey";
 config.autoAddCss = false
  
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function Layout({
   params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string }
+  params: { locale: LanguageKey }
 }>) {
   unstable_setRequestLocale(locale);
 

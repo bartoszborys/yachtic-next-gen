@@ -32,6 +32,7 @@ const nextConfig = {
     },
     env: {
       API_URL: process.env.API_URL,
+      EXTERNAL_FRONTEND_URL: process.env.EXTERNAL_FRONTEND_URL,
     }
 };
 

@@ -1,17 +1,15 @@
 'use client'
 
-import { Button, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { ReactElement, useEffect, useState, useTransition } from "react";
+import { ReactElement, useState, useTransition } from "react";
 import { OAuthButton } from "./OAuthButton";
 import { LoginTranslations } from "../../translations/LoginTranslations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { executeLogin } from "../../fetch/commands/executeLogin";
-import getLoggedUser from "../../fetch/queries/getLoggedUser";
 import { useRouter } from "next/navigation";
-import { PathParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
 interface LoginProps {
     t: LoginTranslations;

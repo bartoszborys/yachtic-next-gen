@@ -13,6 +13,8 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import getLoggedUser from "./fetch/queries/getLoggedUser";
 import Logout from "./components/Logout";
+import ExternalFrontendLink from "@/components/ExternalFrontendLink";
+import { LanguageKey } from "@/types/LanguageKey";
 
 const LanguageChange = dynamic(() => import('./components/Language/LanguageChange'));
 const CurrencyChange = dynamic(() => import('./components/Currency/CurrencyChange'));
@@ -26,7 +28,7 @@ const styles = {
 };
 
 interface NavbarProps {
-    locale: string;
+    locale: LanguageKey;
 }
 
 export default async function Navbar({ locale }: NavbarProps): Promise<ReactElement> {
@@ -91,30 +93,35 @@ export default async function Navbar({ locale }: NavbarProps): Promise<ReactElem
 
                     {
                         (user === null)
-                        ? <>
-                            <div className={styles.navbarItem}>
-                                <a href="https://yachtic.com/registration" className={styles.navbarLink}>
-                                    <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
-                                    <>{loginTranslations.SIGN_UP}</>
-                                </a>
-                            </div>
-                            <div className={styles.navbarItem}>
-                                <Login t={loginTranslations} />
-                            </div>
-                        </>
-                        : <>
-                            <div className="text-xs px-3 flex flex-col justify-center border-r border-gray-200">
-                                <a className={styles.navbarLink}>{user.email}</a>
-                            </div>
-                            <div className="text-xs px-3 flex flex-col justify-center border-r border-gray-200">
-                                <Logout />
-                            </div>
-                        </>
+                            ? <>
+                                <div className={styles.navbarItem}>
+                                    <ExternalFrontendLink href="/registration" locale={locale} className={styles.navbarLink}>
+                                        <>
+                                            <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
+                                            <>{loginTranslations.SIGN_UP}</>
+                                        </>
+                                    </ExternalFrontendLink>
+                                </div>
+                                <div className={styles.navbarItem}>
+                                    <Login t={loginTranslations} />
+                                </div>
+                            </>
+                            : <>
+                                <div className={styles.navbarItem}>
+                                    <a className={styles.navbarLink}>
+                                        <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
+                                        <>{user.email}</>
+                                    </a>
+                                </div>
+                                <div className="text-xs px-3 flex flex-col justify-center border-r border-gray-200">
+                                    <Logout />
+                                </div>
+                            </>
                     }
 
-                    <a href="https://yachtic.com/contact" className="text-xs px-4 flex flex-col justify-center">
+                    <ExternalFrontendLink href="/contact" locale={locale} className="text-xs px-4 flex flex-col justify-center">
                         <Image className="w-4" alt="" src='/contact-icon.png' width={25} height={25} />
-                    </a>
+                    </ExternalFrontendLink>
                 </div>
             </div>
         </nav>
