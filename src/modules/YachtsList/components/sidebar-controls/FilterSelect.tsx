@@ -3,6 +3,7 @@
 import { ChangeEvent, ReactNode } from "react";
 import { parseAsString, useQueryState } from "nuqs";
 import { options } from "@/modules/YachtsList/constants/urlQuery";
+import useQueryStore from "../../hooks/useQueryStore";
 
 interface FilterSelectProps {
     selectOptions: Array<{name: string, value: string}>,
@@ -12,12 +13,7 @@ interface FilterSelectProps {
 }
 
 export default function FilterSelect({ selectOptions, description, filterName, placeholder }: FilterSelectProps): ReactNode {
-    const [value, setValue] = useQueryState(
-        filterName,
-        parseAsString
-            .withDefault('')
-            .withOptions(options)
-    );
+    const [value, setValue] = useQueryStore(filterName);
     
     const onChange = (event: ChangeEvent<HTMLSelectElement>) => setValue(event.target.value);
 

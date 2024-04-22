@@ -31,9 +31,11 @@ export default function LanguageChange({ languages, selectedLanguage }: Language
 
         if (locales.includes(languagePart)) {
             pathParts[1] = nextLanguage.name;
+            console.log(`${pathParts.join("/")}?${params.toString()}`);
             router.replace(`${pathParts.join("/")}?${params.toString()}`);
         }
         else {
+            console.log(`${nextLanguage.name}/${pathname}?${params.toString()}`);
             router.replace(`${nextLanguage.name}/${pathname}?${params.toString()}`);
         };
     }
