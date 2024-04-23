@@ -7,3 +7,15 @@ export type LanguageKey = "en" |
     "ru" |
     "si" |
     "cz" ;
+
+export interface LanguagePath {
+    en: string;
+    pl: string;
+    de: string;
+    es: string;
+    fr: string;
+    it: string;
+    ru: string;
+    si: string;
+    cz: string;
+}
