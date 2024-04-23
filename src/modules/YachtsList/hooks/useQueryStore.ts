@@ -22,7 +22,7 @@ export default function useStringQueryStore(
         parseAsString.withOptions(options).withDefault(permalinkContext?.defaultValue || ""),
     );
 
-    const proxySetValue = useCallback(async <Shallow>(value: string | ((old: string) => string | null) | null, options?: Options<Shallow> | undefined) => {   
+    const proxySetValue = useCallback(async <Shallow>(value: string | ((old: string) => string | null) | null, options?: Options<Shallow> | undefined) => {
         if(!permalinkContext) {
             return setValue(value, options);
         }
@@ -31,7 +31,7 @@ export default function useStringQueryStore(
             return setValue(value, options);
         }
         
-        if(filterName === permalinkContext?.filterName) {
+        if(filterName !== permalinkContext?.filterName) {
             return setValue(value, options);
         }
 

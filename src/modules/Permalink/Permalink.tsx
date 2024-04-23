@@ -20,5 +20,8 @@ export async function Permalink({ locale, rawPermalink, searchParams }: Permalin
         return page;
     }
 
-    return <div>{locale} + {rawPermalink} + {permalink?.model || "EMPTY"}</div>;
+    return <div>
+        <div>{locale} + {rawPermalink} + {permalink?.model || "EMPTY"}</div>
+        <pre>{JSON.stringify(permalink).replaceAll(",", "\n")}</pre>
+    </div>;
 }

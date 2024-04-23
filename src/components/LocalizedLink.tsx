@@ -17,6 +17,6 @@ export default function LocalizedLink({href, locale, children, search, className
     const pathnames = getPathnames();
     const permalink = href in pathnames ? pathnames[href][locale] : href;
     return (
-        <Link className={className} href={`${locale}${permalink}${searchParams}`} locale={locale}>{children}</Link>
+        <Link className={className} href={`/${locale}${permalink}${searchParams}`} locale={locale}>{children}</Link>
     );
 }
