@@ -1,7 +1,7 @@
 "use client"
 
 import { ChangeEvent, ReactNode } from "react";
-import useQueryStore from "../../hooks/useQueryStore";
+import useStringQueryStore from "../../hooks/useQueryStore";
 
 interface FilterSelectProps {
     selectOptions: Array<{name: string, value: string}>,
@@ -11,7 +11,7 @@ interface FilterSelectProps {
 }
 
 export default function FilterSelect({ selectOptions, description, filterName, placeholder }: FilterSelectProps): ReactNode {
-    const [value, setValue] = useQueryStore(filterName);
+    const [value, setValue] = useStringQueryStore(filterName);
     
     const onChange = (event: ChangeEvent<HTMLSelectElement>) => setValue(event.target.value);
 

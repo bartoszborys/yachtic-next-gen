@@ -12,7 +12,7 @@ const options: Options = {
 } as const;
 
 
-export default function useQueryStore(
+export default function useStringQueryStore(
     filterName: string
 ): UseQueryStateReturn<string, string> {
     const permalinkContext = useContext(PermalinkContext);
@@ -23,15 +23,24 @@ export default function useQueryStore(
     );
 
     const proxySetValue = useCallback(async <Shallow>(value: string | ((old: string) => string | null) | null, options?: Options<Shallow> | undefined) => {   
+        if(!permalinkContext) {
+            return setValue(value, options);
+        }
+        
         if(typeof value !== "string") {
             return setValue(value, options);
         }
         
-        if(permalinkContext && value !== permalinkContext.defaultValue.toString()) {
-            permalinkContext.changeCallback(value);
+        if(filterName === permalinkContext?.filterName) {
+            return setValue(value, options);
         }
 
-        return setValue(value, options);
+        if(value === permalinkContext.defaultValue.toString()) {
+            return setValue(value, options);
+        }
+        
+        permalinkContext.changeCallback(value);
+        return new URLSearchParams;
     }, []);
 
     return [value, proxySetValue];
