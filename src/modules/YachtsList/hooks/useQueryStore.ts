@@ -1,8 +1,8 @@
 'use client'
 
 import "client-only";
-import { Options, parseAsString, ParserBuilder, useQueryState, UseQueryStateReturn } from "nuqs";
-import { useCallback, useContext, useEffect } from "react";
+import { Options, parseAsString, useQueryState, UseQueryStateReturn } from "nuqs";
+import { useCallback, useContext } from "react";
 import { PermalinkContext } from "../context/PermalinkProvider";
 
 const options: Options = {
@@ -17,26 +17,22 @@ export default function useQueryStore(
 ): UseQueryStateReturn<string, string> {
     const permalinkContext = useContext(PermalinkContext);
 
-    
-    if(permalinkContext && filterName === permalinkContext.filterName) {
-        const proxySetValue = useCallback(async <Shallow>(value: unknown, options?: Options<Shallow> | undefined) => {            
-            if(value !== permalinkContext.defaultValue.toString()) {
-                permalinkContext.changeCallback(value);
-            }
-
-            return new URLSearchParams;
-        }, []);
-
-        const [value, setValue] = useQueryState(
-            filterName,
-            parseAsString.withOptions(options).withDefault(permalinkContext.defaultValue),
-        );
-
-        return [value, proxySetValue];
-    }
-
-    return useQueryState(
+    const [value, setValue] = useQueryState(
         filterName,
-        parseAsString.withOptions(options).withDefault(""),
+        parseAsString.withOptions(options).withDefault(permalinkContext?.defaultValue || ""),
     );
+
+    const proxySetValue = useCallback(async <Shallow>(value: string | ((old: string) => string | null) | null, options?: Options<Shallow> | undefined) => {   
+        if(typeof value !== "string") {
+            return setValue(value, options);
+        }
+        
+        if(permalinkContext && value !== permalinkContext.defaultValue.toString()) {
+            permalinkContext.changeCallback(value);
+        }
+
+        return setValue(value, options);
+    }, []);
+
+    return [value, proxySetValue];
 }

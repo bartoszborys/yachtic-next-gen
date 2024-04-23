@@ -10,7 +10,7 @@ interface Props {
 
 export default function Page({ params: { locale, permalink}, searchParams }: Props): ReactElement {
   unstable_setRequestLocale(locale);
-  return (<Permalink searchParams={searchParams} locale={locale} permalink={permalink} />);
+  return (<Permalink searchParams={searchParams} locale={locale} rawPermalink={permalink} />);
 }
 
 export function generateStaticParams() {

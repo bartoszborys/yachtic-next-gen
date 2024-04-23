@@ -1,7 +1,7 @@
 "use client"
 
 import React, { createContext, ReactElement } from "react";
-import PermalinkProviderData from "../types/PermalinkProviderData";
+import PermalinkProviderData from "../../YachtsList/types/PermalinkProviderData";
 
 export const PermalinkContext = createContext<PermalinkProviderData | null>(null);
 

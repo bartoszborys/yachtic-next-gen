@@ -1,8 +1,6 @@
 "use client"
 
 import { ChangeEvent, ReactNode } from "react";
-import { parseAsString, useQueryState } from "nuqs";
-import { options } from "@/modules/YachtsList/constants/urlQuery";
 import useQueryStore from "../../hooks/useQueryStore";
 
 interface FilterSelectProps {

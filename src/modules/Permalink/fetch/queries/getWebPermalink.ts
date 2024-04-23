@@ -2,7 +2,7 @@ import { ApiQuery } from "@/fetch/ApiQuery";
 import { RevalidateTime } from "@/fetch/enums/RevalidateTime";
 import WebPermalink from "../dto/webPermalink";
 
-export default async function getPermalink(permalink: string): Promise<WebPermalink> {
+export default async function getPermalink(permalink: string): Promise<WebPermalink|null> {
     const params = new URLSearchParams();
     params.set("permalink", permalink);
 
