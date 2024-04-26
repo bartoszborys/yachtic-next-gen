@@ -1,3 +1,4 @@
+import { StarRating } from "@/components/StarRating";
 import { YachtHeaderDetails } from "@/modules/YachtsList/types/YachtData";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,16 +15,7 @@ export function Header({ details }: { details: YachtHeaderDetails }): ReactNode 
                 </div>
                 {
                     details.showRating
-                    ? <div>
-                        <span>
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStar} />
-                        </span>
-                        <span className="ml-1">{details.rating}</span>
-                      </div>
+                    ? <StarRating rating={details.rating} />
                     : <></>
                 }
             </div>

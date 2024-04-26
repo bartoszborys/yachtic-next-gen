@@ -15,7 +15,7 @@ export async function AbeonContent({locale, permalink, searchParams}: PermalinkP
     }
 
     const blocks = data.abeonBlocks?.map(item => (
-        <article className="bg-white content-container m-auto w-full single-page">
+        <article key={item.order} className="bg-white content-container m-auto w-full single-page">
           <div dangerouslySetInnerHTML={{__html: item.text.content}}/>
         </article>
     ))

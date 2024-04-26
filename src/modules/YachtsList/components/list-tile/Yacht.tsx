@@ -1,10 +1,13 @@
-import { toExternalHref } from "@/navigation";
 import { Header } from "./sections/Header";
 import Details from "./sections/Details";
+import dynamic from "next/dynamic";
 import Price from "./sections/Price";
 import { YachtData } from "@/modules/YachtsList/types/YachtData";
 import Footer from "./sections/Footer";
 import { YachtImage } from "./sections/Image";
+import { useLocale } from "next-intl";
+import { LanguageKey } from "@/types/LanguageKey";
+import LocalizedLink from "@/components/LocalizedLink";
 
 const containerClass = [
     "cursor-pointer",
@@ -25,9 +28,15 @@ const containerClass = [
 ].join(" ");
 
 export default function Yacht({ data }: { data: YachtData }) {
+    const locale = useLocale() as LanguageKey;
+
+    const search = new URLSearchParams();
+    search.append("date", data.price.main.date.toISOString().slice(0, 10) || "");
+    search.append("days", data.price.main.days.toString() || "");
+
     return (
         <div className={containerClass}>
-            <a className="absolute w-full h-full" href={toExternalHref(data.header.locationUrl)}/>
+            <LocalizedLink locale={locale} className="absolute w-full h-full" href={data.header.locationUrl} search={search.toString()}/>
             <YachtImage image={data.image}/>
             <div className="flex flex-1 flex-col px-1">
                 <div className="flex-1 flex flex-col text-sky-500 px-2 pb-1">

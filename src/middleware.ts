@@ -5,7 +5,7 @@ import { Pathnames } from 'next-intl/navigation';
 import { locales } from './navigation';
 
 export default async function middleware(request: NextRequest) {
-  const pathnames = getPathnames() satisfies Pathnames<typeof locales>;
+  const pathnames = getPathnames() as any;
 
   return (createMiddleware({
     defaultLocale: 'en',

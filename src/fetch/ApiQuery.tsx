@@ -13,6 +13,8 @@ export async function ApiQuery<T>(resource: string, {params = new URLSearchParam
 
     if(isServer) {
         const {cookies} = await import("next/headers");
+
+        // Static generation has not access to cookies, we must pass language and currency data in another way
         params.append("currencyId", cookies().get("currencyId")?.value || "2");
         params.append("languageName", cookies().get("languageName")?.value || "en");
         params.append("languageId", cookies().get("languageId")?.value || "2");
@@ -49,7 +51,7 @@ export async function ApiQuery<T>(resource: string, {params = new URLSearchParam
     console.log(`Elapsed time: ${elapsedTime} milliseconds for: "${urlWithParams}"`);
 
     if(!result.status.toString().startsWith("2")) {
-        throw new Error("Not 2XX response");
+        throw new Error(`Not 2XX response for URL ${urlWithParams}`);
     }
 
     return result.json();

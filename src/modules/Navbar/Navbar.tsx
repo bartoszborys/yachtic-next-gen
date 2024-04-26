@@ -61,7 +61,7 @@ export default async function Navbar({ locale }: NavbarProps): Promise<ReactElem
     } as LoginTranslations;
 
     return (
-        <nav className="bg-white flex justify-center w-full h-16 fixed z-50 px-3">
+        <nav className="bg-white flex justify-center w-full h-navbar fixed z-50 px-3">
             <div className="content-container flex justify-between lg:justify-center w-full">
                 <Link className="flex" href="/">
                     <Image className="w-[185px] height-[48px] m-auto" alt="" src='/logo.svg' width={25} height={25} />

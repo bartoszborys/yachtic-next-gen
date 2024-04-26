@@ -45,5 +45,21 @@
     "MY_FAVOURITES": "TODO",
     "RECENTLY_SEEN": "TODO",
     "PAYMENT_TITLE": "Secure on-line payment",
-    "SOCIAL_MEDIA_TITLE": "Keep up to date"
+    "SOCIAL_MEDIA_TITLE": "Keep up to date",
+
+    "Yacht": {
+        "YachtContent": {
+            "year": "Year of build",
+            "length": "Length",
+            "waterTank": "Water tanks",
+            "berths": "Berths",
+            "bathrooms": "Bathrooms",
+            "cabins": "Cabins",
+            "maxPersons": "Persons",
+            "fuelTank": "Fuel Tank",
+            "draft": "Draft",
+            "enginesPower": "Engines Power",
+            "width": "Width"
+        }
+    }
 }

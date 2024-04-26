@@ -11,8 +11,6 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { LanguageKey } from "@/types/LanguageKey";
 import AppFooterContent from "@/modules/Footer/AppFooterContent";
 
-
- 
 export const metadata: Metadata = {
   title: "NextGen",
   description: "NextGenApp",
@@ -31,9 +29,7 @@ export default function Layout({
     <html lang={locale}>
       <body className={`flex flex-col min-h-dvh`}>
         <AppRouterCacheProvider>
-          <header>
-            <Navbar locale={locale} />
-          </header>
+          <Navbar locale={locale} />
           <main className="flex w-full flex-col flex-1 mt-[4rem]">{children}</main>
           <footer className="bg-white">
             <AppFooterContent locale={locale} />

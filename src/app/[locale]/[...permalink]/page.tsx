@@ -1,3 +1,5 @@
+import { ApiQuery } from "@/fetch/ApiQuery";
+import getPermalink from "@/modules/Permalink/fetch/queries/getWebPermalink";
 import { Permalink } from "@/modules/Permalink/Permalink";
 import { locales } from "@/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
@@ -8,11 +10,14 @@ interface Props {
   searchParams: any
 }
 
-export default function Page({ params: { locale, permalink}, searchParams }: Props): ReactElement {
+// export const dynamic = "force-dynamic";
+export const dynamic = 'force-static' // Cookies problem for yacht page
+
+export default async function Page({ params: { locale, permalink}, searchParams}: Props) {
   unstable_setRequestLocale(locale);
   return (<Permalink searchParams={searchParams} locale={locale} rawPermalink={permalink} />);
 }
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+export async function generateStaticParams() {
+  return locales.map(locale => ({locale}));
 }
