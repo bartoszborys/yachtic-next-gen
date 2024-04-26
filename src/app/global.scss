@@ -8,17 +8,11 @@ body {
 
 * {
     min-width: 0;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif; //Todo from next js
 }
 
 .content-container {
     @apply md:min-w-[600px] max-w-[1200px] px-[0.5rem];
-}
-
-.main-page-search-with-background {
-    @apply flex;
-    width: 100%;
-    height: 100%;
 }
 
 .starting {

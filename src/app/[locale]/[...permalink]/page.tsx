@@ -1,9 +1,6 @@
-import { ApiQuery } from "@/fetch/ApiQuery";
-import getPermalink from "@/modules/Permalink/fetch/queries/getWebPermalink";
 import { Permalink } from "@/modules/Permalink/Permalink";
 import { locales } from "@/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
-import { ReactElement } from "react";
 
 interface Props {
   params: { locale: string, permalink: string }
