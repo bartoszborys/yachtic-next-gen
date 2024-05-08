@@ -15,8 +15,6 @@ import getOpinions from "@/modules/Yacht/api/queries/getOpinions";
 import { OpinionsList } from "./components/OpinionsList";
 import getPrices from "@/modules/Yacht/api/queries/getPrices";
 
-export const dynamic = "force-dynamic";
-
 export async function Yacht({ locale, permalink, searchParams }: PermalinkPageProps) {
     const [
         yachtDto,

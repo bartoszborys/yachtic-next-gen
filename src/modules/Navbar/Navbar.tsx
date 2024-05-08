@@ -11,10 +11,11 @@ import { Login } from "./components/Login/Login";
 import { LoginTranslations } from "./translations/LoginTranslations";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import getLoggedUser from "./fetch/queries/getLoggedUser";
 import Logout from "./components/Logout";
 import ExternalFrontendLink from "@/components/ExternalFrontendLink";
 import { LanguageKey } from "@/types/LanguageKey";
+import { executeLogin, LoginParams } from "./fetch/commands/executeLogin";
+import { executeLogout } from "./fetch/commands/executeLogout";
 
 const LanguageChange = dynamic(() => import('./components/Language/LanguageChange'));
 const CurrencyChange = dynamic(() => import('./components/Currency/CurrencyChange'));
@@ -32,17 +33,25 @@ interface NavbarProps {
 }
 
 export default async function Navbar({ locale }: NavbarProps): Promise<ReactElement> {
-    const [languages, currencies, user] = await Promise.all([
+    const [t, languages, currencies] = await Promise.all([
+        getTranslations(),
         getLanguages(),
-        getCurrencies(),
-        getLoggedUser(),
+        getCurrencies()
     ]);
 
-    const t = await getTranslations();
+    const email = cookies().get(CookiesKeys.LOGGED_USER_EMAIL)?.value;
 
-    const currencyId = cookies().get(CookiesKeys.CURRENCY_ID)?.value || "2";
-    const currency = currencies.find(item => item.id.toString() === currencyId) || (() => { throw new Error("Currency not found") })();
-    const selectedLanguage = languages.find(item => item.name === locale) || (() => { throw new Error("SelectedLanguage is not set!") })();
+    async function loginHandler(params: LoginParams): Promise<void> {
+        "use server";
+        const user = await executeLogin(params);
+        cookies().set(CookiesKeys.LOGGED_USER_EMAIL, user.email, {httpOnly: true});
+    }
+
+    async function logoutHandler(): Promise<void> {
+        "use server";
+        await executeLogout();
+        cookies().delete(CookiesKeys.LOGGED_USER_EMAIL);
+    }
 
     const loginTranslations = {
         CONTINUE_FACEBOOK: t("CONTINUE_FACEBOOK"),
@@ -59,6 +68,10 @@ export default async function Navbar({ locale }: NavbarProps): Promise<ReactElem
         SIGNING_INFO: t("SIGNING_INFO"),
         GENERAL_CONDITIONS: t("GENERAL_CONDITIONS"),
     } as LoginTranslations;
+
+    const currencyId = cookies().get(CookiesKeys.CURRENCY_ID)?.value || "2";
+    const currency = currencies.find(item => item.id.toString() === currencyId) || (() => { throw new Error("Currency not found") })();
+    const selectedLanguage = languages.find(item => item.name === locale) || (() => { throw new Error("SelectedLanguage is not set!") })();
 
     return (
         <nav className="bg-white flex justify-center w-full h-navbar fixed z-50 px-3">
@@ -92,7 +105,7 @@ export default async function Navbar({ locale }: NavbarProps): Promise<ReactElem
                     </div>
 
                     {
-                        (user === null)
+                        (typeof email !== 'string')
                             ? <>
                                 <div className={styles.navbarItem}>
                                     <ExternalFrontendLink href="/registration" locale={locale} className={styles.navbarLink}>
@@ -103,18 +116,18 @@ export default async function Navbar({ locale }: NavbarProps): Promise<ReactElem
                                     </ExternalFrontendLink>
                                 </div>
                                 <div className={styles.navbarItem}>
-                                    <Login t={loginTranslations} />
+                                    <Login executeLogin={loginHandler} t={loginTranslations} />
                                 </div>
                             </>
                             : <>
                                 <div className={styles.navbarItem}>
                                     <a className={styles.navbarLink}>
                                         <FontAwesomeIcon icon={faUser} className={styles.navbarIcon} />
-                                        <>{user.email}</>
+                                        <>{email}</>
                                     </a>
                                 </div>
                                 <div className="text-xs px-3 flex flex-col justify-center border-r border-gray-200">
-                                    <Logout />
+                                    <Logout executeLogout={logoutHandler}/>
                                 </div>
                             </>
                     }

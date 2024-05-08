@@ -8,14 +8,15 @@ import { OAuthButton } from "./OAuthButton";
 import { LoginTranslations } from "../../translations/LoginTranslations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { executeLogin } from "../../fetch/commands/executeLogin";
 import { useRouter } from "next/navigation";
+import { LoginParams } from "../../fetch/commands/executeLogin";
 
 interface LoginProps {
     t: LoginTranslations;
+    executeLogin: (params: LoginParams) => Promise<void>;
 }
 
-export function Login({t}: LoginProps): ReactElement {
+export function Login({t, executeLogin}: LoginProps): ReactElement {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);

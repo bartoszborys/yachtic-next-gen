@@ -7,8 +7,8 @@ interface Props {
   searchParams: any
 }
 
-// export const dynamic = "force-dynamic";
-export const dynamic = 'force-static' // Cookies problem for yacht page
+export const dynamic = "force-dynamic";
+// export const dynamic = 'force-static' // Cookies problem for yacht page
 
 export default async function Page({ params: { locale, permalink}, searchParams}: Props) {
   unstable_setRequestLocale(locale);

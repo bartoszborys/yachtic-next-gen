@@ -1,3 +1,18 @@
+## Ważne!!!!!!!!!
+
+## Trzeba dodać takie headery lokalnie do frontendAPI/web/index.php
+
+
+## header("Access-Control-Allow-Origin: http://localhost:3000"); 
+## header("Access-Control-Allow-Credentials: true"); 
+## header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE"); 
+## header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"); 
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

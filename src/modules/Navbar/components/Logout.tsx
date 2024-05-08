@@ -1,11 +1,14 @@
 'use client'
 
 import { ReactElement, useCallback, useTransition } from "react";
-import { executeLogout } from "../fetch/commands/executeLogout";
 import { useRouter } from "next/navigation";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function Logout(): ReactElement {
+interface LogoutProps {
+    executeLogout: () => Promise<void>;
+}
+
+export default function Logout({executeLogout}: LogoutProps): ReactElement {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
 

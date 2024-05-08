@@ -3,7 +3,7 @@ import LoggedUserDetails from "./loggedUserDetails";
 export default interface LoggedUser {
     id: number;
     is_internal: boolean;
-    email?: string;
+    email: string;
     abeonClientsDetail: LoggedUserDetails;
     password?: string;
     oldPassword?: string;
