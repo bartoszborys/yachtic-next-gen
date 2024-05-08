@@ -24,7 +24,7 @@ export async function Yacht({ locale, permalink, searchParams }: PermalinkPagePr
         getYacht({ id: permalink.modelId }),
         getYachtSpecification({ id: permalink.modelId }),
         getOpinions(permalink.modelId),
-        getPrices(permalink.modelId, 2306),
+        // getPrices(permalink.modelId, 2306),
     ]);
 
     const yachtData = fromYachtDto(yachtDto);
