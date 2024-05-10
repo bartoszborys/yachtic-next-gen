@@ -102,7 +102,6 @@ const Carousel = React.forwardRef<
       if (!api || !setApi) {
         return
       }
-
       setApi(api)
     }, [api, setApi])
 

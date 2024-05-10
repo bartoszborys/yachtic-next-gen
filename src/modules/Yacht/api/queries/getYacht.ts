@@ -1,14 +1,6 @@
 import { ApiQuery } from "@/fetch/ApiQuery";
 import Yacht from "../dto/Yacht";
-
-interface getYachtData {
-    id: string | number;
-    date?: string;
-    days?: string | number;
-    locationFromId?: string | number;
-    locationToId?: string | number;
-    isNonRefundable?: boolean;
-}
+import YachtPrimaryKey from "../dto/YachtPrimaryKey";
 
 export default async function getYacht({
     id,
@@ -17,6 +9,6 @@ export default async function getYacht({
     locationFromId = "",
     locationToId = "",
     isNonRefundable = false
-}: getYachtData): Promise<Yacht> {
+}: YachtPrimaryKey): Promise<Yacht> {
     return await ApiQuery(`yachts/${id},${date},${days},${locationFromId},${locationToId},${isNonRefundable ? "1" : "0"}`);
 }

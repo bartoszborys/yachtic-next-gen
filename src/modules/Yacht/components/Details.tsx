@@ -4,15 +4,20 @@ import { Highligts } from "./details/Highlights";
 import { Trips } from "./details/Trips";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { DetailsData } from "../interfaces/YachtData";
+import YachtSliderImage, { ImageType } from "../api/dto/YachtImage";
+import ImagesSlider from "./imagesSlider/ImagesSlider";
 
 interface DetailsProps {
     readonly details: DetailsData;
+    readonly images: YachtSliderImage[];
 }
 
-export default function Details({details}: DetailsProps) {
+export default function Details({details, images}: DetailsProps) {
     return (
         <>
-            <section className="h-[600px] bg-gray-600">XD</section>
+            <section className="flex flex-col">
+                <ImagesSlider images={images} />
+            </section>
             <article className="grid grid-cols-3 gap-x-4">
                 <Content data={details.content} />
             </article>

@@ -20,9 +20,6 @@ export async function ApiQuery<T>(resource: string, {params = new URLSearchParam
         params.append("languageId", cookies().get("languageId")?.value || "2");
 
         const Cookie = [...cookies().getAll()].map(item => `${item.name}=${item.value}`).join(";")
-
-        console.log(Cookie);
-
         finalInit.headers = {Cookie}
     }
     else {

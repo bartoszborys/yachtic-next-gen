@@ -14,17 +14,19 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import getOpinions from "@/modules/Yacht/api/queries/getOpinions";
 import { OpinionsList } from "./components/OpinionsList";
 import getPrices from "@/modules/Yacht/api/queries/getPrices";
+import getYachtImages from "./api/queries/getYachtImages";
 
 export async function Yacht({ locale, permalink, searchParams }: PermalinkPageProps) {
     const [
         yachtDto,
         yachtSpecification,
         opinions,
+        images,
     ] = await Promise.all([
         getYacht({ id: permalink.modelId }),
         getYachtSpecification({ id: permalink.modelId }),
         getOpinions(permalink.modelId),
-        // getPrices(permalink.modelId, 2306),
+        getYachtImages({ id: permalink.modelId }),
     ]);
 
     const yachtData = fromYachtDto(yachtDto);
@@ -44,7 +46,7 @@ export async function Yacht({ locale, permalink, searchParams }: PermalinkPagePr
                     </section>
                     <div className="flex gap-2">
                         <section className="flex-[12] flex flex-col gap-4">
-                            <Details details={yachtData.details} />
+                            <Details details={yachtData.details} images={images} />
                             <span className="flex my-4 ml-2 gap-24">
                                 <b>More details:</b>
                                 <nav className="flex">
