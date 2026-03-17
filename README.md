@@ -1,3 +1,32 @@
+## ⚠️ Project Status
+
+> This repository contains a **Proof of Concept (PoC)** created to validate specific ideas and technical approaches.
+
+This project **is not intended to be production-ready**, an MVP, or an example of production-level code quality. Many parts of the implementation were intentionally simplified to allow for faster experimentation and development.
+
+---
+
+### Important Notes
+
+- The codebase contains **multiple simplifications and shortcuts** that would not be appropriate in a production environment.
+- The project **does not fully follow production best practices** in terms of architecture, structure, error handling, or security.
+- Some **environment variables are included in the repository**, but they contain **public/demo values only** and do **not provide access to any sensitive resources**.
+- The primary goal of this repository is to **demonstrate the concept and technical feasibility**, not to provide a maintainable production system.
+
+---
+
+### Future Work
+
+If this project were to evolve into a real product, it would require:
+
+- architectural refactoring
+- improved security practices
+- proper configuration management
+- production-ready error handling
+- codebase cleanup and optimization
+
+-------------------------------------------------------- Next stuff below
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
